@@ -15,10 +15,10 @@
 	$current_page	= getCurrentPage();
 	
 	// Database
-	$db_host		= '';
-	$db_name		= '';
-	$db_user		= '';
-	$db_pass		= '';
+	$db_host		= 'localhost';
+	$db_user		= 'root';
+	$db_pass		= 'root';
+	$db_name		= 'ttm_2014';
 	
 	// Includes
 	$styles		= array();
