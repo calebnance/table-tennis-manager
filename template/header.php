@@ -21,3 +21,8 @@
 	
 	<body>
 	<?php include('template/menu.php'); ?>
+	
+	<div class="container">
+		<div id="message-area">
+		</div><!-- /.message-area -->
+	</div><!-- /.container -->

@@ -1,10 +1,6 @@
 <?php
-	$title = 'Login';
+	$title = 'Match - Add/Edit';
 	include('template/header.php');
-	
-	if($_POST){
-		print_r($_POST);
-	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -13,7 +9,7 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Login <small>(not yet working)</small></h1>
+				<h1 class="page-header">Add Match <small>(not yet working)</small></h1>
 				
 				
 			</div><!--/span-->
