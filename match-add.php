@@ -9,7 +9,7 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Add Match (not yet working)</h1>
+				<h1 class="page-header">Add Match <small>(not yet working)</small></h1>
 				
 				
 			</div><!--/span-->
