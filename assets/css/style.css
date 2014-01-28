@@ -39,6 +39,7 @@ h1.page-header { margin: 0 0 20px 0; }
 .jumbotron h1 { font-size: 34px; margin-top: 0; }
 
 /* Panels */
+.panel .btn { margin: 0 5px 5px 0; }
 .panel-navy { border-color: #3B3F4C; }
 .panel-navy>.panel-heading { background-color: #3B3F4C; }
 .panel-navy>.panel-heading>.panel-title { color: #FFD074; }
@@ -47,3 +48,46 @@ h1.page-header { margin: 0 0 20px 0; }
 a.list-group-item.active { background-color: #3B3F4C; border-color: #3B3F4C; }
 a.list-group-item.active>.badge { color: #3B3F4C; }
 a.list-group-item>.badge { background-color: #3B3F4C; }
+
+/* Live Match */
+#table-tennis { background-color: #306048; border: 1px solid #000000; height: 420px; margin: 0 auto; position: relative; width: 756px; }
+#center-stripe { background-color: #FFFFFF; height: 4px; position: absolute; top: 209px; width: 754px; z-index: 10; }
+#net { background-color: #000000; left: 373px; height: 418px; width: 8px; position: absolute; z-index: 20; }
+.side { border: 4px solid #FFF; color: #FFFFFF; height: 418px; width: 373px; }
+.side .player { font-size: 26px; padding: 30px 0; text-align: center; }
+.side .score { font-size: 36px; padding: 0 0 30px 0; text-align: center; }
+
+/* Service Ball */
+#pong-ball-ntohing {
+
+			border-radius: 50%;
+			display: inline-block;
+			margin-right: 20px;
+	width: 200px;
+	height: 200px;
+	
+	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
+	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+	
+	background-image: -webkit-radial-gradient(45px 45px, circle cover, #BFBFBF, #FFF);
+			
+			
+			/* webkit chrome, safari, mobile */
+			  -webkit-animation-name: spin; 
+			  -webkit-animation-duration: 3s; /* 3 seconds */
+			  -webkit-animation-iteration-count: infinite; 
+			  -webkit-animation-timing-function: linear;
+
+			  /* mozilla ff */
+			  -moz-animation-name: spin; 
+			  -moz-animation-duration: 3s; /* 3 seconds */
+			  -moz-animation-iteration-count: infinite; 
+			  -moz-animation-timing-function: linear;
+
+			  /* microsoft ie */
+			  -ms-animation-name: spin; 
+			  -ms-animation-duration: 3s; /* 3 seconds */
+			  -ms-animation-iteration-count: infinite; 
+			  -ms-animation-timing-function: linear;
+		}

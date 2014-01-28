@@ -1,6 +1,19 @@
 <?php
 	include_once('includes/config.php');
 	
+	checksession();
+	
+	$loggedin = 0;
+	if(isset($_SESSION['loggedin'])){
+		$loggedin = 1;
+	}
+	
+	$show_form = 1;
+	if((isset($registered) && $registered = 1) && $loggedin == 0){
+		$msg = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.</div>';
+		$show_form = 0;
+	}
+	
 	if(!$title){
 		$title = 'Table Tennis';
 	}
@@ -24,5 +37,10 @@
 	
 	<div class="container">
 		<div id="message-area">
-		</div><!-- /.message-area -->
+		<?php
+		if(isset($msg) && $msg){
+			echo $msg;
+		}
+		?>
+		</div><!-- /#message-area -->
 	</div><!-- /.container -->

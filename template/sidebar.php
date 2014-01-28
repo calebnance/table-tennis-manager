@@ -4,10 +4,9 @@
 			<h3 class="panel-title">Matches</h3>
 		</div>
 		<div class="panel-body">
-			<a href="<?php echo $base_url; ?>match-add.php" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Match</a>
-			<br />
-			<br />
-			<a href="<?php echo $base_url; ?>matches.php" class="btn btn-success"><span class="glyphicon glyphicon-list"></span> View Matches</a>
+			<a href="<?php echo $base_url; ?>match-add.php" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> Add Match</a>
+			<a href="<?php echo $base_url; ?>matches.php" class="btn btn-default btn-sm pull-left"><span class="glyphicon glyphicon-list"></span> View Matches</a>
+			<a href="<?php echo $base_url; ?>live.php" class="btn btn-success btn-sm pull-left"><span class="glyphicon glyphicon-play"></span> Watch Live</a>
 		</div>
 		<div class="panel-footer">footer area</div>
 	</div><!-- /.panel -->

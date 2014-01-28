@@ -5,6 +5,7 @@
 			<footer>
 				<p>Table Tennis Manager | <?php echo date('Y'); ?></p>
 			</footer>
+			
 		</div><!-- /.container -->
 		
 		<!-- Le javascript -->
