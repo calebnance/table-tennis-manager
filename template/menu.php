@@ -19,24 +19,21 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="/contact" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li>
-							<form class="form-signin" role="form" action="login.php" method="POST">
-								<input type="text" name="usename" class="form-control" placeholder="Username" required>
-								<input type="password" name="password" class="form-control" placeholder="Password" required>
-								<?php 
-								/*
-								<label class="checkbox">
-									<input type="checkbox" value="remember-me"> Remember me
-								</label>
-								*/
-								?>
-								<button class="btn btn-lg btn-navy btn-block" type="submit">Sign in</button>
-								<a href="<?php echo $base_url; ?>create-account.php" class="btn btn-lg btn-navy btn-block">Create Account</a>
-							</form>
-						</li>
-					</ul>
+					<?php if($loggedin == 0){ ?>
+						<a href="#" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<form class="form-signin" role="form" action="login.php" method="POST">
+									<input type="text" name="username" class="form-control" placeholder="Username" required>
+									<input type="password" name="password" class="form-control" placeholder="Password" required>
+									<button class="btn btn-lg btn-navy btn-block" type="submit">Sign in</button>
+									<a href="<?php echo $base_url; ?>create-account.php" class="btn btn-lg btn-navy btn-block">Create Account</a>
+								</form>
+							</li>
+						</ul>
+					<?php } else { ?>
+						<a href="<?php echo $base_url; ?>logout.php">Logout</a>
+					<?php } ?>
 				</li>
 			</ul>
 		</div><!-- /.nav-collapse -->

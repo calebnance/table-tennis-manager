@@ -1,13 +1,6 @@
 <?php
 	include_once('includes/config.php');
 	
-	checksession();
-	
-	$loggedin = 0;
-	if(isset($_SESSION['loggedin'])){
-		$loggedin = 1;
-	}
-	
 	if(!$title){
 		$title = 'Table Tennis';
 	}
@@ -24,17 +17,14 @@
 			echo sprintf('<link href="%s" rel="stylesheet" type="text/css">' . "\n", $style);
 		}
 		?>
+		<style>
+			body { padding-top: 20px; }
+		</style>
 	</head>
 	
 	<body>
-	<?php include('template/menu.php'); ?>
 	
 	<div class="container">
 		<div id="message-area">
-		<?php
-		if(isset($msg) && $msg){
-			echo $msg;
-		}
-		?>
-		</div><!-- /#message-area -->
+		</div><!-- /.message-area -->
 	</div><!-- /.container -->
