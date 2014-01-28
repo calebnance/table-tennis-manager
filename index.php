@@ -22,11 +22,12 @@
 				</p>
 
 				<div class="jumbotron">
-					<h1>Welcome</h1>
-					<a href="create-account.php" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span> Create Account</a>
 					<?php if($loggedin == 0){ ?>
+						<h1>Welcome</h1>
+						<a href="create-account.php" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span> Create Account</a>
 						<a href="<?php echo $base_url; ?>login.php" id="login-button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-user"></span> Login</a>
 					<?php } else { ?>
+						<h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
 						<a href="<?php echo $base_url; ?>logout.php" id="login-button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-user"></span> Logout</a>
 					<?php } ?>
 				</div><!-- /.jumbotron -->

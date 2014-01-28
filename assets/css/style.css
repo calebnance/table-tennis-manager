@@ -54,7 +54,8 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 #center-stripe { background-color: #FFFFFF; height: 4px; position: absolute; top: 209px; width: 754px; z-index: 10; }
 #net { background-color: #000000; left: 373px; height: 418px; width: 8px; position: absolute; z-index: 20; }
 .side { border: 4px solid #FFF; color: #FFFFFF; height: 418px; width: 373px; }
-.side .player { font-size: 26px; padding: 14px 0; text-align: center; }
+.side .player { font-size: 26px; padding: 30px 0; text-align: center; }
+.side .score { font-size: 36px; padding: 0 0 30px 0; text-align: center; }
 
 /* Service Ball */
 #pong-ball-ntohing {

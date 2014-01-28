@@ -1,5 +1,7 @@
 <?php
 	// login
+	$username	= '';
+	$pass		= '';
 	if($_POST){
 		// Lets do some checking
 		if(empty($_POST['username']) || empty($_POST['password'])){
@@ -22,9 +24,11 @@
 					header('location: index.php?msg=1');
 					exit();
 				} else {
+					$pass = '';
 					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Password did not match.</div>';
 				}
 			} else {
+				$username = $pass = '';
 				$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Username was not found!</div>';
 			}
 		
@@ -44,8 +48,8 @@
 				<h1 class="page-header">Login</h1>
 				
 				<form class="form-signin" role="form" action="<?php echo $base_url; ?>login.php" method="POST">
-					<input type="text" name="username" class="form-control" placeholder="Username" required>
-					<input type="password" name="password" class="form-control" placeholder="Password" required>
+					<input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $username; ?>" required>
+					<input type="password" name="password" class="form-control" placeholder="Password" value="<?php echo $pass; ?>" required>
 					<button class="btn btn-lg btn-navy btn-block" type="submit">Sign in</button>
 					<a href="<?php echo $base_url; ?>create-account.php" class="btn btn-lg btn-navy btn-block">Create Account</a>
 				</form>

@@ -53,6 +53,7 @@ function startsession($user_info, $db){
 	$_SESSION['loggedin']	= 1;
 	$_SESSION['uid']		= $user_info[0]['id'];
 	$_SESSION['name']		= $user_info[0]['name'];
+	$_SESSION['username']	= $user_info[0]['username'];
 	$_SESSION['email']		= $user_info[0]['email'];
 	$_SESSION['timeout']	= time();
 

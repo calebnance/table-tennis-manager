@@ -13,13 +13,15 @@
 		<div id="table-tennis">
 			<div id="center-stripe"></div>
 			<div class="side pull-left">
-				<div class="player">Bob Weston</div>
+				<div class="player">Player 1</div>
+				<div class="score">9</div>
 			</div>
 			
 			<div id="net" class="pull-left"></div><!-- /#net -->
 			
 			<div class="side pull-right">
-				<div class="player">Ryan Andrews</div>
+				<div class="player">Player 2</div>
+				<div class="score">4</div>
 			</div>
 			<div class="clearfix"></div>
 		</div><!-- /#table-tennis -->
