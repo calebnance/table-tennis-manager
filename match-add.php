@@ -2,6 +2,11 @@
 	$registered = 1;
 	$title = 'Match - Add/Edit';
 	include('template/header.php');
+	
+	if($_POST){
+		//print_r($_POST);
+	}
+	
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -23,8 +28,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Player (Home)</label>
 							<div class="col-sm-10">
-								<select id="player1" class="form-control">
-									<option>-select-</option>
+								<select id="player1" name="player1" class="form-control">
+									<option value="">-select-</option>
 									<?php foreach($players as $player){ ?>
 									<option value="<?php echo $player->id; ?>"><?php echo $player->name; ?></option>
 									<?php } ?>
@@ -37,14 +42,20 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Player (Away)</label>
 							<div class="col-sm-10">
-								<select id="player2" class="form-control">
-									<option>-select-</option>
+								<select id="player2" name="player2" class="form-control">
+									<option value="">-select-</option>
 									<?php foreach($players as $player){ ?>
 									<option value="<?php echo $player->id; ?>"><?php echo $player->name; ?></option>
 									<?php } ?>
 								</select>
 							</div>
 						</div>
+						
+						<br />
+						<br />
+						
+						<button class="btn btn-lg btn-navy btn-block" type="submit">Start Match</button>
+						
 					</form>
 					<?php
 					} else {
