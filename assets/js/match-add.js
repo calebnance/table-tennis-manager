@@ -2,6 +2,9 @@ $(document).ready(function(){
 	
 	$('#match-add').on('click', function(e){
 		e.preventDefault();
+		if($(this).hasClass('disabled')){
+			return false;
+		}
 		$.validateForm(true);
 	});
 	
@@ -21,14 +24,25 @@ $(document).ready(function(){
 			}
 		});
 		
-		if(check_empty && submit){			
+		if(check_empty && submit){
+			$('#match-add').html('Creating Match..').addClass('disabled');
 			$.ajax({
 				url: 'match-add.php',
 				type: 'POST',
 				dataType: 'json',
 				data: $('#match_add_form').serialize()
-			}).done(function(data){
-				console.log(data);
+			}).done(function(match_start){
+				console.log(match_start);
+				$.ajax({
+					url: 'match-add.php',
+					type: 'POST',
+					dataType: 'json',
+					data: match_start
+				}).done(function(data){
+					console.log(data);
+				}).fail(function(){
+					$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
+				});
 			}).fail(function(){
 				$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
 			});

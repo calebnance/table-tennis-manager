@@ -42,8 +42,9 @@
 	$scripts[]	= $js . 'offcanvas.js';
 	
 	// Table tennis defaults
-	$pts_to_win = 11;
-	$skunk		= 5;
+	$pts_to_win		= 11;
+	$pts_per_turn	= 2;
+	$skunk			= 5;
 	
 	// Debug
 ?>

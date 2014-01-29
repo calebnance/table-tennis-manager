@@ -15,12 +15,13 @@ CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_ref` (
 	`player1` INT( 11 ) NOT NULL ,
 	`player2` INT( 11 ) NOT NULL ,
 	`serve_first` INT( 11 ) NOT NULL ,
-	`total_time` TIME NOT NULL ,
-	`date_time_started` DATETIME NOT NULL
+	`date_time_started` DATETIME NOT NULL,
+	`total_time` TIME NOT NULL
 ) ENGINE = INNODB;
 
-CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_ref` (
+CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_player` (
 	`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	`match_id` INT( 11 ) NOT NULL ,
 	`player_id` INT( 11 ) NOT NULL ,
 	`aces` INT( 2 ) NOT NULL ,
 	`bad_serves` INT( 2 ) NOT NULL ,
@@ -32,5 +33,5 @@ CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_ref` (
 	`date_created` DATETIME NOT NULL,
 	`date_modified` DATETIME NOT NULL,
 	`user_created` INT( 11 ) NOT NULL ,
-	`user_modified` INT( 11 ) NOT NULL ,
+	`user_modified` INT( 11 ) NOT NULL
 ) ENGINE = INNODB;
