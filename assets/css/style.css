@@ -12,7 +12,7 @@ table { background-color: #EFEFEF; }
 
 h1.page-header { margin: 0 0 20px 0; }
 
-.btn-navy { background-color: #3B3F4C; color: #999999; }
+.btn-navy { background-color: #3B3F4C; border-color: #CCCCCC; color: #999999; }
 .btn-navy:hover { color: #FFFFFF; }
 .btn-navy:focus { color: #FFD074; }
 
@@ -60,6 +60,9 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 #match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
 
 #match_created_form { display: none; }
+#match_created_form .lead { margin-right: 4px; text-align: right; width: 140px; }
+
+form .counters { height: 30px; margin-right: 10px; width: 60px; }
 
 @media (max-width: 1199px) {
 	#match_wrapper form { width: 700px; }

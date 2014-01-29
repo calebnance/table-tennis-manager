@@ -8,6 +8,18 @@ $(document).ready(function(){
 		$.validateForm(true);
 	});
 	
+	$('#match_created_form').on('click', '.plus, .minus', function(e){
+		e.preventDefault();
+		$value = $(this).closest('.controls').find('input').val();
+		if($(this).hasClass('minus')){
+			if($value == 0) return false;
+			$value--;
+		} else if($(this).hasClass('plus')){
+			$value++;
+		}
+		$(this).closest('.controls').find('input').val($value);
+	});
+	
 	$.validateForm = function(check_empty){
 		$fields = $('#match_add_form .required');
 		var submit = true;
