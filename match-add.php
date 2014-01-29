@@ -38,6 +38,8 @@
 			session_start();
 			
 			sleep(2);
+			$player1	= $db->select('users', 'username', 'id="' . (int)$_POST['player1'] . '"', 'object');
+			$player2	= $db->select('users', 'username', 'id="' . (int)$_POST['player2'] . '"', 'object');
 			
 			$player1_create = array(
 				'match_id'		=> (int)$_POST['match_id'],
@@ -63,11 +65,13 @@
 				'match_options'	=> $_POST,
 				'player1'		=> array(
 					'match_player_id'	=> $player1_match,
-					'info'				=> $player1_create
+					'info'				=> $player1_create,
+					'username'			=> $player1[0]->username
 				),
 				'player2'		=> array(
 					'match_player_id'	=> $player2_match,
-					'info'				=> $player2_create
+					'info'				=> $player2_create,
+					'username'			=> $player2[0]->username
 				)
 			);
 			
@@ -99,55 +103,81 @@
 					$players = $db->select('users', 'id, username', '1="1"', 'object', '', '', 'username');
 					if($players){
 					?>
-					<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
-					
-						<div class="form-group player-area pull-left">
-							<label class="control-label">Player 1</label>
-							<div>
-								<select id="player1" name="player1" class="form-control required">
-									<option value="">-select-</option>
-									<?php foreach($players as $player){ ?>
-									<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
-									<?php } ?>
-								</select>
-								<div class="radio">
-									<label>
-										<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
-										Serves First
-									</label>
+					<div id="match_wrapper">
+						<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
+						
+							<div class="form-group player-area pull-left">
+								<label class="control-label">Player 1</label>
+								<div>
+									<select id="player1" name="player1" class="form-control required">
+										<option value="">-select-</option>
+										<?php foreach($players as $player){ ?>
+										<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
+										<?php } ?>
+									</select>
+									<div class="radio">
+										<label>
+											<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
+											Serves First
+										</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="verses pull-left">vs</div>
-						
-						<div class="form-group player-area pull-left ">
-							<label class="control-label">Player 2</label>
-							<div>
-								<select id="player2" name="player2" class="form-control required">
-									<option value="">-select-</option>
-									<?php foreach($players as $player){ ?>
-									<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
-									<?php } ?>
-								</select>
-								<div class="radio">
-									<label>
-										<input type="radio" name="playerserves" id="playerserves2" value="2">
-										Serves First
-									</label>
+							
+							<div class="verses pull-left">vs</div>
+							
+							<div class="form-group player-area pull-left">
+								<label class="control-label">Player 2</label>
+								<div>
+									<select id="player2" name="player2" class="form-control required">
+										<option value="">-select-</option>
+										<?php foreach($players as $player){ ?>
+										<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
+										<?php } ?>
+									</select>
+									<div class="radio">
+										<label>
+											<input type="radio" name="playerserves" id="playerserves2" value="2">
+											Serves First
+										</label>
+									</div>
 								</div>
 							</div>
-						</div>
+							
+							<div class="clearfix"></div>
+							
+							<div class="btm-form">
+								<a id="match-add" class="btn btn-lg btn-navy">Start Match</a>
+							</div>
+							
+							<input type="hidden" name="type" value="start" />
+							
+						</form>
 						
-						<div class="clearfix"></div>
-						
-						<div class="btm-form">
-							<a id="match-add" class="btn btn-lg btn-navy" >Start Match</a>
-						</div>
-						
-						<input type="hidden" name="type" value="start" />
-						
-					</form>
+						<form id="match_created_form">
+							<div class="form-group player-area pull-left">
+								<label id="player1" class="control-label">Player 1</label>
+								<div>
+									
+								</div>
+							</div>
+							
+							<div class="verses pull-left">vs</div>
+							
+							<div class="form-group player-area pull-left">
+								<label id="player2" class="control-label">Player 2</label>
+								<div>
+									
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							<div class="btm-form">
+								<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>
+							</div>
+						</form>
+					</div><!-- /#match_wrapper -->
 					<?php
 					} else {
 					?>

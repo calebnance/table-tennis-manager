@@ -9,7 +9,7 @@ $(document).ready(function(){
 	});
 	
 	$.validateForm = function(check_empty){
-		$fields = $('form .required');
+		$fields = $('#match_add_form .required');
 		var submit = true;
 		$.each($fields, function(f, field){
 			var value = $(field).val();
@@ -40,6 +40,18 @@ $(document).ready(function(){
 					data: match_start
 				}).done(function(data){
 					console.log(data);
+					
+					$match_add		= $('#match_add_form');
+					$match_created	= $('#match_created_form');
+					
+					$match_add.fadeOut(400);
+					$match_created.delay(400).fadeIn(400);
+					
+					// Update data
+					$match_created.find('#player1').html(data.player1.username);
+					$match_created.find('#player2').html(data.player2.username);
+					
+					
 				}).fail(function(){
 					$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
 				});

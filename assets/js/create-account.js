@@ -11,7 +11,7 @@ $(document).ready(function(){
 	});
 	
 	$.validateForm = function(check_empty){
-		$fields = $('form .required');
+		$fields = $('#create_account_form .required');
 		var email_val = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
 		var submit = true;
 		$.each($fields, function(f, field){

@@ -50,14 +50,26 @@ a.list-group-item.active>.badge { color: #3B3F4C; }
 a.list-group-item>.badge { background-color: #3B3F4C; }
 
 /* Add Match */
-#match_add_form { border: 1px solid #EEEEEE; margin: 0 auto; padding: 20px 6px; width: 850px; }
-#match_add_form .player-area { text-align: center; width: 380px; }
-#match_add_form .player-area .control-label { padding: 8px 0; }
-#match_add_form .verses { font-size: 36px; line-height: 117px; padding: 0 20px; }
-#match_add_form .radio { padding-left: 0; }
-#match_add_form .radio label { padding: 10px 65px 10px 42px; }
-#match_add_form .radio input { margin: 0 0 0 10px; }
-#match_add_form .btm-form { margin-top: 5px; text-align: center; width: 100%; }
+#match_wrapper form { border: 1px solid #EEEEEE; margin: 0 auto; padding: 20px 6px; width: 850px; }
+#match_wrapper .player-area { text-align: center; width: 380px; }
+#match_wrapper .player-area .control-label { padding: 8px 0; }
+#match_wrapper .verses { font-size: 36px; line-height: 117px; padding: 0 20px; }
+#match_wrapper .radio { padding-left: 0; }
+#match_wrapper .radio label { padding: 10px 65px 10px 42px; }
+#match_wrapper .radio input { margin: 0 0 0 10px; }
+#match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
+
+#match_created_form { display: none; }
+
+@media (max-width: 1199px) {
+	#match_wrapper form { width: 700px; }
+	#match_wrapper .player-area { width: 302px; }
+}
+@media (max-width: 991px) {
+	#match_wrapper form { width: 532px; }
+	#match_wrapper .verses { line-height: 114px; padding: 0 10px; }
+	#match_wrapper .player-area { width: 228px; }
+}
 
 /* Live Match */
 #table-tennis { background-color: #306048; border: 1px solid #000000; height: 420px; margin: 0 auto; position: relative; width: 756px; }
