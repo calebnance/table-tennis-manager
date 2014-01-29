@@ -77,7 +77,7 @@
 	include('template/header.php');
 	
 	// Include page js
-	$scripts[] = $js . 'create-account.js';	
+	$scripts[] = $js . 'create-account.js';
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

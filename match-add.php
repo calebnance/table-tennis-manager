@@ -1,12 +1,20 @@
 <?php
+	
+	if($_POST){
+		include_once('includes/config.php');
+		include_once('includes/database.php');
+		$db = new Database($db_host, $db_name, $db_user, $db_pass);
+		
+		echo json_encode($_POST);
+		exit();
+	}
+
 	$registered = 1;
 	$title = 'Match - Add/Edit';
 	include('template/header.php');
 	
-	if($_POST){
-		//print_r($_POST);
-	}
-	
+	// Include page js
+	$scripts[] = $js . 'match-add.js';
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -24,37 +32,51 @@
 					$players = $db->select('users', '*', '1="1"', 'object');
 					if($players){
 					?>
-					<form class="form-add-match" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Player (Home)</label>
-							<div class="col-sm-10">
-								<select id="player1" name="player1" class="form-control">
+					<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
+					
+						<div class="form-group player-area pull-left">
+							<label class="control-label">Player 1</label>
+							<div>
+								<select id="player1" name="player1" class="form-control required">
 									<option value="">-select-</option>
 									<?php foreach($players as $player){ ?>
 									<option value="<?php echo $player->id; ?>"><?php echo $player->name; ?></option>
 									<?php } ?>
 								</select>
+								<div class="radio">
+									<label>
+										<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
+										Serves First
+									</label>
+								</div>
 							</div>
 						</div>
 						
-						<p class="lead text-center">vs</p>
+						<div class="verses pull-left">vs</div>
 						
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Player (Away)</label>
-							<div class="col-sm-10">
-								<select id="player2" name="player2" class="form-control">
+						<div class="form-group player-area pull-left ">
+							<label class="control-label">Player 2</label>
+							<div>
+								<select id="player2" name="player2" class="form-control required">
 									<option value="">-select-</option>
 									<?php foreach($players as $player){ ?>
 									<option value="<?php echo $player->id; ?>"><?php echo $player->name; ?></option>
 									<?php } ?>
 								</select>
+								<div class="radio">
+									<label>
+										<input type="radio" name="playerserves" id="playerserves2" value="2">
+										Serves First
+									</label>
+								</div>
 							</div>
 						</div>
 						
-						<br />
-						<br />
+						<div class="clearfix"></div>
 						
-						<button class="btn btn-lg btn-navy btn-block" type="submit">Start Match</button>
+						<div class="btm-form">
+							<a id="match-add" class="btn btn-lg btn-navy" >Start Match</a>
+						</div>
 						
 					</form>
 					<?php

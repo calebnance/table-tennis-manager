@@ -9,7 +9,17 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Rules</h1>
+				<h1 class="page-header">Rules &amp; Definitions</h1>
+				
+				<ul>
+					<li>
+						Slam Point
+						<ul>
+							<li>player must make contact with the ball, above their shoulders.</li>
+						</ul>
+					</li>
+					
+				</ul>
 				
 			</div><!--/span-->
 			

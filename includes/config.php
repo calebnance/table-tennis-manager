@@ -41,5 +41,9 @@
 	$scripts[]	= $bs_js . 'bootstrap.min.js';
 	$scripts[]	= $js . 'offcanvas.js';
 	
+	// Table tennis defaults
+	$pts_to_win = 11;
+	$skunk		= 5;
+	
 	// Debug
 ?>
