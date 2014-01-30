@@ -77,7 +77,7 @@ function timeoutsession(){
 	if($_SESSION['timeout'] + 120 * 60 < time()){// 2 hours of inactive time
 		session_destroy();
 	
-		header('Location: login.php?msg=2');
+		header('Location: index.php?msg=2');
 		exit();
 	} else {
 		$_SESSION['timeout']	= time();

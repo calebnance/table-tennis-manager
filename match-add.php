@@ -74,6 +74,10 @@
 			
 			echo json_encode($response);
 		}
+		
+		if(isset($_POST['type']) && $_POST['type'] == 'update'){
+			echo json_encode($_POST);
+		}
 		exit();
 	}
 
@@ -158,7 +162,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="score_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -171,7 +175,20 @@
 								<div class="controls">
 									<div class="lead pull-left">Aces</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="aces_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Digs</div>
+									<div class="pull-left">
+										<input type="text" name="digs_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -184,7 +201,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Bad Serve</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -197,7 +214,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Frustration</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="frustration_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -210,7 +227,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Ones</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -223,7 +240,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Feel Goods</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -236,7 +253,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_missed_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -249,7 +266,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_made_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -266,7 +283,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="score_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -279,7 +296,20 @@
 								<div class="controls">
 									<div class="lead pull-left">Aces</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="aces_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Digs</div>
+									<div class="pull-left">
+										<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -292,7 +322,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Bad Serve</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="bad_serve_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -305,7 +335,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Frustration</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -318,7 +348,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Ones</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -331,7 +361,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Feel Goods</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="feel_goods_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -344,7 +374,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -357,16 +387,21 @@
 								<div class="controls">
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
-										<input type="text" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div>
 								</div>
+								
 							</div>
 							
 							<div class="clearfix"></div>
+							
+							<input type="hidden" name="type" value="update" />
+							
+							<a id="match-updating" class="alert alert-warning pull-right">waiting</a>
 							
 							<div class="btm-form">
 								<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>

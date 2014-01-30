@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_player` (
 	`feel_goods` INT( 2 ) NOT NULL ,
 	`slams_missed` INT( 2 ) NOT NULL ,
 	`slams_made` INT( 2 ) NOT NULL ,
+	`digs` INT( 2 ) NOT NULL ,
 	`date_created` DATETIME NOT NULL,
 	`date_modified` DATETIME NOT NULL,
 	`user_created` INT( 11 ) NOT NULL ,

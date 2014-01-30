@@ -59,8 +59,10 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 #match_wrapper .radio input { margin: 0 0 0 10px; }
 #match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
 
-#match_created_form { display: none; }
+#match_created_form { display: none; position: relative; }
 #match_created_form .lead { margin-right: 4px; text-align: right; width: 140px; }
+
+#match_created_form #match-updating { position: absolute; right: 20px; bottom: 0; }
 
 form .counters { height: 30px; margin-right: 10px; width: 60px; }
 
