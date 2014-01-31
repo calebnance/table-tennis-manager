@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	var updating, counter;
-	var count = 5;
+	var count = 3;
 	
 	$('#match-add').on('click', function(e){
 		e.preventDefault();
@@ -22,13 +22,61 @@ $(document).ready(function(){
 		}
 		$(this).closest('.controls').find('input').val($value);
 		
-		count = 5;
+		count = 3;
 		clearInterval(counter);
 		
 		$.autoUpdate();
 	});
 	
+	$('#match-complete').on('click', function(e){
+		var update_data = $('#match_created_form').serialize();
+			
+		console.log(update_data);
+		
+		$.ajax({
+			url: 'match-add.php',
+			type: 'POST',
+			dataType: 'json',
+			data: update_data
+		}).done(function(data){
+			$('#match-complete').html('Match Saved!');
+			$('#player1-area, #player2-area, .verses, #match-updating').fadeOut(400);
+			
+			setTimeout(function(){
+				location.reload();
+			}, 2000);
+			
+		}).fail(function(){
+		
+			console.log('FAILED UPDATE');
+			
+		});
+	});
+	
+	$.playerServe = function(){
+		$match_created	= $('#match_created_form');
+		$total_score	= parseInt($('#score_1').val()) + parseInt($('#score_2').val());
+		$serve_turn		= parseInt($('#pts_per_turn').val());
+		$serve_first	= parseInt($('#serve_first').val());
+		$player_first	= $match_created.find('label[data-player-id="' + $serve_first + '"]').attr('id');
+		$player_first	= $player_first == 'player1-label' ? 'player1-label' : 'player2-label';
+		$player_second	= $player_first == 'player1-label' ? 'player2-label' : 'player1-label';
+		
+		if($total_score % $serve_turn === 0){
+			console.log('switch');
+			if($('#' + $player_first).hasClass('serving')){
+				$('#' + $player_second).addClass('serving');
+				$('#' + $player_first).removeClass('serving');
+			} else {
+				$('#' + $player_first).addClass('serving');
+				$('#' + $player_second).removeClass('serving');
+			}
+		}
+	}
+	
 	$.autoUpdate = function(){
+	
+		$.playerServe();
 		
 		$match_updating = $('#match-updating');
 		$match_updating.addClass('alert-info').removeClass('alert-warning alert-success').html('updating in <span class="secs">' + count + '</span> second<span class="add_s">s</span>');
@@ -69,7 +117,7 @@ $(document).ready(function(){
 				
 			});
 			
-		}, 5000);
+		}, 3000);
 		
 		
 		console.log('made it to the update page');
@@ -99,28 +147,45 @@ $(document).ready(function(){
 				dataType: 'json',
 				data: $('#match_add_form').serialize()
 			}).done(function(match_start){
-				console.log(match_start);
-				$.ajax({
-					url: 'match-add.php',
-					type: 'POST',
-					dataType: 'json',
-					data: match_start
-				}).done(function(data){
+				if(match_start.error){
+					$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +  match_start.msg + '</div>').slideDown(400);
+					$('#match-add').html('Start Match').removeClass('disabled');
+				} else {
 					
-					$match_add		= $('#match_add_form');
-					$match_created	= $('#match_created_form');
+					$('#match_id').val(match_start.match_id);
 					
-					$match_add.fadeOut(400);
-					$match_created.delay(400).fadeIn(400);
+					$('#player1_id').val(match_start.player1);
+					$('#player2_id').val(match_start.player2);
 					
-					// Update data
-					$match_created.find('#player1').html(data.player1.username);
-					$match_created.find('#player2').html(data.player2.username);
+					$('#pts_per_turn').val(match_start.pts_per_turn);
+					$('#pts_to_win').val(match_start.pts_to_win);
+					$('#skunk').val(match_start.skunk);
+					$('#serve_first').val(match_start.serve_first);
 					
-					
-				}).fail(function(){
-					$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
-				});
+					console.log(match_start);
+					$.ajax({
+						url: 'match-add.php',
+						type: 'POST',
+						dataType: 'json',
+						data: match_start
+					}).done(function(data){
+						
+						$match_add		= $('#match_add_form');
+						$match_created	= $('#match_created_form');
+						
+						$match_add.fadeOut(400);
+						$match_created.delay(400).fadeIn(400);
+						
+						// Update data
+						$match_created.find('#player1-label').html(data.player1.username).attr('data-player-id', match_start.player1);
+						$match_created.find('#player2-label').html(data.player2.username).attr('data-player-id', match_start.player2);
+						
+						$match_created.find('label[data-player-id="' + match_start.serve_first + '"]').addClass('serving');
+						
+					}).fail(function(){
+						$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
+					});
+				}
 			}).fail(function(){
 				$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong! Please reload the page and try again.</div>').slideDown(400);
 			});

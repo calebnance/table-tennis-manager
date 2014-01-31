@@ -9,11 +9,21 @@
 		
 		// start a match, set up everything in database
 		if(isset($_POST['type']) && $_POST['type'] == 'start'){
+		
+			if(isset($_POST['player1']) && isset($_POST['player2']) && ($_POST['player1'] == $_POST['player2'] ) ){
+				$res = array(
+					'msg'	=> 'You have selected the same person for both, this can\'t be done..',
+					'error' => 1
+				);
+				echo json_encode($res);
+				exit();
+			}
+			
 			$playerserves = 'player' . $_POST['playerserves'];
 			$match_start = array(
-				'player1' => $_POST['player1'],
-				'player2' => $_POST['player2'],
-				'serve_first' => $_POST[$playerserves],
+				'player1'			=> $_POST['player1'],
+				'player2'			=> $_POST['player2'],
+				'serve_first'		=> $_POST[$playerserves],
 				'date_time_started' => date('Y-m-d H:i:s')
 			);
 			
@@ -27,10 +37,13 @@
 				'skunk'			=> (int)$skunk,
 				'pts_per_turn'	=> (int)$pts_per_turn,
 				'pts_to_win'	=> (int)$pts_to_win,
-				'type'			=> 'match'
+				'type'			=> 'match',
+				'error'			=> 0,
+				'msg'			=> 'Match has been created!'
 			);
 			
 			echo json_encode($match_response);
+			exit();
 		}
 		if(isset($_POST['type']) && $_POST['type'] == 'match'){
 			session_start();
@@ -73,10 +86,48 @@
 			);
 			
 			echo json_encode($response);
+			exit();
 		}
 		
 		if(isset($_POST['type']) && $_POST['type'] == 'update'){
-			echo json_encode($_POST);
+			//echo json_encode($_POST);
+			$player1_update = array(
+				'final_score'	=> (int)$_POST['score_1'],
+				'aces'			=> (int)$_POST['aces_1'],
+				'bad_serves'	=> (int)$_POST['bad_serve_1'],
+				'frustration'	=> (int)$_POST['frustration_1'],
+				'ones'			=> (int)$_POST['ones_1'],
+				'feel_goods'	=> (int)$_POST['feel_goods_1'],
+				'slams_missed'	=> (int)$_POST['slams_missed_1'],
+				'slams_made'	=> (int)$_POST['slams_made_1'],
+				'digs'			=> (int)$_POST['digs_1'],
+				'date_modified'	=> date('Y-m-d H:i:s')
+			);
+			$player2_update = array(
+				'final_score'	=> (int)$_POST['score_2'],
+				'aces'			=> (int)$_POST['aces_2'],
+				'bad_serves'	=> (int)$_POST['bad_serve_2'],
+				'frustration'	=> (int)$_POST['frustration_2'],
+				'ones'			=> (int)$_POST['ones_2'],
+				'feel_goods'	=> (int)$_POST['feel_goods_2'],
+				'slams_missed'	=> (int)$_POST['slams_missed_2'],
+				'slams_made'	=> (int)$_POST['slams_made_2'],
+				'digs'			=> (int)$_POST['digs_2'],
+				'date_modified'	=> date('Y-m-d H:i:s')
+			);
+			
+			$update_1 = $db->update('match_player', $player1_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player1_id'] . '"');
+			$update_2 = $db->update('match_player', $player2_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player2_id'] . '"');
+			
+			$response = array(
+				'post'		=> $_POST,
+				'update_1'	=> $update_1,
+				'player_1'	=> $player1_update,
+				'update_2'	=> $update_2,
+				'player_2'	=> $player2_update
+			);
+			echo json_encode($response);
+			exit();
 		}
 		exit();
 	}
@@ -99,11 +150,13 @@
 				<?php
 				if($show_form){
 					include_once('includes/database.php');
-					$db = new Database($db_host, $db_name, $db_user, $db_pass);
 					
+					$db = new Database($db_host, $db_name, $db_user, $db_pass);
 					$players = $db->select('users', 'id, username', '1="1"', 'object', '', '', 'username');
+					
 					if($players){
 					?>
+					
 					<div id="match_wrapper">
 						<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
 						
@@ -157,12 +210,12 @@
 						
 						<form id="match_created_form">
 							<div id="player1-area" class="form-group player-area pull-left">
-								<label id="player1" class="control-label">Player 1</label>
+								<label id="player1-label" data-player-id="0" class="control-label">Player 1</label>
 								
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" name="score_1" class="form-control counters" placeholder="" value="0">
+										<input type="text" id="score_1" name="score_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -279,11 +332,11 @@
 							<div class="verses pull-left">vs</div>
 							
 							<div id="player2-area" class="form-group player-area pull-left">
-								<label id="player2" class="control-label">Player 2</label>
+								<label id="player2-label" class="control-label">Player 2</label>
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" name="score_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" id="score_2" name="score_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -400,6 +453,15 @@
 							<div class="clearfix"></div>
 							
 							<input type="hidden" name="type" value="update" />
+							
+							<input type="hidden" id="player1_id" name="player1_id" value="" />
+							<input type="hidden" id="player2_id" name="player2_id" value="" />
+							
+							<input type="hidden" id="match_id" name="match_id" value="" />
+							<input type="hidden" id="pts_per_turn" name="pts_per_turn" value="" />
+							<input type="hidden" id="pts_to_win" name="pts_to_win" value="" />
+							<input type="hidden" id="skunk" name="skunk" value="" />
+							<input type="hidden" id="serve_first" name="serve_first" value="" />
 							
 							<a id="match-updating" class="alert alert-warning pull-right">waiting</a>
 							

@@ -52,7 +52,7 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 /* Add Match */
 #match_wrapper form { border: 1px solid #EEEEEE; margin: 0 auto; padding: 20px 6px; width: 850px; }
 #match_wrapper .player-area { text-align: center; width: 380px; }
-#match_wrapper .player-area .control-label { padding: 8px 0; }
+#match_add_form .player-area .control-label { padding: 8px 0; }
 #match_wrapper .verses { font-size: 36px; line-height: 117px; padding: 0 20px; }
 #match_wrapper .radio { padding-left: 0; }
 #match_wrapper .radio label { padding: 10px 65px 10px 42px; }
@@ -60,6 +60,8 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 #match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
 
 #match_created_form { display: none; position: relative; }
+#match_created_form label.control-label { border: 1px solid #000000; font-size: 16px; margin-bottom: 20px; padding: 10px 20px; }
+#match_created_form label.serving { background-color: #d9edf7; border-color: #31708F; border-radius: 4px; }
 #match_created_form .lead { margin-right: 4px; text-align: right; width: 140px; }
 
 #match_created_form #match-updating { position: absolute; right: 20px; bottom: 0; }
