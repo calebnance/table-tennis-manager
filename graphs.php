@@ -1,5 +1,5 @@
 <?php
-	$title = 'Compare';
+	$title = 'Graphs';
 	include('template/header.php');
 ?>
 	<div class="container">
@@ -9,7 +9,7 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Compare <small>(not yet working)</small></h1>
+				<h1 class="page-header">Graphs <small>(not yet working)</small></h1>
 				
 				
 			</div><!--/span-->

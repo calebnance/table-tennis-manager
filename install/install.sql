@@ -31,8 +31,19 @@ CREATE TABLE IF NOT EXISTS  `ttm_2014`.`match_player` (
 	`slams_missed` INT( 2 ) NOT NULL ,
 	`slams_made` INT( 2 ) NOT NULL ,
 	`digs` INT( 2 ) NOT NULL ,
+	`foosball` INT( 2 ) NOT NULL ,
+	`just_the_tip` INT( 2 ) NOT NULL ,
+	`fabulous` INT( 2 ) NOT NULL ,
 	`date_created` DATETIME NOT NULL,
 	`date_modified` DATETIME NOT NULL,
 	`user_created` INT( 11 ) NOT NULL ,
 	`user_modified` INT( 11 ) NOT NULL
+) ENGINE = INNODB;
+
+CREATE TABLE IF NOT EXISTS  `ttm_2014`.`seasons` (
+	`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+	`season_number` INT( 11 ) NOT NULL ,
+	`start` DATETIME NOT NULL ,
+	`end` DATETIME NOT NULL ,
+	`year` INT( 11 ) NOT NULL
 ) ENGINE = INNODB;

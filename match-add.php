@@ -101,6 +101,9 @@
 				'slams_missed'	=> (int)$_POST['slams_missed_1'],
 				'slams_made'	=> (int)$_POST['slams_made_1'],
 				'digs'			=> (int)$_POST['digs_1'],
+				'foosball'		=> (int)$_POST['foosball_1'],
+				'just_the_tip'	=> (int)$_POST['just_the_tip_1'],
+				'fabulous'		=> (int)$_POST['fabulous_1'],
 				'date_modified'	=> date('Y-m-d H:i:s')
 			);
 			$player2_update = array(
@@ -113,18 +116,33 @@
 				'slams_missed'	=> (int)$_POST['slams_missed_2'],
 				'slams_made'	=> (int)$_POST['slams_made_2'],
 				'digs'			=> (int)$_POST['digs_2'],
+				'foosball'		=> (int)$_POST['foosball_2'],
+				'just_the_tip'	=> (int)$_POST['just_the_tip_2'],
+				'fabulous'		=> (int)$_POST['fabulous_2'],
 				'date_modified'	=> date('Y-m-d H:i:s')
 			);
 			
 			$update_1 = $db->update('match_player', $player1_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player1_id'] . '"');
 			$update_2 = $db->update('match_player', $player2_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player2_id'] . '"');
 			
+			$match_info			= $db->select('match_ref', 'date_time_started', 'id="' . (int)$_POST['match_id'] . '"', 'object');
+			$match_start_time	= strtotime($match_info[0]->date_time_started);
+			$current_time		= strtotime(date('Y-m-d H:i:s'));
+			$time_stamp			= ($current_time - $match_start_time);
+			$time_played		= date('i:s', $time_stamp);
+			
+			$match_update		= array(
+				'total_time'	=> '00:' . $time_played
+			);
+			$update_3 = $db->update('match_ref', $match_update, 'id="' . (int)$_POST['match_id'] .'"');
+			
 			$response = array(
-				'post'		=> $_POST,
-				'update_1'	=> $update_1,
-				'player_1'	=> $player1_update,
-				'update_2'	=> $update_2,
-				'player_2'	=> $player2_update
+				'post'			=> $_POST,
+				'player_1'		=> $player1_update,
+				'player_2'		=> $player2_update,
+				'current'		=> date('Y-m-d H:i:s'),
+				'stamp'			=> ($current_time - $match_start_time),
+				'time_format'	=> $time_format
 			);
 			echo json_encode($response);
 			exit();
@@ -146,7 +164,7 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Add Match <small>(not yet working)</small></h1>
+				<h1 class="page-header">Add Match</h1>
 				<?php
 				if($show_form){
 					include_once('includes/database.php');
@@ -327,6 +345,45 @@
 									</div>
 								</div>
 								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Foosball</div>
+									<div class="pull-left">
+										<input type="text" name="foosball_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Just The Tip</div>
+									<div class="pull-left">
+										<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Fabulous</div>
+									<div class="pull-left">
+										<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
 							</div><!-- /#player1-area -->
 							
 							<div class="verses pull-left">vs</div>
@@ -441,6 +498,45 @@
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
 										<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Foosball</div>
+									<div class="pull-left">
+										<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Just The Tip</div>
+									<div class="pull-left">
+										<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Fabulous</div>
+									<div class="pull-left">
+										<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>

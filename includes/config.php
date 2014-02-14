@@ -20,6 +20,10 @@
 	$db_pass		= 'root';
 	$db_name		= 'ttm_2014';
 	
+	// Season Setup
+	$weeks			= 2; // for each season
+	$week_start		= '2014-02-03'; // set this date that will continue until the end of the year
+	
 	// Includes
 	$styles		= array();
 	$scripts	= array();

@@ -108,7 +108,8 @@ $(document).ready(function(){
 				dataType: 'json',
 				data: update_data
 			}).done(function(data){
-			
+				
+				console.log('Updated');
 				console.log(data);
 				
 			}).fail(function(){
@@ -163,6 +164,7 @@ $(document).ready(function(){
 					$('#serve_first').val(match_start.serve_first);
 					
 					console.log(match_start);
+					
 					$.ajax({
 						url: 'match-add.php',
 						type: 'POST',

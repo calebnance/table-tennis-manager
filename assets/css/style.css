@@ -78,6 +78,11 @@ form .counters { height: 30px; margin-right: 10px; width: 60px; }
 	#match_wrapper .player-area { width: 228px; }
 }
 
+/* Matches */
+.filter-area { margin: 0 0 20px 0; }
+.table-striped tr.success td, .table-striped tr td.success { background-color: #DFF0D8!important; }
+.table td.border-left-right { border-left: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; }
+
 /* Live Match */
 #table-tennis { background-color: #306048; border: 1px solid #000000; height: 420px; margin: 0 auto; position: relative; width: 756px; }
 #center-stripe { background-color: #FFFFFF; height: 4px; position: absolute; top: 209px; width: 754px; z-index: 10; }

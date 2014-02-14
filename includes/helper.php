@@ -1,5 +1,8 @@
 <?php
 
+/**
+ *	Helpers
+ */
 function getFullURL(){
 	$full_url = 'http';
 	
@@ -90,5 +93,45 @@ function endsession(){
 	header('Location: index.php?msg=3');
 	exit();
 }
+
+/**
+ *	Data Helpers
+ */
+function setKeyDBData($data, $field){
+	$formatted = array();
+	if($data && $field && is_array($data)){
+		foreach($data as $key => $value){
+			if(isset($value->$field)){
+				$formatted[$value->$field] = $value;
+			}
+		}
+	}
 	
+	return $formatted;
+}
+
+/**
+ *	Match Helpers
+ */
+
+function getSeasons($db){
+	
+	return $db->custom_query('SELECT * FROM seasons');
+}
+
+function getThisYearSeasons($db){
+	
+	return $db->custom_query('SELECT * FROM seasons WHERE year="' . date('Y') . '"');
+}
+
+function getCurrentSeason($db){
+
+	return $db->custom_query('SELECT * FROM seasons WHERE start <="' . date('Y-m-d') . ' 00:00:00" AND end >="' . date('Y-m-d') . ' 23:59:59"');
+}
+
+function getSeasonMatches($season_start, $season_end, $db){
+
+	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . ' 00:00:00" AND date_time_started <="' . $season_end . ' 23:59:59"');
+}
+
 ?>

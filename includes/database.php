@@ -43,6 +43,25 @@
 		}
 		
 		/**
+		 * Custom Query Statement
+		 *
+		 */
+		public function custom_query($query){
+			$result = $this->_sendQuery($query);
+			$resultArray = array();
+			
+			while ($row = mysql_fetch_object($result)){
+				$resultArray[] = $row;
+			}
+			
+			if(count($resultArray) == 1){
+				$resultArray = $resultArray[0];
+			}
+			
+			return $resultArray;
+		}
+		
+		/**
 		 * Performs a SELECT-Query
 		 *
 		 * @param	string		Table name
