@@ -1,6 +1,15 @@
 <?php
 	$title = 'Standings';
+	
+	// Include page css
+	$page_styles[] = $css . 'jquery.circliful.css';
+	
 	include('template/header.php');
+	
+	// Include page js
+	$scripts[] = $js . 'jquery.circliful.min.js';
+	$scripts[] = $js . 'matches.js';
+	
 	include_once('includes/database.php');
 	
 	// Display errors on localhost
@@ -24,6 +33,41 @@
 	$current_season			= getCurrentSeason($db);
 	$current_season_matches	= getSeasonMatches($current_season->start, $current_season->end, $db);
 	
+	$standings = array();
+	foreach($current_season_matches as $match){
+		$match_scores	= $db->select('match_player', '*', 'match_id="' . $match->id . '"', 'object');
+		if($match_scores){
+			if(count($match_scores) == 2){
+				$player1 = $match_scores[0];
+				$player2 = $match_scores[1];
+			} else {
+				continue;
+			}
+			if(($player1->final_score != $player2->final_score) && ($player1->final_score > 0 || $player2->final_score > 0)){
+				
+				if($player1->final_score > $player2->final_score){
+					$players[$player1->player_id]->win ++;
+					$players[$player2->player_id]->lose ++;
+				} else {
+					$players[$player1->player_id]->lose ++;
+					$players[$player2->player_id]->win ++;
+				}
+			}
+		}
+	}
+	
+	foreach($players as $player_id => $player){
+		if($player->win > 0 || $player->lose > 0){
+			$players[$player_id]->percentage	= round(($player->win / ($player->win + $player->lose)) * 100, 2);
+		}
+	}
+	
+	uasort($players, function($a, $b){
+		$a->percentage = str_replace(' ', '', $a->percentage);
+		$b->percentage = str_replace(' ', '', $b->percentage);
+		return (int)$b->percentage - (int)$a->percentage;
+	});
+	
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -34,78 +78,70 @@
 				</p>
 				<h1 class="page-header">Standings</h1>
 				
-				<?php
-				$standings = array();
-				foreach($current_season_matches as $match){
-					$match_scores	= $db->select('match_player', '*', 'match_id="' . $match->id . '"', 'object');
-					if(count($match_scores) == 2){
-						$player1 = $match_scores[0];
-						$player2 = $match_scores[1];
-					} else {
-						continue;
-					}
-					
-					if(($player1->final_score != $player2->final_score) && ($player1->final_score > 0 || $player2->final_score > 0)){
-						
-						if($player1->final_score > $player2->final_score){
-							$players[$player1->player_id]->win ++;
-							$players[$player2->player_id]->lose ++;
-						} else {
-							$players[$player1->player_id]->lose ++;
-							$players[$player2->player_id]->win ++;
-						}
-					}
-				?>
-					
-				<?php
-				}
-				
-				foreach($players as $player_id => $player){
-					$players[$player_id]->percentage	= round(($player->win / ($player->win + $player->lose)) * 100, 2);
-				}
-				
-				uasort($players, function($a, $b){
-					$a->percentage = str_replace(' ', '', $a->percentage);
-					$b->percentage = str_replace(' ', '', $b->percentage);
-					return (int)$b->percentage - (int)$a->percentage;
-				});
-				
-				?>
+				<div class="btn-group pull-right" data-toggle="buttons">
+					<label class="btn btn-primary show-list-graph active">
+						<input type="radio" name="options" id="listings"> <i class="fa fa-th-list"></i>
+					</label>
+					<label class="btn btn-primary show-list-graph">
+						<input type="radio" name="options" id="graphs"> <i class="fa fa-th-large"></i>
+					</label>
+				</div>
 				
 				<h3>Season #<?php echo $current_season->season_number; ?>
 				<br /><small><?php echo date('m-d-Y', strtotime($current_season->start)); ?> to <?php echo date('m-d-Y', strtotime($current_season->end)); ?></small></h3>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<td class="text-center">Place</td>
-							<td>Player</td>
-							<td class="text-center">Win</td>
-							<td class="text-center">Lose</td>
-							<td class="text-right">Winning Percentage</td>
+				
+				<div id="standings-listings" class="list-graph">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td class="text-center">Place</td>
+								<td>Player</td>
+								<td class="text-center">Win</td>
+								<td class="text-center">Lose</td>
+								<td class="text-right">Winning Percentage</td>
+							</tr>
+						</thead>
+						<tbody>
+					<?php
+					$place = 1;
+					foreach($players as $player){
+						$tr_class = '';
+						if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
+							$tr_class = 'success';
+						}
+					?>
+						<tr class="<?php echo $tr_class; ?>">
+							<td class="text-center"><?php echo $place; ?></td>
+							<td><?php echo $player->username; ?></td>
+							<td class="text-center"><?php echo $player->win; ?></td>
+							<td class="text-center"><?php echo $player->lose; ?></td>
+							<td class="text-right"><?php echo number_format($player->percentage, 2); ?>%</td>
 						</tr>
-					</thead>
-					<tbody>
-				<?php
-				$place = 1;
-				foreach($players as $player){
-					$tr_class = '';
-					if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
-						$tr_class = 'success';
+					<?php
+						$place++;
 					}
-				?>
-					<tr class="<?php echo $tr_class; ?>">
-						<td class="text-center"><?php echo $place; ?></td>
-						<td><?php echo $player->username; ?></td>
-						<td class="text-center"><?php echo $player->win; ?></td>
-						<td class="text-center"><?php echo $player->lose; ?></td>
-						<td class="text-right"><?php echo number_format($player->percentage, 2); ?>%</td>
-					</tr>
-				<?php
-					$place++;
-				}
-				?>
-					</tbody>
-				</table>
+					?>
+						</tbody>
+					</table>
+				</div><!-- /#standings-listings -->
+				
+				<div id="standings-graphs" class="list-graph display-none">
+					<?php
+					$place = 1;
+					foreach($players as $player){
+						$tr_class = '';
+						if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
+							$tr_class = 'success';
+						}
+					?>
+						<div id="graph-<?php echo $place; ?>" class="circliful circliful-standings-block pull-left" data-dimension="250" data-text="<?php echo number_format($player->percentage, 2); ?>%" data-info="<?php echo $player->username; ?>" data-width="30" data-fontsize="30" data-percent="35" data-fgcolor="#61A9DC" data-icon="fa-users" data-bgcolor="#EEEEEE" data-fill="#DDDDDD"></div>
+					<?php
+						$place++;
+					}
+					?>
+				</div><!-- /#standings-graphs -->
+				
+				<div class="clearfix"></div>
 				
 			</div><!--/span-->
 			

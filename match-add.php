@@ -257,6 +257,19 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
+									<div class="lead pull-left">Bad Serve</div>
+									<div class="pull-left">
+										<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
 									<div class="lead pull-left">Digs</div>
 									<div class="pull-left">
 										<input type="text" name="digs_1" class="form-control counters" placeholder="" value="0">
@@ -270,9 +283,35 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Bad Serve</div>
+									<div class="lead pull-left">Fabulous</div>
 									<div class="pull-left">
-										<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Feel Goods</div>
+									<div class="pull-left">
+										<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Foosball</div>
+									<div class="pull-left">
+										<input type="text" name="foosball_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -296,9 +335,9 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Ones</div>
+									<div class="lead pull-left">Just The Tip</div>
 									<div class="pull-left">
-										<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -309,9 +348,9 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Feel Goods</div>
+									<div class="lead pull-left">Ones</div>
 									<div class="pull-left">
-										<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -338,45 +377,6 @@
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
 										<input type="text" name="slams_made_1" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
-									<div class="lead pull-left">Foosball</div>
-									<div class="pull-left">
-										<input type="text" name="foosball_1" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
-									<div class="lead pull-left">Just The Tip</div>
-									<div class="pull-left">
-										<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
-									<div class="lead pull-left">Fabulous</div>
-									<div class="pull-left">
-										<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -417,19 +417,6 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Digs</div>
-									<div class="pull-left">
-										<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
 									<div class="lead pull-left">Bad Serve</div>
 									<div class="pull-left">
 										<input type="text" name="bad_serve_2" class="form-control counters" placeholder="" value="0">
@@ -443,9 +430,9 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Frustration</div>
+									<div class="lead pull-left">Digs</div>
 									<div class="pull-left">
-										<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -456,9 +443,9 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Ones</div>
+									<div class="lead pull-left">Fabulous</div>
 									<div class="pull-left">
-										<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -482,9 +469,48 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Slams Missed</div>
+									<div class="lead pull-left">Foosball</div>
 									<div class="pull-left">
-										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Frustration</div>
+									<div class="pull-left">
+										<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+																
+								<div class="controls">
+									<div class="lead pull-left">Just The Tip</div>
+									<div class="pull-left">
+										<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
+									</div>
+									<div class="btn-group pull-left">
+										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+								
+								<div class="controls">
+									<div class="lead pull-left">Ones</div>
+									<div class="pull-left">
+										<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -508,9 +534,9 @@
 								<div class="clearfix"></div>
 								
 								<div class="controls">
-									<div class="lead pull-left">Foosball</div>
+									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
-										<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -518,33 +544,7 @@
 									</div>
 								</div>
 								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
-									<div class="lead pull-left">Just The Tip</div>
-									<div class="pull-left">
-										<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-								<div class="clearfix"></div>
-								
-								<div class="controls">
-									<div class="lead pull-left">Fabulous</div>
-									<div class="pull-left">
-										<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
-									</div>
-									<div class="btn-group pull-left">
-										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
-								</div>
-								
-							</div>
+							</div><!-- /#player2-area -->
 							
 							<div class="clearfix"></div>
 							

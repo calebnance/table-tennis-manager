@@ -126,12 +126,17 @@ function getThisYearSeasons($db){
 
 function getCurrentSeason($db){
 
-	return $db->custom_query('SELECT * FROM seasons WHERE start <="' . date('Y-m-d') . ' 00:00:00" AND end >="' . date('Y-m-d') . ' 23:59:59"');
+	return $db->custom_query('SELECT * FROM seasons WHERE start <="' . date('Y-m-d') . ' 00:00:00" AND end >="' . date('Y-m-d') . ' 23:59:59"', true);
+}
+
+function getSeasonByNumYear($number, $year, $db){
+	
+	return $db->custom_query('SELECT * FROM seasons WHERE season_number="' . (int)$number . '" AND year="' . (int)$year . '"', true);
 }
 
 function getSeasonMatches($season_start, $season_end, $db){
 
-	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . ' 00:00:00" AND date_time_started <="' . $season_end . ' 23:59:59"');
+	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . '" AND date_time_started <="' . $season_end . '"');
 }
 
 ?>

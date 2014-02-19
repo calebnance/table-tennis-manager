@@ -46,7 +46,7 @@
 		 * Custom Query Statement
 		 *
 		 */
-		public function custom_query($query){
+		public function custom_query($query, $single = false){
 			$result = $this->_sendQuery($query);
 			$resultArray = array();
 			
@@ -54,7 +54,7 @@
 				$resultArray[] = $row;
 			}
 			
-			if(count($resultArray) == 1){
+			if(count($resultArray) == 1 && $single == true){
 				$resultArray = $resultArray[0];
 			}
 			

@@ -10,6 +10,8 @@ body { background-color: #D8D9DE; }
 
 table { background-color: #EFEFEF; }
 
+.display-none { display: none; }
+
 h1.page-header { margin: 0 0 20px 0; }
 
 .btn-navy { background-color: #3B3F4C; border-color: #CCCCCC; color: #999999; }
@@ -48,6 +50,9 @@ h1.page-header { margin: 0 0 20px 0; }
 a.list-group-item.active { background-color: #3B3F4C; border-color: #3B3F4C; }
 a.list-group-item.active>.badge { color: #3B3F4C; }
 a.list-group-item>.badge { background-color: #3B3F4C; }
+
+/* Standings */
+.circliful-standings-block { border: 1px solid #CCCCCC; border-radius: 4px; margin: 0 20px 20px 0; }
 
 /* Add Match */
 #match_wrapper form { border: 1px solid #EEEEEE; margin: 0 auto; padding: 20px 6px; width: 850px; }

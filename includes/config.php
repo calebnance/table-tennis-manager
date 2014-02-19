@@ -9,7 +9,8 @@
 	$bs			= $assets . 'bootstrap/';
 	$bs_css		= $bs . 'css/';
 	$bs_js		= $bs . 'js/';
-	$bs_fonts	= $bs . 'fonts/';
+	$fa			= $assets . 'fontawesome4/';
+	$fa_css		= $fa . 'css/';
 	
 	// Variables
 	$current_page	= getCurrentPage();
@@ -29,6 +30,7 @@
 	$scripts	= array();
 	
 	$styles[]	= $bs_css . 'bootstrap.min.css';
+	$styles[]	= $fa_css . 'font-awesome.min.css';
 	$styles[]	= $css . 'offcanvas.css';
 	$styles[]	= $css . 'style.css';
 	
