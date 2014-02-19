@@ -134,7 +134,7 @@
 							$tr_class = 'success';
 						}
 					?>
-						<div id="graph-<?php echo $place; ?>" class="circliful circliful-standings-block pull-left" data-dimension="250" data-text="<?php echo number_format($player->percentage, 2); ?>%" data-info="<?php echo $player->username; ?>" data-width="30" data-fontsize="30" data-percent="35" data-fgcolor="#61A9DC" data-icon="fa-users" data-bgcolor="#EEEEEE" data-fill="#DDDDDD"></div>
+						<div id="graph-<?php echo $place; ?>" class="circliful circliful-standings-block pull-left" data-dimension="250" data-text="<?php echo number_format($player->percentage, 2); ?>%" data-info="<?php echo $player->username; ?>" data-width="30" data-fontsize="30" data-percent="<?php echo $player->percentage; ?>" data-fgcolor="#61A9DC" data-icon="fa-users" data-bgcolor="#EEEEEE" data-fill="#DDDDDD"></div>
 					<?php
 						$place++;
 					}
