@@ -23,7 +23,6 @@
 	$set_season = 0;
 	if($_GET['season']){
 		$set_season = $_GET['season'];
-		echo $set_season;
 	}
 	
 	$seasons				= getSeasons($db);
