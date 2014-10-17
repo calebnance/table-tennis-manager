@@ -5,7 +5,7 @@
 		</div>
 		<div class="panel-body">
 			<?php
-			if($_SESSION && $_SESSION['loggedin'] == 1){
+			if($_SESSION && $_SESSION['loggedin'] == 1 && $_SESSION['is_admin'] == 1){
 			?>
 			<a href="<?php echo $base_url; ?>match-add.php" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> Add Match</a>
 			<?php
@@ -23,7 +23,7 @@
 		?>
 	</div><!-- /.panel -->
 	<?php
-	/*	
+	/*
 	<div class="list-group">
 		<a href="#" class="list-group-item active">User #1 <span class="badge pull-right">42</span></a>
 		<a href="#" class="list-group-item">User #2 <span class="badge pull-right">42</span></a>

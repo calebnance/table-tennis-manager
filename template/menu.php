@@ -1,5 +1,6 @@
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 	<div class="container">
+
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
@@ -9,7 +10,9 @@
 			</button>
 			<a class="navbar-brand" href="<?php echo $base_url; ?>">Table Tennis</a>
 		</div><!-- /.navbar-header -->
+
 		<div class="collapse navbar-collapse">
+
 			<ul class="nav navbar-nav">
 				<li <?php if($current_page == ''){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>">Home</a></li>
 				<li <?php if($current_page == 'standings.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>standings.php">Standings</a></li>
@@ -18,8 +21,8 @@
 				<li <?php if($current_page == 'about.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<?php if($loggedin == 0){ ?>
+				<?php if($loggedin == 0){ ?>
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
@@ -31,11 +34,14 @@
 								</form>
 							</li>
 						</ul>
-					<?php } else { ?>
-						<a href="<?php echo $base_url; ?>logout.php">Logout</a>
-					<?php } ?>
-				</li>
+					</li>
+				<?php } else { ?>
+					<li <?php if($current_page == 'profile.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>profile.php">Profile</a></li>
+					<li><a href="<?php echo $base_url; ?>logout.php">Logout</a></li>
+				<?php } ?>
 			</ul>
+
 		</div><!-- /.nav-collapse -->
+		
 	</div><!-- /.container -->
-</div><!-- /.navbar -->	
+</div><!-- /.navbar -->
