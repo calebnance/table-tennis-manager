@@ -1,8 +1,6 @@
 <?php
 	$title = 'My Profile';
 	include('template/header.php');
-
-	$addS	= $weeks == 1 ? '' : 's';
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -13,7 +11,7 @@
 				</p>
 				<h1 class="page-header">My Profile</h1>
 
-				
+
 
 			</div><!--/span-->
 

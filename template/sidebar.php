@@ -1,8 +1,11 @@
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+
 	<div class="panel panel-navy">
+
 		<div class="panel-heading">
 			<h3 class="panel-title">Matches</h3>
-		</div>
+		</div><!-- /.panle-heading -->
+
 		<div class="panel-body">
 			<?php
 			if($_SESSION && $_SESSION['loggedin'] == 1 && $_SESSION['is_admin'] == 1){
@@ -15,7 +18,7 @@
 			<a href="<?php echo $base_url; ?>live.php" class="btn btn-success btn-sm pull-left"><span class="glyphicon glyphicon-play"></span> Watch Live</a>
 			<a href="<?php echo $base_url; ?>graphs.php" class="btn btn-warning btn-sm pull-left"><span class="glyphicon glyphicon-signal"></span> View Graphs</a>
 			<div class="clearfix"></div>
-		</div>
+		</div><!-- /.panel-body -->
 		<?php
 		/*
 		<div class="panel-footer">footer area</div>
@@ -31,4 +34,4 @@
 	</div><!-- /.list-group -->
 	*/
 	?>
-</div><!--/#sidebar-->
+</div><!-- /#sidebar -->

@@ -19,6 +19,21 @@
 				<li <?php if($current_page == 'rules.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>rules.php">Rules</a></li>
 				<li <?php if($current_page == 'compare.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>compare.php">Compare</a></li>
 				<li <?php if($current_page == 'about.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
+				<?php
+				// if loggedin and admin
+				if($_SESSION && $_SESSION['loggedin'] == 1 && $_SESSION['is_admin'] == 1){
+				?>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle " data-toggle="dropdown">Admin <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="<?php echo $base_url; ?>start-season.php">Start Seasons</a>
+						</li>
+					</ul>
+				</li>
+				<?php
+				}
+				?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<?php if($loggedin == 0){ ?>
@@ -42,6 +57,6 @@
 			</ul>
 
 		</div><!-- /.nav-collapse -->
-		
+
 	</div><!-- /.container -->
 </div><!-- /.navbar -->
