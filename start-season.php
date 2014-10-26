@@ -1,7 +1,12 @@
 <?php
 
+
 	include_once('includes/config.php');
 	include_once('includes/database.php');
+
+	$post_styles[] = $dp_css . 'datepicker.css';
+	$scripts[] = $dp_js . 'bootstrap-datepicker.js';
+	$scripts[] = $js . 'datepicker.js';
 
 	// do they have access to ths page?
 	isAdmin();
@@ -13,11 +18,12 @@
 	// Start season for this year
 	$current_start = strtotime($week_start);
 	$addS	= $weeks == 1 ? '' : 's';
-
 	if($_POST){
-
-		print_r($_POST);
-		exit();
+		// check post for start seasons
+		if(isset($_POST['start_seasons'])){
+			$date_formatted= date('m-d-Y', strtotime($_POST['start_seasons']));
+			$current_start = strtotime($date_formatted);
+		}
 		// Display errors on localhost
 		$whitelist = array('localhost');
 		if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
@@ -68,17 +74,16 @@
 						}
 					}
 					$season_number--;
-					$msg = 'Seasons ' . $season_number_start . ' - ' . $season_number . ' have been created!';
+					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Seasons ' . $season_number_start . ' - ' . $season_number . ' have been created!</div>';
 				} else {
-					$msg = 'Seasons are already set for this year.';
+					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Seasons are already set for this year.</div>';
 				}
 
 			} else {
-				$msg = 'Season needs to be at least 1 week. In the config.php file, set $weeks = "1"';
+				$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Season needs to be at least 1 week. In the config.php file, set $weeks = "1"</div>';
 			}
 		} else {
-			$msg = 'Week start is not a Monday.<br /> Please edit the date in the config.php file: $week_start = "' . $week_start . '" - which is a ' . date('l', $current_start) . '.';
-
+			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Season start is not a Monday.</div>';
 		}
 	}
 
@@ -98,7 +103,10 @@
 				<form id="start_seasons_form" role="form" action="start-season.php" method="POST">
 					<div class="form-group">
 						<label class="control-label" for="start_seasons">Season Start Day</label>
-						<input type="text" class="form-control" id="start_seasons" name="start_seasons" value="<?php echo date('m-d-Y', strtotime($week_start)); ?>">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							<input type="text" class="form-control datepicker" id="start_seasons" name="start_seasons" value="<?php echo date('m-d-Y', strtotime($week_start)); ?>">
+						</div><!-- /.input-group -->
 					</div><!-- /.form-group -->
 					<p class="lead">Each season will be <span class="label label-primary"><?php echo $weeks;?> week<?php echo $addS; ?></span>. (You can edit the season length inside of the config file)</p>
 					<button id="submit_start_seasons" type="submit" class="btn btn-navy">Start Seasons</button>

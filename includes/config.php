@@ -11,6 +11,9 @@
 	$bs_js		= $bs . 'js/';
 	$fa				= $assets . 'fontawesome4/';
 	$fa_css		= $fa . 'css/';
+	$dp 			= $assets . 'datepicker/';
+	$dp_js 		= $dp . 'js/';
+	$dp_css 	= $dp . 'css/';
 
 	// Variables
 	$current_page	= getCurrentPage();
