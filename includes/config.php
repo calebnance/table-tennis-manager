@@ -46,9 +46,10 @@
 		}
 	}
 
-	$scripts[]	= $js . 'jquery-1.10.2.min.js';
-	$scripts[]	= $bs_js . 'bootstrap.min.js';
-	$scripts[]	= $js . 'offcanvas.js';
+	$scripts[] = $js . 'jquery-1.10.2.min.js';
+	$scripts[] = $bs_js . 'bootstrap.min.js';
+	$scripts[] = $js . 'offcanvas.js';
+	$scripts[] = $js . 'javascript.js';
 
 	// Table tennis defaults
 	$pts_to_win		= 11;
