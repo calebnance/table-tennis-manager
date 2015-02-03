@@ -3,7 +3,7 @@
 			<hr />
 
 			<footer>
-				<p>Table Tennis Manager | <?php echo date('Y'); ?></p>
+				<p>Table Tennis Manager | 2014 - <?php echo date('Y'); ?></p>
 			</footer>
 
 		</div><!-- /.container -->

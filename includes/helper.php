@@ -19,11 +19,22 @@ function getFullURL(){
 	return $full_url;
 }
 
-function getBaseURL(){
+function getBaseUrl($dir_deep = ''){
 	$full_url = getFullURL();
 	$full_url_explode = explode('/', $full_url);
 
 	array_pop($full_url_explode);
+
+	// now let's check for any directories that need to be removed
+	if(in_array($dir_deep, $full_url_explode)) {
+		// parse through url parts
+		foreach($full_url_explode as $key => $path_string) {
+			// if dir_deep and url part match, unset it!
+			if($path_string == $dir_deep) {
+				unset($full_url_explode[$key]);
+			}
+		}
+	}
 
 	$base_url = implode('/', $full_url_explode) . '/';
 	unset($full_url_explode);
@@ -40,6 +51,35 @@ function getCurrentPage(){
 	unset($full_url_explode);
 
 	return $current_page;
+}
+
+/**
+*	Installed Helpers
+*/
+function isInstalled(){
+		// check if class is available first
+		$directory = __DIR__;
+		$tt 			 = $directory . '/tt.php';
+		// check if file exists
+		if(file_exists($tt)){
+			// are we at the wizard?
+			if(getCurrentPage() != 'wizard.php') {
+				// go to wizard!
+				goToWizard();
+				exit();
+			}
+		} else { // if file doesn't exist, create it, go to installation wizard, to create full file
+			// create file
+			fclose(fopen($tt, 'w'));
+			// go to wizard!
+			goToWizard();
+		}
+}
+
+function goToWizard() {
+	// go to wizard!
+	header('Location: install/wizard.php');
+	exit();
 }
 
 /**

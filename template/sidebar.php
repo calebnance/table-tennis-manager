@@ -1,3 +1,6 @@
+<?php
+if($current_page != 'wizard.php') {
+?>
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
 
 	<div class="panel panel-navy">
@@ -35,3 +38,6 @@
 	*/
 	?>
 </div><!-- /#sidebar -->
+<?php
+}
+?>

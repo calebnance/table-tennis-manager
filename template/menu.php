@@ -10,7 +10,9 @@
 			</button>
 			<a class="navbar-brand" href="<?php echo $base_url; ?>">Table Tennis</a>
 		</div><!-- /.navbar-header -->
-
+		<?php
+		if($current_page != 'wizard.php') {
+		?>
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
@@ -57,6 +59,9 @@
 			</ul>
 
 		</div><!-- /.nav-collapse -->
+		<?php
+		}
+		?>
 
 	</div><!-- /.container -->
 </div><!-- /.navbar -->

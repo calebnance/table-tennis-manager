@@ -1,8 +1,12 @@
 <?php
-	include('includes/helper.php');
+	// Helper
+	include($root_path . 'includes/helper.php');
+
+	// Is it installed?
+	isInstalled();
 
 	// Paths
-	$base_url	= getBaseUrl();
+	$base_url	= getBaseUrl($dir_deep);
 	$assets		= $base_url . 'assets/';
 	$css			= $assets . 'css/';
 	$js				= $assets . 'js/';
