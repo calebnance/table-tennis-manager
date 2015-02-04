@@ -5,6 +5,9 @@
 	// Is it installed?
 	isInstalled();
 
+	// Version
+	$version  = '0.7.0';
+
 	// Paths
 	$base_url	= getBaseUrl($dir_deep);
 	$assets		= $base_url . 'assets/';
