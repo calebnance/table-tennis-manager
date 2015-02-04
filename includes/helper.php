@@ -26,7 +26,7 @@ function getBaseUrl($dir_deep = ''){
 	array_pop($full_url_explode);
 
 	// now let's check for any directories that need to be removed
-	if(in_array($dir_deep, $full_url_explode)) {
+	if(in_array($dir_deep, $full_url_explode) && $dir_deep != '') {
 		// parse through url parts
 		foreach($full_url_explode as $key => $path_string) {
 			// if dir_deep and url part match, unset it!
@@ -51,6 +51,32 @@ function getCurrentPage(){
 	unset($full_url_explode);
 
 	return $current_page;
+}
+
+function isCurrentPage($currentPage, $pageCheck) {
+	if($currentPage == $pageCheck) {
+		return 'class="active"';
+	}
+
+	return '';
+}
+
+function md5It($string, $responseType) {
+	// md5 string
+	$response = md5($string);
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+
+}
+
+function jsonIt($response) {
+	print_r(json_encode($response));
+	exit();
 }
 
 /**

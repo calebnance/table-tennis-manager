@@ -13,6 +13,9 @@
 		if($_GET['msg'] == 4){
 			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You do not have access to this page.</div>';
 		}
+		if($_GET['msg'] == 5){
+			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>I like your style, but naw homie, you can\'t go there.</div>';
+		}
 	}
 	include('template/header.php');
 ?>

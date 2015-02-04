@@ -16,11 +16,12 @@
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
-				<li <?php if($current_page == ''){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>">Home</a></li>
-				<li <?php if($current_page == 'standings.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>standings.php">Standings</a></li>
-				<li <?php if($current_page == 'rules.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>rules.php">Rules</a></li>
-				<li <?php if($current_page == 'compare.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>compare.php">Compare</a></li>
-				<li <?php if($current_page == 'about.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
+				<li <?php echo isCurrentPage($current_page, ''); ?>><a href="<?php echo $base_url; ?>">Home</a></li>
+				<li <?php echo isCurrentPage($current_page, 'about.php'); ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
+				<li <?php echo isCurrentPage($current_page, 'rules.php'); ?>><a href="<?php echo $base_url; ?>rules.php">Rules</a></li>
+				<li <?php echo isCurrentPage($current_page, 'standings.php'); ?>><a href="<?php echo $base_url; ?>standings.php">Standings</a></li>
+				<li <?php echo isCurrentPage($current_page, 'compare.php'); ?>><a href="<?php echo $base_url; ?>compare.php">Compare</a></li>
+				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>><a href="<?php echo $base_url; ?>matches.php">Matches</a></li>
 				<?php
 				// if loggedin and admin
 				if($_SESSION && $_SESSION['loggedin'] == 1 && $_SESSION['is_admin'] == 1){

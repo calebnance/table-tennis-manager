@@ -39,6 +39,7 @@
 	$styles[]	= $bs_css . 'bootstrap.min.css';
 	$styles[]	= $fa_css . 'font-awesome.min.css';
 	$styles[]	= $css . 'offcanvas.css';
+	$styles[]	= $css . 'plugins.css';
 	$styles[]	= $css . 'style.css';
 
 	// If a single page needs its own style.. set $page_styles before header is included
@@ -50,7 +51,8 @@
 		}
 	}
 
-	$scripts[] = $js . 'jquery-1.10.2.min.js';
+	//$scripts[] = $js . 'jquery-1.10.2.min.js';
+	$scripts[] = $js . 'jquery-2.1.3.min.js';
 	$scripts[] = $bs_js . 'bootstrap.min.js';
 	$scripts[] = $js . 'offcanvas.js';
 	$scripts[] = $js . 'javascript.js';

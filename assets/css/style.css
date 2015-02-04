@@ -46,10 +46,20 @@ h1.page-header { margin: 0 0 20px 0; }
 .panel-navy>.panel-heading { background-color: #3B3F4C; }
 .panel-navy>.panel-heading>.panel-title { color: #FFD074; }
 
+/* Tab Pane */
+.tab-pane { background-color: #FFF; border: 1px solid #ddd; border-top: 0; padding: 20px; }
+
+/* Images */
+.img-caption { background-color: rgba(0,0,0,0.5); bottom: 25px; color: #fff; left: 0; padding: 5px 0; position: absolute; text-align: center; width: 100%; }
+
 /* List Group */
 a.list-group-item.active { background-color: #3B3F4C; border-color: #3B3F4C; }
 a.list-group-item.active>.badge { color: #3B3F4C; }
 a.list-group-item>.badge { background-color: #3B3F4C; }
+
+/* Gravatar */
+.gravatar { background-color: #fff; border-radius: 4px; height: 250px; width: 250px; }
+.gravatar, .gravatar img { position: relative; }
 
 /* Standings */
 .circliful-standings-block { border: 1px solid #CCCCCC; border-radius: 4px; margin: 0 20px 20px 0; }
@@ -104,29 +114,29 @@ form .counters { height: 30px; margin-right: 10px; width: 60px; }
 			margin-right: 20px;
 	width: 200px;
 	height: 200px;
-	
+
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
-	
+
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, #BFBFBF, #FFF);
-			
-			
+
+
 			/* webkit chrome, safari, mobile */
-			  -webkit-animation-name: spin; 
+			  -webkit-animation-name: spin;
 			  -webkit-animation-duration: 3s; /* 3 seconds */
-			  -webkit-animation-iteration-count: infinite; 
+			  -webkit-animation-iteration-count: infinite;
 			  -webkit-animation-timing-function: linear;
 
 			  /* mozilla ff */
-			  -moz-animation-name: spin; 
+			  -moz-animation-name: spin;
 			  -moz-animation-duration: 3s; /* 3 seconds */
-			  -moz-animation-iteration-count: infinite; 
+			  -moz-animation-iteration-count: infinite;
 			  -moz-animation-timing-function: linear;
 
 			  /* microsoft ie */
-			  -ms-animation-name: spin; 
+			  -ms-animation-name: spin;
 			  -ms-animation-duration: 3s; /* 3 seconds */
-			  -ms-animation-iteration-count: infinite; 
+			  -ms-animation-iteration-count: infinite;
 			  -ms-animation-timing-function: linear;
 		}
