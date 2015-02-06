@@ -41,9 +41,42 @@ $(document).ready(function(){
 	// Bootstrap 3 tooltip
 	$('[data-toggle="tooltip"]').tooltip();
 
+
 	/**
 	 * on stuff
 	 */
+	// on wizard field keyup/blur
+	$('#wizard').on('keyup blur', '.required', function(e) {
+		// steps to pass
+		var pass1 = pass2 = pass3 = true;
+		// step1 check
+		$step1 		  = $('#step1 .required');
+		$step1Count = $step1.length;
+		// are there required fields in step 1?
+		if($step1Count > 1) {
+			// parse through the required fields for step 1
+			$.each($step1, function(i, input) {
+				// is it empty?
+				if($(input).val() == '' || $(input).val() === null) {
+					pass1 = false;
+				}
+			});
+		}
+
+		// is pass1 good?
+		if(pass1 == true) {
+			console.log(pass1 + ':: step1 is true')
+		}
+
+	});
+
+	// on steppers for wizard clicked
+	$('#wizard').on('click', '[href="#step1"], [href="#step2"], [href="#step3"], [href="#step4"]', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log('here');
+	});
+
 
 	/**
 	 * ajax stuff
@@ -69,6 +102,7 @@ $(document).ready(function(){
 	// 	console.log(textStatus);
 	// 	console.log(errorThrown);
 	// });
+
 
 	/**
 	 * function stuff
