@@ -108,6 +108,46 @@ function goToWizard() {
 	exit();
 }
 
+function checkConnection($host, $table, $user, $pass, $responseType) {
+	// sleep just for the ajax call
+	sleep(2);
+	// response
+	$response = array(
+		'error' => false,
+		'msg'   => '',
+	);
+	$mysqli = mysqli_init();
+	if (!$mysqli) {
+		$response['msg'] = 'mysqli_init failed';
+		$response['error'] =  true;
+	}
+
+	if (!$mysqli->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0')) {
+		$response['msg'] = 'Setting MYSQLI_INIT_COMMAND failed';
+		$response['error'] =  true;
+	}
+
+	if (!$mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
+		$response['msg'] = 'Setting MYSQLI_OPT_CONNECT_TIMEOUT failed';
+		$response['error'] =  true;
+	}
+
+	if (!$mysqli->real_connect($host, $user, $pass, $table)) {
+		$response['msg'] = 'Connect Error: ' . mysqli_connect_error();
+		$response['error'] =  true;
+	} else {
+		$response['msg'] = 'success';
+		$mysqli->close();
+	}
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+}
+
 /**
  *	Login/Session Helpers
  */

@@ -12,8 +12,7 @@
 
 		protected $connection;
 
-		public function __construct($server, $database, $user, $password)
-		{
+		public function __construct($server, $database, $user, $password){
 			$this->_server   = $server;
 			$this->_database = $database;
 			$this->_user     = $user;
@@ -21,8 +20,7 @@
 
 		}
 
-		protected function _sendQuery($query, $getId = false)
-		{
+		protected function _sendQuery($query, $getId = false){
 			$this->_connection = mysqli_connect($this->_server, $this->_user, $this->_password);
 
 			mysqli_select_db($this->_connection, $this->_database);
@@ -75,8 +73,7 @@
 		 * @param	bool		Activate Monitoring
 		 * @return	resource	Result
 		 */
-		public function select($table, $fields = '*', $where = '1=1', $returntype = 'array', $leftjoin = '', $on = '',  $order = 'id', $limit = '', $desc = false, $limitBegin = 0, $groupby = null, $monitoring = false)
-		{
+		public function select($table, $fields = '*', $where = '1=1', $returntype = 'array', $leftjoin = '', $on = '',  $order = 'id', $limit = '', $desc = false, $limitBegin = 0, $groupby = null, $monitoring = false){
 
 			$types = array('array'=>'mysqli_fetch_assoc', 'object'=>'mysqli_fetch_object');
 			$type = $types[$returntype];
@@ -131,8 +128,7 @@
 		 * @param	array	Data
 		 * @return	int     Id of inserted data
 		 */
-		public function insert($table, $objects)
-		{
+		public function insert($table, $objects){
 			$query = 'INSERT INTO ' . $table . ' ( ' . implode(',', array_keys($objects)) . ' )';
 			$query .= ' VALUES(\'' . implode('\',\'', $objects) . '\')';
 
@@ -149,8 +145,7 @@
 		 * @param	string	WHERE-Clause
 		 * @return	void
 		 */
-		public function update($table, $data, $where)
-		{
+		public function update($table, $data, $where){
 			if (is_array($data)):
 				$update = array();
 
@@ -171,8 +166,7 @@
 		 * @param	int     Id of row to delete
 		 * @return	void
 		 */
-		public function delete($table, $id, $where = null)
-		{
+		public function delete($table, $id, $where = null){
 			if($where === null):
 				$query = 'DELETE FROM ' . $table . ' WHERE id=\'' . $id . '\'';
 			else:
@@ -188,8 +182,7 @@
 		 * @param	string	Table
 		 * @return	void
 		 */
-		public function truncate($table)
-		{
+		public function truncate($table){
 			$query = 'TRUNCATE TABLE `' . $table . '`';
 			$this->_sendQuery($query);
 		}

@@ -10,7 +10,26 @@ body { background-color: #D8D9DE; }
 
 table { background-color: #EFEFEF; }
 
+/* General */
 .display-none { display: none; }
+.margin-0 { margin: 0; }
+.margin-b-0 { margin-bottom: 0; }
+.margin-l-0 { margin-left: 0; }
+.margin-r-0 { margin-right: 0; }
+.margin-t-0 { margin-top: 0; }
+.margin-10 { margin: 10px; }
+.margin-b-10 { margin-bottom: 10px; }
+.margin-l-10 { margin-left: 10px; }
+.margin-r-10 { margin-right: 10px; }
+.margin-t-10 { margin-top: 10px; }
+
+.padding-0 { padding: 0; }
+.padding-b-0 { padding-bottom: 0; }
+.padding-l-0 { padding-left: 0; }
+.padding-r-0 { padding-right: 0; }
+.padding-t-0 { padding-top: 0; }
+
+.bs3-btn-padding { padding: 6px 12px; }
 
 h1.page-header { margin: 0 0 20px 0; }
 

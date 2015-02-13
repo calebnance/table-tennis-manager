@@ -6,6 +6,7 @@
 	// Include page js
 	$scripts[] = $js . 'classie.js';
 	$scripts[] = $js . 'text-input-effects.js';
+	$scripts[] = $js . 'wizard.js';
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -17,7 +18,7 @@
 				<div id="wizard" class="well" role="tabpanel">
 
 					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
+					<ul class="nav nav-tabs" role="tablist" id="tab-wizard">
 						<li role="presentation" class="active">
 							<a href="#step1" aria-controls="step1" role="tab" data-toggle="tab">Step 1</a>
 						</li>
@@ -34,7 +35,7 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane fade in active" id="step1">
+						<div role="tabpanel" class="tab-pane fade in active" id="step1" data-complete="0">
 							<h3>Connect Database</h3>
 
 							<div>
@@ -67,15 +68,27 @@
 											</label>
 										</span>
 									</div><!-- /.col-md-6 -->
+
+									<div class="col-md-12">
+										<a href="#" class="btn btn-default pull-right display-none" id="gotoStep2">Step 2 <i class="fa fa-chevron-right"></i></a>
+										<a href="#" class="btn btn-default pull-left display-none" id="check-connection">Check Connection</a>
+										<div id="errorMsg" class="pull-left margin-l-10"></div><!-- /#errorMsg -->
+										<div class="clearfix"></div>
+									</div><!-- /.col-md-12 -->
+
 								</div><!-- /.row -->
 							</div>
 
 						</div><!-- /#step1 -->
-						<div role="tabpanel" class="tab-pane fade" id="step2">
+						<div role="tabpanel" class="tab-pane fade" id="step2" data-complete="0">
 							profile
 						</div><!-- /#step2 -->
-						<div role="tabpanel" class="tab-pane fade" id="step3">messages</div>
-						<div role="tabpanel" class="tab-pane fade" id="step4">settings</div>
+						<div role="tabpanel" class="tab-pane fade" id="step3" data-complete="0">
+							messages
+						</div><!-- /#step3 -->
+						<div role="tabpanel" class="tab-pane fade" id="step4" data-complete="0">
+							settings
+						</div><!-- /#step4 -->
 					</div>
 
 				</div>
