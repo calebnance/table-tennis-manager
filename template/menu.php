@@ -24,25 +24,23 @@
 			<ul class="nav navbar-nav">
 				<li <?php echo isCurrentPage($current_page, ''); ?>><a href="<?php echo $base_url; ?>">Home</a></li>
 				<li <?php echo isCurrentPage($current_page, 'about.php'); ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
-				<li <?php echo isCurrentPage($current_page, 'rules.php'); ?>><a href="<?php echo $base_url; ?>rules.php">Rules</a></li>
-				<li <?php echo isCurrentPage($current_page, 'standings.php'); ?>><a href="<?php echo $base_url; ?>standings.php">Standings</a></li>
-				<li <?php echo isCurrentPage($current_page, 'compare.php'); ?>><a href="<?php echo $base_url; ?>compare.php">Compare</a></li>
-				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>><a href="<?php echo $base_url; ?>matches.php">Matches</a></li>
-				<?php
-				// if loggedin and admin
-				if($_SESSION && $_SESSION['loggedin'] == 1 && $_SESSION['is_admin'] == 1){
-				?>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle " data-toggle="dropdown">Admin <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle " data-toggle="dropdown">League <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li>
-							<a href="<?php echo $base_url; ?>start-season.php">Start Seasons</a>
+						<li <?php echo isCurrentPage($current_page, 'rules.php'); ?>>
+							<a href="<?php echo $base_url; ?>rules.php">Rules</a>
+						</li>
+						<li <?php echo isCurrentPage($current_page, 'standings.php'); ?>>
+							<a href="<?php echo $base_url; ?>standings.php">Standings</a>
+						</li>
+						<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
+							<a href="<?php echo $base_url; ?>matches.php">Matches</a>
+						</li>
+						<li <?php echo isCurrentPage($current_page, 'compare.php'); ?>>
+							<a href="<?php echo $base_url; ?>compare.php">Compare</a>
 						</li>
 					</ul>
 				</li>
-				<?php
-				}
-				?>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<?php if($loggedin == 0){ ?>
@@ -60,7 +58,6 @@
 						</ul>
 					</li>
 				<?php } else { ?>
-					<li <?php if($current_page == 'profile.php'){ echo 'class="active"'; } ?>><a href="<?php echo $base_url; ?>profile.php">Profile</a></li>
 					<li><a href="<?php echo $base_url; ?>logout.php">Logout</a></li>
 				<?php } ?>
 			</ul>

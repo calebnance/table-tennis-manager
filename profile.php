@@ -11,7 +11,7 @@
 				</p>
 				<h1 class="page-header">My Profile</h1>
 
-				<div class="gravatar invisible pull-left" data-email="<?php echo md5($_SESSION['email']); ?>" data-username="<?php echo $_SESSION['name']; ?>"></div><!-- /.gravatar -->
+				<div class="gravatar invisible pull-left margin-b-5 margin-r-10" data-email="<?php echo md5($_SESSION['email']); ?>" data-username="<?php echo $_SESSION['name']; ?>"></div><!-- /.gravatar -->
 
 				<div class="profile-text">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id augue sit amet neque suscipit venenatis sed et orci.
