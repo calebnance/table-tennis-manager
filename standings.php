@@ -8,7 +8,7 @@
 
 	// Include page js
 	$scripts[] = $js . 'jquery.circliful.min.js';
-	$scripts[] = $js . 'matches.js';
+	$scripts[] = $js . 'standings.js';
 
 	include_once('includes/database.php');
 

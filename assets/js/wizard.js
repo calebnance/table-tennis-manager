@@ -124,6 +124,7 @@ $(document).ready(function(){
 		}).fail(function( jqXHR, textStatus, errorThrown ){
 			// remove class of working
 			$('#check-connection').removeClass('working');
+			console.log('error');
 			console.log(jqXHR);
 			console.log(textStatus);
 			console.log(errorThrown);
@@ -184,8 +185,6 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
-			console.log('install() returned');
-			console.log(data);
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
@@ -219,8 +218,6 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
-			console.log('setUpDatabaseTables() returned');
-			console.log(data);
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
@@ -255,8 +252,6 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
-			console.log('seedDatabaseTables() returned');
-			console.log(data);
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress

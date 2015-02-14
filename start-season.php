@@ -34,7 +34,7 @@
 			//error_reporting(E_ALL);
 			error_reporting(E_ALL ^ E_NOTICE);
 		}
-		
+
 		// is the date a Monday
 		if(date('D', $current_start) === 'Mon'){
 			if($weeks > 0){

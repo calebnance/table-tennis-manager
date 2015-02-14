@@ -1,19 +1,23 @@
 <?php
 	$title = 'Matches';
 	include('template/header.php');
+
+	// Include page js
+	$scripts[] = $js . 'matches.js';
+
 	include_once('includes/database.php');
-	
+
 	// Display errors on localhost
-	$whitelist = array('locathost');
+	$whitelist = array('localhost');
 	if(!in_array($_SERVER['SERVER_NAME'], $whitelist)){
 		//this is localhost!
 		ini_set('display_errors', 1);
 		//error_reporting(E_ALL);
 		error_reporting(E_ALL ^ E_NOTICE);
 	}
-	
+
 	$db		= new Database($db_host, $db_name, $db_user, $db_pass);
-	
+
 	$players= setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
 	foreach($players as $player_id => $player){
 		$players[$player_id]->win			= 0;
@@ -24,26 +28,26 @@
 	if($_GET['season']){
 		$set_season = $_GET['season'];
 	}
-	
+
 	$seasons				= getSeasons($db);
 	if($set_season){
 		$current_season		= getSeasonByNumYear($set_season, date('Y'), $db);
 	} else {
-		$current_season		= getCurrentSeason($db);	
+		$current_season		= getCurrentSeason($db);
 	}
 	$current_season_matches	= getSeasonMatches($current_season->start, $current_season->end, $db);
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
-			
+
 			<div class="col-xs-12 col-sm-9">
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
 				<h1 class="page-header">Matches</h1>
-				
+
 				<form class="filter-area form-inline">
-					<select name="season" class="form-control">
+					<select name="season" class="form-control margin-b-10">
 						<option>Select Season</option>
 						<?php
 						foreach($seasons as $select_season){
@@ -52,31 +56,21 @@
 							<option value="<?php echo $select_season->season_number; ?>" <?php echo $selected; ?>>
 								Season #<?php echo $select_season->season_number; ?> (<?php echo date('m-d-Y', strtotime($select_season->start)); ?> - <?php echo date('m-d-Y', strtotime($select_season->end)); ?>)
 							</option>
-							<?php	
+							<?php
 						}
 						?>
 					</select>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary margin-b-10">Submit</button>
 				</form><!-- /.filter-area -->
-				
+
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th class="text-right">
-									<?php
-									/*
-									<a href="#" class="btn btn-default btn-xs pull-left"><span class="glyphicon glyphicon-sort-by-order"></span></a>
-									ID
-									<span class="clearfix"></span>
-									*/
-									?>
-									ID
-								</th>
-								<th class="text-right">Player 1</th>
-								<th></th>
-								<th class="text-left">Player 2</th>
-								<th></th>
+								<th class="width-20"></th>
+								<th class="text-right width-200">Player 1</th>
+								<th class="width-20"></th>
+								<th class="text-left width-200">Player 2</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -89,14 +83,46 @@
 								$match_player2	= $match_scores[1];
 								$winner_1		= $match_player1->final_score > $match_player2->final_score ? ' success' : '';
 								$winner_2		= $match_player2->final_score > $match_player1->final_score ? ' success' : '';
+								// wat?
 								if(($match_player1->final_score != $match_player2->final_score) && ($match_player1->final_score > 0 || $match_player2->final_score > 0)){
 								?>
 								<tr>
-									<td class="text-right"><?php echo $match_player1->match_id; ?></td>
-									<td class="text-right<?php echo $winner_1; ?>"><?php echo $players[$season_match->player1]->username; ?> - <?php echo sprintf("%02s", $match_player1->final_score); ?></td>
+									<td class="text-center">
+										<i class="fa fa-plus-square more-stats" data-toggle="tooltip" data-placement="right" data-original-title="View More Stats"></i>
+									</td>
+									<td class="text-right<?php echo $winner_1; ?>">
+										<?php echo $players[$season_match->player1]->username; ?> <span class="label label-default"><?php echo sprintf("%02s", $match_player1->final_score); ?></span>
+										<div class="more display-none">
+											<p class="margin-b-0">Aces - <?php echo $match_player1->aces; ?></p>
+											<p class="margin-b-0">Bad Serves - <?php echo $match_player1->bad_serves; ?></p>
+											<p class="margin-b-0">Frustration - <?php echo $match_player1->frustration; ?></p>
+											<p class="margin-b-0">Ones - <?php echo $match_player1->ones; ?></p>
+											<p class="margin-b-0">Feel Goods - <?php echo $match_player1->feel_goods; ?></p>
+											<p class="margin-b-0">Slams Missed - <?php echo $match_player1->slams_missed; ?></p>
+											<p class="margin-b-0">Slams Made - <?php echo $match_player1->slams_made; ?></p>
+											<p class="margin-b-0">Foosball - <?php echo $match_player1->foosball; ?></p>
+											<p class="margin-b-0">Digs - <?php echo $match_player1->digs; ?></p>
+											<p class="margin-b-0">Just the Tip - <?php echo $match_player1->just_the_tip; ?></p>
+											<p class="margin-b-0">Fabulous - <?php echo $match_player1->fabulous; ?></p>
+										</div><!-- /.more -->
+									</td>
 									<td class="text-center border-left-right">vs</td>
-									<td class="text-left<?php echo $winner_2; ?>"><?php echo sprintf("%02s", $match_player2->final_score); ?> - <?php echo $players[$season_match->player2]->username; ?></td>
-									<td><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-wrench"></span></td>
+									<td class="text-left<?php echo $winner_2; ?>">
+										<span class="label label-default"><?php echo sprintf("%02s", $match_player2->final_score); ?></span> <?php echo $players[$season_match->player2]->username; ?>
+										<div class="more display-none">
+											<p class="margin-b-0"><?php echo $match_player2->aces; ?> - Aces</p>
+											<p class="margin-b-0"><?php echo $match_player2->bad_serves; ?> - Bad Serves</p>
+											<p class="margin-b-0"><?php echo $match_player2->frustration; ?> - Frustration</p>
+											<p class="margin-b-0"><?php echo $match_player2->ones; ?> - Ones</p>
+											<p class="margin-b-0"><?php echo $match_player2->feel_goods; ?> - Feel Goods</p>
+											<p class="margin-b-0"><?php echo $match_player2->slams_missed; ?> - Slams Missed</p>
+											<p class="margin-b-0"><?php echo $match_player2->slams_made; ?> - Slams Made</p>
+											<p class="margin-b-0"><?php echo $match_player2->foosball; ?> - Foosball</p>
+											<p class="margin-b-0"><?php echo $match_player2->digs; ?> - Digs</p>
+											<p class="margin-b-0"><?php echo $match_player2->just_the_tip; ?> - Just the Tip</p>
+											<p class="margin-b-0"><?php echo $match_player2->fabulous; ?> - Fabulous</p>
+										</div><!-- /.more -->
+									</td>
 								</tr>
 								<?php
 								}
@@ -104,7 +130,7 @@
 						} else {
 						?>
 						<tr>
-							<td colspan="5">No matches for this season.</td>
+							<td colspan="4">No matches for this season.</td>
 						</tr>
 						<?php
 						}
@@ -112,11 +138,11 @@
 						</tbody>
 					</table>
 				</div><!-- /.table-responsive -->
-				
+
 			</div><!--/span-->
-			
+
 			<?php include('template/sidebar.php'); ?>
-			
+
 		</div><!--/.row-->
 	</div><!--/.container-->
 
