@@ -6,7 +6,7 @@
 	isInstalled();
 
 	// Version
-	$version  = '0.7.0';
+	$version  = '0.9.0';
 
 	// Paths
 	$base_url	= getBaseUrl($dir_deep);
@@ -25,15 +25,22 @@
 	// Variables
 	$current_page	= getCurrentPage();
 
-	// Database
-	$db_host		= 'localhost';
-	$db_user		= 'root';
-	$db_pass		= 'root';
-	$db_name		= 'ttm_2014';
+	// Does this class exist? Errors out when wizard is present, so fixed it.
+	if(class_exists('tt')) {
+		// Database
+		$db_host	= tt::DBHOST;
+		$db_user	= tt::DBUSER;
+		$db_pass	= tt::DBPASS;
+		$db_name	= tt::DBTABLE;
+	}
 
 	// Season Setup
-	$weeks			= 2; // for each season
-	$week_start	= '2014-10-06'; // set this date that will continue until the end of the year
+	$weeks = 2; // for each season
+	if(date('N') == 1) {
+		$week_start	= date('Y-m-d'); // grab today
+	} else {
+		$week_start	= date('Y-m-d', strtotime('next monday')); // grab last weeks monday
+	}
 
 	// Includes
 	$styles		= array();

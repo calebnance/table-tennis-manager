@@ -171,8 +171,6 @@ $(document).ready(function(){
 			table : $('#dbTable').val(),
 			user : $('#dbUser').val(),
 			pass : $('#dbPass').val(),
-			username : $('#username').val(),
-			password : $('#password').val(),
 			responseType : 'json'
 		};
 
@@ -186,28 +184,109 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
+			console.log('install() returned');
 			console.log(data);
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
 			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
-
-			return false;
+			// next step
+			setUpDB();
 		}).fail(function( jqXHR, textStatus, errorThrown ){
 			console.log('error');
 			console.log(jqXHR);
 			console.log(textStatus);
 			console.log(errorThrown);
-
-			return false;
 		});
 	});
 
 	/**
 	* functions
 	*/
-	function setUpDatabaseTables(){
+	function setUpDB(){
+		// set args
+		var args = {
+			responseType : 'json'
+		};
 
+		$.ajax({
+			type : 'POST',
+			url : '../ajax.php',
+			dataType : 'json',
+			data : {
+				ajax : true,
+				function : 'setUpDatabaseTables',
+				args : args
+			}
+		}).done(function(data){
+			console.log('setUpDatabaseTables() returned');
+			console.log(data);
+			// update text
+			$('#installation-text').html(data.msg);
+			// update progress
+			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
+			// next step
+			seedContent();
+		}).fail(function( jqXHR, textStatus, errorThrown ){
+			console.log('error');
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		});
 	}
+
+	function seedContent(){
+		// set args
+		var args = {
+			name : $('#name').val(),
+			username : $('#username').val(),
+			password : $('#password').val(),
+			email : $('#email').val(),
+			responseType : 'json'
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : '../ajax.php',
+			dataType : 'json',
+			data : {
+				ajax : true,
+				function : 'seedDatabaseTables',
+				args : args
+			}
+		}).done(function(data){
+			console.log('seedDatabaseTables() returned');
+			console.log(data);
+			// update text
+			$('#installation-text').html(data.msg);
+			// update progress
+			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
+			// show complete
+			setTimeout(function(){
+				$('#installing').fadeOut(400, function(e){
+					$('#complete').fadeIn(400);
+				});
+			}, 3000);
+		}).fail(function( jqXHR, textStatus, errorThrown ){
+			console.log('error');
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		});
+	}
+
+	// set args
+	/*
+	var args = {
+		host : $('#dbHost').val(),
+		table : $('#dbTable').val(),
+		user : $('#dbUser').val(),
+		pass : $('#dbPass').val(),
+		username : $('#username').val(),
+		password : $('#password').val(),
+		email : $('#email').val(),
+		responseType : 'json'
+	};
+	*/
 
 });

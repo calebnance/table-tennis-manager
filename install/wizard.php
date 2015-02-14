@@ -90,20 +90,34 @@
 
 							<div>
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="text" id="name" />
+											<label class="input__label input__label--jiro" for="name">
+												<span class="input__label-content input__label-content--jiro">Name</span>
+											</label>
+										</span>
 										<span class="input input--jiro">
 											<input class="input__field input__field--jiro required" type="text" id="username" />
 											<label class="input__label input__label--jiro" for="username">
 												<span class="input__label-content input__label-content--jiro">Username</span>
 											</label>
 										</span>
+									</div><!-- /.col-md-6 -->
+									<div class="col-md-6">
 										<span class="input input--jiro">
 											<input class="input__field input__field--jiro required" type="password" id="password" />
 											<label class="input__label input__label--jiro" for="password">
 												<span class="input__label-content input__label-content--jiro">Password</span>
 											</label>
 										</span>
-									</div><!-- /.col-md-12 -->
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="text" id="email" />
+											<label class="input__label input__label--jiro" for="email">
+												<span class="input__label-content input__label-content--jiro">E-Mail</span>
+											</label>
+										</span>
+									</div><!-- /.col-md-6 -->
 
 									<div class="col-md-12">
 										<a href="#" class="btn btn-default pull-right display-none" id="complete-install">Complete Install</a>

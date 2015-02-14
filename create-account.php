@@ -69,14 +69,14 @@
 				<p>The next step is to validate this e-mail address by clicking the link below, if the link does not work, copy the full link underneath into your favorite internet browser.</p>
 				<p><a href="'.$link_validate.'">Validate E-mail</a></p>
 				<p>'.$link_validate.'</p>
-				<p><br />Thanks You!</p>
+				<p><br />Thank You!</p>
 			</body>
 		</html>
 		';
 
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= 'From: Table Tennis <tabletennis@somedomain.com>' . "\r\n";
+		$headers .= 'From: Table Tennis Manager<no_reply@calebnance.com>' . "\r\n";
 
 		// Send mail
 		mail($user_record['email'], 'Table Tennis Validate E-mail', $email_msg, $headers);

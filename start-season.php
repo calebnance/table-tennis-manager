@@ -16,12 +16,14 @@
 	$msg = '';
 
 	// Start season for this year
+
 	$current_start = strtotime($week_start);
 	$addS	= $weeks == 1 ? '' : 's';
 	if($_POST){
 		// check post for start seasons
 		if(isset($_POST['start_seasons'])){
-			$date_formatted= date('m-d-Y', strtotime($_POST['start_seasons']));
+			$start_seasons_arr = explode('-', $_POST['start_seasons']);
+			$date_formatted= $start_seasons_arr[2] . '-' . $start_seasons_arr[0] . '-' . $start_seasons_arr[1];
 			$current_start = strtotime($date_formatted);
 		}
 		// Display errors on localhost
@@ -32,7 +34,7 @@
 			//error_reporting(E_ALL);
 			error_reporting(E_ALL ^ E_NOTICE);
 		}
-
+		
 		// is the date a Monday
 		if(date('D', $current_start) === 'Mon'){
 			if($weeks > 0){

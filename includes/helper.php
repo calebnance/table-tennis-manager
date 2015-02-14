@@ -154,7 +154,7 @@ function checkConnection($host, $table, $user, $pass, $responseType) {
 	}
 }
 
-function install($host, $table, $user, $pass, $username, $password, $responseType) {
+function install($host, $table, $user, $pass, $responseType) {
 	// check if class is available first
 	$directory = __DIR__;
 	$tt 			 = $directory . '/tt.php';
@@ -186,7 +186,188 @@ function install($host, $table, $user, $pass, $username, $password, $responseTyp
 	$response = array(
 		'error' 	 => false,
 		'msg'   	 => 'Installing Database Tables',
-		'progress' => '30',
+		'progress' => '25',
+	);
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+}
+
+function setUpDatabaseTables($responseType) {
+	// include tt
+	$directory = __DIR__;
+	$tt 			 = $directory . '/tt.php';
+	include($tt);
+
+	// set sql1 - users table
+	$sql1 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`users` (' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`name` VARCHAR(256) NOT NULL,' .
+	'`username` VARCHAR(256) NOT NULL,' .
+	'`email` VARCHAR(256) NOT NULL,' .
+	'`password` VARCHAR(256) NOT NULL,' .
+	'`email_code` VARCHAR(256) NOT NULL,' .
+	'`email_validated` INT(2) NOT NULL,' .
+	'`is_admin` VARCHAR(10) NOT NULL,' .
+	'`created` DATETIME NOT NULL,' .
+	'`updated` DATETIME NOT NULL,' .
+	'`last_login` DATETIME NOT NULL' .
+	')ENGINE = INNODB;';
+
+	// set sql2 - match_ref table
+	$sql2 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`match_ref` (' .
+	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`player1` INT( 11 ) NOT NULL,' .
+	'`player2` INT( 11 ) NOT NULL,' .
+	'`serve_first` INT( 11 ) NOT NULL,' .
+	'`date_time_started` DATETIME NOT NULL,' .
+	'`total_time` TIME NOT NULL' .
+	') ENGINE = INNODB;';
+
+	// set sql3 - match_player table
+	$sql3 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`match_player` (' .
+	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`match_id` INT( 11 ) NOT NULL,' .
+	'`player_id` INT( 11 ) NOT NULL,' .
+	'`final_score` INT( 11 ) NOT NULL,' .
+	'`aces` INT( 2 ) NOT NULL,' .
+	'`bad_serves` INT( 2 ) NOT NULL,' .
+	'`frustration` INT( 2 ) NOT NULL,' .
+	'`ones` INT( 2 ) NOT NULL,' .
+	'`feel_goods` INT( 2 ) NOT NULL,' .
+	'`slams_missed` INT( 2 ) NOT NULL,' .
+	'`slams_made` INT( 2 ) NOT NULL,' .
+	'`digs` INT( 2 ) NOT NULL,' .
+	'`foosball` INT( 2 ) NOT NULL,' .
+	'`just_the_tip` INT( 2 ) NOT NULL,' .
+	'`fabulous` INT( 2 ) NOT NULL,' .
+	'`date_created` DATETIME NOT NULL,' .
+	'`date_modified` DATETIME NOT NULL,' .
+	'`user_created` INT( 11 ) NOT NULL,' .
+	'`user_modified` INT( 11 ) NOT NULL' .
+	') ENGINE = INNODB;';
+
+	// set sql4 - seasons table
+	$sql4 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`seasons` (' .
+	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`season_number` INT( 11 ) NOT NULL,' .
+	'`start` DATETIME NOT NULL,' .
+	'`end` DATETIME NOT NULL,' .
+	'`year` INT( 11 ) NOT NULL' .
+	') ENGINE = INNODB;';
+
+	// create connection to database
+	$conn = mysqli_connect(tt::DBHOST, tt::DBUSER, tt::DBPASS, tt::DBTABLE);
+
+	// install tables
+	mysqli_query($conn, $sql1);
+	mysqli_query($conn, $sql2);
+	mysqli_query($conn, $sql3);
+	mysqli_query($conn, $sql4);
+
+	// close connection
+	mysqli_close($conn);
+
+	// sleep for a bit
+	sleep(5);
+
+	// response
+	$response = array(
+		'error' 	 => false,
+		'msg'   	 => 'Seeding Database Tables',
+		'progress' => '50',
+	);
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+}
+
+function seedDatabaseTables($name, $username, $password, $email, $responseType) {
+	// include tt
+	$directory = __DIR__;
+	$tt 			 = $directory . '/tt.php';
+	include($tt);
+
+	// create connection to database
+	$conn = mysqli_connect(tt::DBHOST, tt::DBUSER, tt::DBPASS, tt::DBTABLE);
+
+	// placeholder for content section / manage pages!
+
+	// Set up for user e-mail
+	$email_code = md5(uniqid(rand(), true));
+
+	// Insert new user
+	$admin_record = array (
+		'name' 						=> $name,
+		'username'				=> $username,
+		'email'						=> $email,
+		'password'				=> pass_encrypt($password),
+		'email_code'			=> $email_code,
+		'email_validated'	=> 0,
+		'is_admin' 				=> 1,
+		'created'					=> date('Y-m-d H:i:s'),
+		'last_login'			=> '0000-00-00 00:00:00',
+	);
+
+	// insert query
+	$query = 'INSERT INTO users ( ' . implode(',', array_keys($admin_record)) . ' )';
+	$query .= ' VALUES(\'' . implode('\',\'', $admin_record) . '\')';
+
+	// mysql query
+	mysqli_query($conn, 'SET NAMES \'utf8\'');
+	mysqli_query($conn, 'SET CHARACTER SET \'utf8\'');
+
+	// insert into database
+	$result = mysqli_query($conn, $query);
+
+	// get base url
+	$base_url	= getBaseUrl();
+
+	// set up validate link
+	$link_validate = $base_url . 'validate.php?' . $email_code;
+
+	// set up e-mail msg
+	$email_msg = '
+	<html>
+	<head>
+	<title>Welcome to Tabble Tennis, ' . $admin_record['name'] . '</title>
+	</head>
+	<body>
+	<p>Hey ' . $admin_record['name'] . ',</p>
+	<p>You have installed Table Tennis Manager on your server! :)</p>
+	<p>Thank you for trying this tool out! All errors or feature requests can be sent to me at calebnance@gmail.com</p>
+	<p>Please validate this e-mail address by clicking the link below, if the link does not work, copy the full link underneath into your favorite internet browser.</p>
+	<p><a href="'.$link_validate.'">Validate E-mail</a></p>
+	<p>'.$link_validate.'</p>
+	<p><br />Thank You!</p>
+	</body>
+	</html>
+	';
+
+	// set headers for e-mail
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'From: Table Tennis Manager<no_reply@calebnance.com>' . "\r\n";
+
+	// send mail
+	mail($admin_record['email'], 'Table Tennis Validate E-mail', $email_msg, $headers);
+
+	// sleep for a bit
+	sleep(5);
+
+	// response
+	$response = array(
+		'error' 	 => false,
+		'msg'   	 => 'Validation E-mail has been sent!',
+		'progress' => '100',
 	);
 
 	// is response json?
