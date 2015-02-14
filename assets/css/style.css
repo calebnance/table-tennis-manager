@@ -12,17 +12,29 @@ table { background-color: #EFEFEF; }
 
 /* General */
 .display-none { display: none; }
+
+.text-align-center { text-align: center; }
+
 .margin-0 { margin: 0; }
 .margin-b-0 { margin-bottom: 0; }
 .margin-l-0 { margin-left: 0; }
 .margin-r-0 { margin-right: 0; }
 .margin-t-0 { margin-top: 0; }
+.margin-5 { margin: 5px; }
+.margin-b-5 { margin-bottom: 5px; }
+.margin-l-5 { margin-left: 5px; }
+.margin-r-5 { margin-right: 5px; }
+.margin-t-5 { margin-top: 5px; }
 .margin-10 { margin: 10px; }
 .margin-b-10 { margin-bottom: 10px; }
 .margin-l-10 { margin-left: 10px; }
 .margin-r-10 { margin-right: 10px; }
 .margin-t-10 { margin-top: 10px; }
-
+.margin-20 { margin: 20px; }
+.margin-b-20 { margin-bottom: 20px; }
+.margin-l-20 { margin-left: 20px; }
+.margin-r-20 { margin-right: 20px; }
+.margin-t-20 { margin-top: 20px; }
 .padding-0 { padding: 0; }
 .padding-b-0 { padding-bottom: 0; }
 .padding-l-0 { padding-left: 0; }
@@ -47,6 +59,9 @@ h1.page-header { margin: 0 0 20px 0; }
 .navbar-nav.navbar-right:last-child { margin-right: -1px; }
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #23262E; color: #3B3F4C; }
 
+/* Installer */
+#installing-loader { font-size: 56px; }
+
 /* Login Panel */
 .form-signin { margin: 0 auto; padding: 15px; width: 330px; }
 .form-signin .form-signin-heading, .form-signin .checkbox { margin-bottom: 10px; }
@@ -66,6 +81,7 @@ h1.page-header { margin: 0 0 20px 0; }
 .panel-navy>.panel-heading>.panel-title { color: #FFD074; }
 
 /* Tab Pane */
+.nav.nav-tabs li .label { font-weight: normal; font-size: 100%; }
 .tab-pane { background-color: #FFF; border: 1px solid #ddd; border-top: 0; padding: 20px; }
 
 /* Images */

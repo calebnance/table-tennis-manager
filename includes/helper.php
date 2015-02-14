@@ -88,6 +88,12 @@ function isInstalled(){
 		$tt 			 = $directory . '/tt.php';
 		// check if file exists
 		if(file_exists($tt)){
+			// include tt installer class
+			include($tt);
+			// has installation happened?
+			if(class_exists('tt')) {
+				return false;
+			}
 			// are we at the wizard?
 			if(getCurrentPage() != 'wizard.php') {
 				// go to wizard!
@@ -110,7 +116,7 @@ function goToWizard() {
 
 function checkConnection($host, $table, $user, $pass, $responseType) {
 	// sleep just for the ajax call
-	sleep(2);
+	sleep(3);
 	// response
 	$response = array(
 		'error' => false,
@@ -139,6 +145,49 @@ function checkConnection($host, $table, $user, $pass, $responseType) {
 		$response['msg'] = 'success';
 		$mysqli->close();
 	}
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+}
+
+function install($host, $table, $user, $pass, $username, $password, $responseType) {
+	// check if class is available first
+	$directory = __DIR__;
+	$tt 			 = $directory . '/tt.php';
+	$file 		 = fopen($tt, 'w');
+
+	$contents  = '<?php' . "\n";
+	$contents .= '/**' . "\n";
+	$contents .= ' *	Table Tennis installer class' . "\n";
+	$contents .= ' *' . "\n";
+	$contents .= ' */' . "\n";
+	$contents .= '  class tt {' . "\n";
+	$contents .= "\n";
+	$contents .= '		// database stuff' . "\n";
+	$contents .= '    const DBHOST  = \'' . $host . '\';' . "\n";
+	$contents .= '    const DBTABLE = \'' . $table . '\';' . "\n";
+	$contents .= '    const DBUSER  = \'' . $user . '\';' . "\n";
+	$contents .= '    const DBPASS  = \'' . $pass . '\';' . "\n";
+	$contents .= "\n";
+	$contents .= '  }' . "\n";
+	$contents .= '?>' . "\n";
+
+	fwrite($file, $contents);
+	fclose($file);
+
+	// sleep for a bit
+	sleep(5);
+
+	// response
+	$response = array(
+		'error' 	 => false,
+		'msg'   	 => 'Installing Database Tables',
+		'progress' => '30',
+	);
 
 	// is response json?
 	if($responseType == 'json') {

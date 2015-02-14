@@ -2,12 +2,18 @@
 	<div class="container">
 
 		<div class="navbar-header">
+			<?php
+			if($current_page != 'wizard.php') {
+			?>
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			<?php
+			}
+			?>
 			<a class="navbar-brand" href="<?php echo $base_url; ?>">Table Tennis</a>
 		</div><!-- /.navbar-header -->
 		<?php
