@@ -117,6 +117,8 @@ function goToWizard() {
 function checkConnection($host, $table, $user, $pass, $responseType) {
 	// sleep just for the ajax call
 	sleep(3);
+	// turn off error reporting
+	error_reporting(0);
 	// response
 	$response = array(
 		'error' => false,
