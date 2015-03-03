@@ -554,22 +554,24 @@
 
 							<div class="clearfix"></div>
 
+							<!-- post needed -->
 							<input type="hidden" name="type" value="update" />
-
 							<input type="hidden" id="player1_id" name="player1_id" value="" />
 							<input type="hidden" id="player2_id" name="player2_id" value="" />
-
 							<input type="hidden" id="match_id" name="match_id" value="" />
-							<input type="hidden" id="pts_per_turn" name="pts_per_turn" value="" />
-							<input type="hidden" id="pts_to_win" name="pts_to_win" value="" />
-							<input type="hidden" id="skunk" name="skunk" value="" />
 							<input type="hidden" id="serve_first" name="serve_first" value="" />
+
+							<!-- js needed -->
+							<input type="hidden" id="pts_per_turn" value="<?php echo $pts_per_turn; ?>" />
+							<input type="hidden" id="pts_to_win" value="<?php echo $pts_to_win; ?>" />
+							<input type="hidden" id="skunk" value="<?php echo $skunk; ?>" />
 
 							<a id="match-updating" class="alert alert-warning pull-right">waiting</a>
 
 							<div class="btm-form">
 								<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>
-							</div>
+							</div><!-- /.btm-form -->
+
 						</form>
 					</div><!-- /#match_wrapper -->
 					<?php
@@ -581,12 +583,12 @@
 				}
 				?>
 
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
 			<?php include('template/sidebar.php'); ?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 
 <?php

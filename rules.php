@@ -74,7 +74,7 @@
 					<li>
 						<strong>Digs</strong>
 						<ul>
-							<li>Is when a player makes a valid return, from having to go to an extreme left or right and/or also "digging" the ball up, from underneath the table level.</li>
+							<li>Is when a player makes a valid return, from having to go to an extreme left or right and/or "digging" the ball up, from underneath the table level.</li>
 						</ul>
 					</li>
 				</ul>

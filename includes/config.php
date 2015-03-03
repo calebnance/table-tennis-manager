@@ -6,7 +6,7 @@
 	isInstalled();
 
 	// Version
-	$version  = '0.9.2';
+	$version  = '0.9.3';
 
 	// Paths
 	$base_url	= getBaseUrl($dir_deep);
