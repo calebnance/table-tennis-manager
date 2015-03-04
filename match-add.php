@@ -8,6 +8,9 @@
 
 		$db = new Database($db_host, $db_name, $db_user, $db_pass);
 
+		// set timezone
+		date_default_timezone_set('UTC');
+
 		// start a match, set up everything in database
 		if(isset($_POST['type']) && $_POST['type'] == 'start'){
 
@@ -45,6 +48,8 @@
 				'error'					=> 0,
 				'msg'						=> 'Match has been created!',
 			);
+			// sleep a little
+			sleep(2);
 			echo json_encode($match_response);
 			exit();
 		}
@@ -233,7 +238,7 @@
 						</form>
 
 						<form id="match_created_form">
-							<div id="player1-area" class="form-group player-area pull-left">
+							<div id="player1-area" class="form-group player-area pull-left" data-id="1">
 								<div id="player1-msg"></div><!-- /#player1-msg -->
 								<label id="player1-label" data-player-id="0" class="control-label">Player 1</label>
 
@@ -245,7 +250,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -258,7 +263,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -271,7 +276,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -284,7 +289,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -297,7 +302,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -310,7 +315,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -323,7 +328,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -336,7 +341,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -349,7 +354,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -362,7 +367,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -375,7 +380,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -388,14 +393,14 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 							</div><!-- /#player1-area -->
 
 							<div class="verses pull-left">vs</div>
 
-							<div id="player2-area" class="form-group player-area pull-left">
+							<div id="player2-area" class="form-group player-area pull-left" data-id="2">
 								<div id="player2-msg"></div><!-- /#player2-msg -->
 								<label id="player2-label" class="control-label">Player 2</label>
 								<div class="controls">
@@ -406,7 +411,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -419,7 +424,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -432,7 +437,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -445,7 +450,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -458,7 +463,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -471,7 +476,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -484,7 +489,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -497,7 +502,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -510,7 +515,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -523,7 +528,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -536,7 +541,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 								<div class="clearfix"></div>
@@ -549,7 +554,7 @@
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-									</div>
+									</div><!-- /.btn-group -->
 								</div>
 
 							</div><!-- /#player2-area -->

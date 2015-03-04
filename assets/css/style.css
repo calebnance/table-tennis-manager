@@ -120,6 +120,7 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 
 #match_created_form { display: none; position: relative; }
 #match_created_form #player1-msg, #match_created_form #player2-msg { height: 40px; }
+#match_created_form #player1-msg .label, #match_created_form #player2-msg .label { font-size: 100%; }
 #match_created_form label.control-label { /*border: 1px solid #000000;*/ font-size: 16px; margin-bottom: 20px; padding: 10px 20px; }
 #match_created_form label.serving { background-color: #d9edf7; border-color: #31708F; border-radius: 4px; }
 #match_created_form .lead { margin-right: 4px; text-align: right; width: 140px; }
@@ -142,6 +143,7 @@ form .counters { height: 30px; margin-right: 10px; width: 60px; }
 .filter-area { margin: 0 0 20px 0; }
 .table-striped tr.success td, .table-striped tr td.success { background-color: #DFF0D8!important; }
 .table td.border-left-right { border-left: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD; }
+.more-stats { cursor: pointer; }
 
 /* Live Match */
 #table-tennis { background-color: #306048; border: 1px solid #000000; height: 420px; margin: 0 auto; position: relative; width: 756px; }

@@ -19,13 +19,26 @@ $(document).ready(function(){
 		$pts_to_win = parseInt($('#pts_to_win').val());
 		// value of input
 		$value = $(this).closest('.controls').find('input').val();
+		// get player
+		$player_num = $(this).closest('.player-area').attr('data-id');
+		// player check
+		if($player_num == 1) {
+			$other_player_score = parseInt($('#score_2').val());
+		} else {
+			$other_player_score = parseInt($('#score_1').val());
+		}
 		// are we taking away or adding?
 		if($(this).hasClass('minus')){
 			// would it be 0?
 			if($value == 0) return false;
 			$value--;
 		} else if($(this).hasClass('plus')){
+			// win value
 			if($value == $pts_to_win) return false;
+			// make sure other player can't go to win value
+			if($other_player_score == $pts_to_win) {
+				return false;
+			}
 			$value++;
 		}
 		$(this).closest('.controls').find('input').val($value);
@@ -45,7 +58,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: update_data
 		}).done(function(data){
-			$('#match-complete').html('Match Saved!');
+			$('#match-complete').addClass('btn-success').removeClass('btn-navy').html('<i class="fa fa-check"></i> Match Saved!');
 			$('#player1-area, #player2-area, .verses, #match-updating').fadeOut(400);
 
 			setTimeout(function(){
@@ -62,7 +75,9 @@ $(document).ready(function(){
 	$.playerServe = function(){
 		// players stuff
 		$match_created	= $('#match_created_form');
-		$total_score		= parseInt($('#score_1').val()) + parseInt($('#score_2').val());
+		$p1_score				= parseInt($('#score_1').val());
+		$p2_score				= parseInt($('#score_2').val());
+		$total_score		= $p1_score + $p2_score;
 		$serve_first		= parseInt($('#serve_first').val());
 		$player_first		= $match_created.find('label[data-player-id="' + $serve_first + '"]').attr('id');
 		$player_first		= $player_first == 'player1-label' ? 'player1-label' : 'player2-label';
@@ -71,13 +86,14 @@ $(document).ready(function(){
 		// game stuff
 		$pts_per_turn = parseInt($('#pts_per_turn').val());
 		$skunk				= parseInt($('#skunk').val());
+		$pts_to_win		= parseInt($('#pts_to_win').val());
 
 		// short game arrays
-		var first_points = [0, 1, 4, 5, 8, 9];
-		var secon_points = [2, 3, 6, 7, 10];
+		var first_points = [0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20];
+		var secon_points = [2, 3, 6, 7, 10, 11, 14, 15, 18, 19];
 		// long game arrays
-		// var first_points = [0, 1, 2, 3, 4, 10, 11, 12, 13, 14];
-		// var secon_points = [5, 6, 7, 8, 9, 15, 16, 17, 18, 19];
+		// var first_points = [0, 1, 2, 3, 4, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30, 31, 32, 33, 34, 40];
+		// var secon_points = [5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 35, 36, 37, 38, 39];
 
 		// clear player messages
 		$('#player1-msg').html('');
@@ -95,9 +111,11 @@ $(document).ready(function(){
 		// is it skunk?!
 		if(parseInt($('#score_2').val()) == 0 && parseInt($('#score_1').val()) == $skunk) {
 			// player 1 has a skunk!
+			$('#player1-msg').html('<span class="label label-success">Winner</span>');
 			$('#player2-msg').html('<span class="label label-danger">You have been skunked!</span>');
 		} else if(parseInt($('#score_1').val()) == 0 && parseInt($('#score_2').val()) == $skunk) {
 			// player 2 has a skunk!
+			$('#player2-msg').html('<span class="label label-success">Winner</span>');
 			$('#player1-msg').html('<span class="label label-danger">You have been skunked!</span>');
 		}
 
@@ -111,6 +129,37 @@ $(document).ready(function(){
 			$('#' + $player_second).addClass('serving');
 			$('#' + $player_first).removeClass('serving');
 		}
+
+		// is player at game point?
+		if(($pts_to_win - 1) == $p1_score) {
+			$('#' + $player_second).addClass('serving');
+			$('#' + $player_first).removeClass('serving');
+		} else if(($pts_to_win - 1) == $p2_score) {
+			$('#' + $player_first).addClass('serving');
+			$('#' + $player_second).removeClass('serving');
+		}
+
+		// deuce??
+		if(($pts_to_win - 1) == $p1_score && ($pts_to_win - 1) == $p2_score) {
+			$('#player1-msg').html('<span class="label label-info">Deuce</span>');
+			$('#player2-msg').html('<span class="label label-info">Deuce</span>');
+			$('.serving').removeClass('serving');
+		}
+
+		// winner player 1
+		if(($pts_to_win) == $p1_score && ($pts_to_win) != $p2_score) {
+			$('#player1-msg').html('<span class="label label-success">Winner</span>');
+			$('#player2-msg').html('');
+			$('.serving').removeClass('serving');
+		}
+
+		// winner player 2
+		if(($pts_to_win) != $p1_score && ($pts_to_win) == $p2_score) {
+			$('#player1-msg').html('');
+			$('#player2-msg').html('<span class="label label-success">Winner</span>');
+			$('.serving').removeClass('serving');
+		}
+
 	}
 
 	$.autoUpdate = function(){
@@ -194,7 +243,7 @@ $(document).ready(function(){
 					$('#skunk').val(match_start.skunk);
 					$('#serve_first').val(match_start.serve_first);
 
-					console.log(match_start);
+					//console.log(match_start);
 
 					$.ajax({
 						url: 'match-add.php',
