@@ -119,7 +119,8 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 #match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
 
 #match_created_form { display: none; position: relative; }
-#match_created_form label.control-label { border: 1px solid #000000; font-size: 16px; margin-bottom: 20px; padding: 10px 20px; }
+#match_created_form #player1-msg, #match_created_form #player2-msg { height: 40px; }
+#match_created_form label.control-label { /*border: 1px solid #000000;*/ font-size: 16px; margin-bottom: 20px; padding: 10px 20px; }
 #match_created_form label.serving { background-color: #d9edf7; border-color: #31708F; border-radius: 4px; }
 #match_created_form .lead { margin-right: 4px; text-align: right; width: 140px; }
 

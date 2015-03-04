@@ -6,8 +6,10 @@ $(document).ready(function(){
 	$('#match-add').on('click', function(e){
 		e.preventDefault();
 		if($(this).hasClass('disabled')){
+
 			return false;
 		}
+
 		$.validateForm(true);
 	});
 
@@ -37,8 +39,6 @@ $(document).ready(function(){
 	$('#match-complete').on('click', function(e){
 		var update_data = $('#match_created_form').serialize();
 
-		console.log(update_data);
-
 		$.ajax({
 			url: 'match-add.php',
 			type: 'POST',
@@ -54,7 +54,7 @@ $(document).ready(function(){
 
 		}).fail(function(){
 
-			console.log('FAILED UPDATE');
+			console.log('FAILED UPDATE: #match-complete click');
 
 		});
 	});
@@ -75,19 +75,30 @@ $(document).ready(function(){
 		// short game arrays
 		var first_points = [0, 1, 4, 5, 8, 9];
 		var secon_points = [2, 3, 6, 7, 10];
+		// long game arrays
+		// var first_points = [0, 1, 2, 3, 4, 10, 11, 12, 13, 14];
+		// var secon_points = [5, 6, 7, 8, 9, 15, 16, 17, 18, 19];
+
+		// clear player messages
+		$('#player1-msg').html('');
+		$('#player2-msg').html('');
 
 		// is it a possible skunk coming up?!
 		if(parseInt($('#score_2').val()) == 0 && parseInt($('#score_1').val()) == ($skunk - 1)) {
 			// player 1 is about to have a skunk!
+			$('#player2-msg').html('<span class="label label-info">A skunk is close...</span>');
 		} else if(parseInt($('#score_1').val()) == 0 && parseInt($('#score_2').val()) == ($skunk - 1)) {
 			// player 2 is about to have a skunk!
+			$('#player1-msg').html('<span class="label label-info">A skunk is close...</span>');
 		}
 
 		// is it skunk?!
 		if(parseInt($('#score_2').val()) == 0 && parseInt($('#score_1').val()) == $skunk) {
 			// player 1 has a skunk!
+			$('#player2-msg').html('<span class="label label-danger">You have been skunked!</span>');
 		} else if(parseInt($('#score_1').val()) == 0 && parseInt($('#score_2').val()) == $skunk) {
 			// player 2 has a skunk!
+			$('#player1-msg').html('<span class="label label-danger">You have been skunked!</span>');
 		}
 
 		// if short game (2 points a serve)
@@ -132,12 +143,12 @@ $(document).ready(function(){
 				data: update_data
 			}).done(function(data){
 
-					console.log('Updated');
-					console.log(data);
+					//console.log('Updated');
+					//console.log(data);
 
 			}).fail(function(){
 
-				console.log('FAILED UPDATE');
+				console.log('FAILED UPDATE: $.autoUpdate');
 
 			});
 

@@ -234,6 +234,7 @@
 
 						<form id="match_created_form">
 							<div id="player1-area" class="form-group player-area pull-left">
+								<div id="player1-msg"></div><!-- /#player1-msg -->
 								<label id="player1-label" data-player-id="0" class="control-label">Player 1</label>
 
 								<div class="controls">
@@ -395,6 +396,7 @@
 							<div class="verses pull-left">vs</div>
 
 							<div id="player2-area" class="form-group player-area pull-left">
+								<div id="player2-msg"></div><!-- /#player2-msg -->
 								<label id="player2-label" class="control-label">Player 2</label>
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
@@ -566,12 +568,13 @@
 							<input type="hidden" id="pts_to_win" value="<?php echo $pts_to_win; ?>" />
 							<input type="hidden" id="skunk" value="<?php echo $skunk; ?>" />
 
-							<a id="match-updating" class="alert alert-warning pull-right">waiting</a>
+							<div id="match-updating" class="alert alert-warning pull-right">waiting</div>
 
 							<div class="btm-form">
 								<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>
 							</div><!-- /.btm-form -->
 
+							<div class="clearfix"></div>
 						</form>
 					</div><!-- /#match_wrapper -->
 					<?php
