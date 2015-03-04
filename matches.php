@@ -83,7 +83,30 @@
 								$match_player2	= $match_scores[1];
 								$winner_1		= $match_player1->final_score > $match_player2->final_score ? ' success' : '';
 								$winner_2		= $match_player2->final_score > $match_player1->final_score ? ' success' : '';
-								// wat?
+								$served_1		= $season_match->serve_first == $season_match->player1 ? '<strong>Served First</strong>' : '&nbsp;';
+								$served_2		= $season_match->serve_first == $season_match->player2 ? '<strong>Served First</strong>' : '&nbsp;';
+								$date				= date('m-d-Y H:i:sa', strtotime($season_match->date_time_started));
+								$total_time = explode(':', $season_match->total_time);
+								// add ssss
+								$addSh = $addSm = $addSs = '';
+								if(ltrim($total_time[0], '0') != 1){
+									$addSh = 's';
+								}
+								if(ltrim($total_time[1], '0') != 1){
+									$addSm = 's';
+								}
+								if(ltrim($total_time[2], '0') != 1){
+									$addSs = 's';
+								}
+								// if hours and minutes are empty.
+								if ($total_time[0] == 0 && $total_time[1] == 0) {
+									$dis_time = ltrim($total_time[2], '0') . ' second' . $addSs;
+								} elseif($total_time[0] == 0) {
+									$dis_time = ltrim($total_time[1], '0') . ' minute' . $addSm . ', ' . ltrim($total_time[2], '0') . ' second' . $addSs;
+								} else {
+									$dis_time = ltrim($total_time[0], '0') . 'hour' . $addSh . ', ' . ltrim($total_time[1], '0') . ' minute' . $addSm . ', ' . ltrim($total_time[2], '0') . ' second' . $addSs;
+								}
+								// wat? why even is this here?
 								if(($match_player1->final_score != $match_player2->final_score) && ($match_player1->final_score > 0 || $match_player2->final_score > 0)){
 								?>
 								<tr>
@@ -93,6 +116,8 @@
 									<td class="text-right<?php echo $winner_1; ?>">
 										<?php echo $players[$season_match->player1]->username; ?> <span class="label label-default"><?php echo sprintf("%02s", $match_player1->final_score); ?></span>
 										<div class="more display-none">
+											<p class="margin-b-0"><?php echo $served_1; ?></p>
+											<p class="margin-b-0">Started At - <strong><?php echo $date; ?></strong></p>
 											<p class="margin-b-0">Aces - <?php echo $match_player1->aces; ?></p>
 											<p class="margin-b-0">Bad Serves - <?php echo $match_player1->bad_serves; ?></p>
 											<p class="margin-b-0">Frustration - <?php echo $match_player1->frustration; ?></p>
@@ -108,8 +133,11 @@
 									</td>
 									<td class="text-center border-left-right">vs</td>
 									<td class="text-left<?php echo $winner_2; ?>">
+
 										<span class="label label-default"><?php echo sprintf("%02s", $match_player2->final_score); ?></span> <?php echo $players[$season_match->player2]->username; ?>
 										<div class="more display-none">
+											<p class="margin-b-0"><?php echo $served_2; ?></p>
+											<p class="margin-b-0">Total Time - <strong><?php echo $dis_time; ?></strong></p>
 											<p class="margin-b-0"><?php echo $match_player2->aces; ?> - Aces</p>
 											<p class="margin-b-0"><?php echo $match_player2->bad_serves; ?> - Bad Serves</p>
 											<p class="margin-b-0"><?php echo $match_player2->frustration; ?> - Frustration</p>
