@@ -5,8 +5,11 @@
 	// Is it installed?
 	isInstalled();
 
+	// set timezone
+	date_default_timezone_set('America/New_York');
+
 	// Version
-	$version  = '0.9.6';
+	$version  = '0.9.7';
 
 	// Paths
 	$base_url	= getBaseUrl($dir_deep);

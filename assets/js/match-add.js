@@ -36,7 +36,7 @@ $(document).ready(function(){
 			// win value
 			if($value == $pts_to_win) return false;
 			// make sure other player can't go to win value
-			if($other_player_score == $pts_to_win) {
+			if($other_player_score == $pts_to_win && $(this).closest('.controls').find('input').hasClass('scoring')) {
 				return false;
 			}
 			$value++;

@@ -8,9 +8,6 @@
 
 		$db = new Database($db_host, $db_name, $db_user, $db_pass);
 
-		// set timezone
-		date_default_timezone_set('UTC');
-
 		// start a match, set up everything in database
 		if(isset($_POST['type']) && $_POST['type'] == 'start'){
 
@@ -245,7 +242,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" id="score_1" name="score_1" class="form-control counters" placeholder="" value="0">
+										<input type="text" id="score_1" name="score_1" class="form-control counters scoring" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -396,6 +393,8 @@
 									</div><!-- /.btn-group -->
 								</div>
 
+								<div class="clearfix"></div>
+
 							</div><!-- /#player1-area -->
 
 							<div class="verses pull-left">vs</div>
@@ -406,7 +405,7 @@
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
-										<input type="text" id="score_2" name="score_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" id="score_2" name="score_2" class="form-control counters scoring" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -534,9 +533,9 @@
 								<div class="clearfix"></div>
 
 								<div class="controls">
-									<div class="lead pull-left">Slams Made</div>
+									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
-										<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
@@ -547,9 +546,9 @@
 								<div class="clearfix"></div>
 
 								<div class="controls">
-									<div class="lead pull-left">Slams Missed</div>
+									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
-										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
+										<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
 									</div>
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
