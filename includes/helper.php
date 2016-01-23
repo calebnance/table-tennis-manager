@@ -123,6 +123,7 @@ function checkConnection($host, $table, $user, $pass, $responseType) {
 	$response = array(
 		'error' => false,
 		'msg'   => '',
+		'extra' => '',
 	);
 	$mysqli = mysqli_init();
 	if (!$mysqli) {
@@ -141,11 +142,54 @@ function checkConnection($host, $table, $user, $pass, $responseType) {
 	}
 
 	if (!$mysqli->real_connect($host, $user, $pass, $table)) {
-		$response['msg'] = 'Connect Error: ' . mysqli_connect_error();
+		$connectError = mysqli_connect_error();
+		$response['msg'] = 'Connect Error: ' . $connectError;
 		$response['error'] =  true;
+		// if the database is non-existant..
+		if(substr($connectError, 0, 16) == 'Unknown database') {
+			$response['extra'] = 'showCreateDB';
+		}
 	} else {
 		$response['msg'] = 'success';
 		$mysqli->close();
+	}
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
+}
+
+function createDatabase($host, $table, $user, $pass, $responseType) {
+	// sleep just for the ajax call
+	sleep(2);
+	// turn off error reporting
+	error_reporting(0);
+	// response
+	$response = array(
+		'error' => false,
+		'msg'   => '',
+		'extra' => '',
+	);
+
+	// create connection
+	$connection = new mysqli($host, $user, $pass);
+
+	// check connection
+	if ($connection->connect_error) {
+		$response['msg'] = 'Connect Error: please check host, user and password';
+		$response['error'] =  true;
+	} else {
+		// create database
+		if ($connection->query("CREATE DATABASE " . $table) === TRUE) {
+			$response['msg'] = 'success';
+		} else {
+			$response['msg'] = 'Connect Error: please check host, user and password';
+			$response['error'] =  true;
+		}
+		$connection->close();
 	}
 
 	// is response json?

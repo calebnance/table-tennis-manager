@@ -1,7 +1,7 @@
 <?php
 if($current_page != 'wizard.php') {
 ?>
-<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+<div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
 
 	<div class="panel panel-navy">
 

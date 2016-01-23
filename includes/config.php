@@ -9,7 +9,7 @@
 	date_default_timezone_set('America/New_York');
 
 	// Version
-	$version  = '0.9.7';
+	$version  = '0.9.8';
 
 	// Paths
 	$base_url	= getBaseUrl($dir_deep);
