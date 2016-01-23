@@ -87,7 +87,7 @@ $(document).ready(function(){
 		if($(this).hasClass('working')) {
 			return false;
 		}
-		$(this).addClass('working').html('<i class="fa fa-spinner fa-spin"></i> Checking..');
+		$(this).addClass('working').html('<i class="fa fa-spinner fa-spin"></i> Checking...');
 		// set args
 		var args = {
 			host : $('#dbHost').val(),
@@ -96,7 +96,6 @@ $(document).ready(function(){
 			pass : $('#dbPass').val(),
 			responseType : 'json'
 		};
-
 		// clear errorMsg
 		$('#errorMsg').html('');
 
@@ -110,24 +109,69 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
-			// remove class of working
-			$('#check-connection').removeClass('working');
 			// any errors?
 			if(data.error) {
+				// remove class of working
+				$('#check-connection').removeClass('working');
 				$('#errorMsg').html('<div class="alert alert-danger bs3-btn-padding margin-t-20 margin-b-0" role="alert">' + data.msg + '</div>');
 				$('#check-connection').html('Check Connection');
+				// create the DB?
+				if(data.extra == 'showCreateDB') {
+					$('#create-database').fadeIn();
+				}
 			} else {
 				$('#check-connection').removeClass('btn-default').addClass('btn-success').html('Connection Success!');
 				$('#step1').attr('data-complete', 1);
 				$('#gotoStep2').fadeIn(400);
 			}
-		}).fail(function( jqXHR, textStatus, errorThrown ){
+		}).fail(function(jqXHR, textStatus, errorThrown){
 			// remove class of working
 			$('#check-connection').removeClass('working');
-			console.log('error');
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+		});
+	});
+
+	// on create database click
+	$wizard.on('click', '#create-database', function(e){
+		e.preventDefault();
+		// working
+		if($(this).hasClass('working')) {
+			return false;
+		}
+		$(this).addClass('working').html('<i class="fa fa-spinner fa-spin"></i> Creating...');
+		// set args
+		var args = {
+			host : $('#dbHost').val(),
+			table : $('#dbTable').val(),
+			user : $('#dbUser').val(),
+			pass : $('#dbPass').val(),
+			responseType : 'json'
+		};
+		// clear errorMsg
+		$('#errorMsg').html('');
+
+		$.ajax({
+			type : 'POST',
+			url : '../ajax.php',
+			dataType : 'json',
+			data : {
+				ajax : true,
+				function : 'createDatabase',
+				args : args
+			}
+		}).done(function(data){
+			// remove class of working
+			$('#create-database').removeClass('working');
+			// any errors?
+			if(data.error) {
+				$('#errorMsg').html('<div class="alert alert-danger bs3-btn-padding margin-t-20 margin-b-0" role="alert">' + data.msg + '</div>');
+				$('#create-database').html('Create Database');
+			} else {
+				$('#create-database').fadeOut();
+				$('#check-connection').trigger('click');
+			}
+		}).fail(function(jqXHR, textStatus, errorThrown){
+			// remove class of working
+			$('#create-database').removeClass('working');
 		});
 	});
 
@@ -191,11 +235,8 @@ $(document).ready(function(){
 			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
 			// next step
 			setUpDB();
-		}).fail(function( jqXHR, textStatus, errorThrown ){
-			console.log('error');
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+		}).fail(function(jqXHR, textStatus, errorThrown){
+
 		});
 	});
 
@@ -224,11 +265,8 @@ $(document).ready(function(){
 			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
 			// next step
 			seedContent();
-		}).fail(function( jqXHR, textStatus, errorThrown ){
-			console.log('error');
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+		}).fail(function(jqXHR, textStatus, errorThrown){
+
 		});
 	}
 
@@ -262,26 +300,9 @@ $(document).ready(function(){
 					$('#complete').fadeIn(400);
 				});
 			}, 3000);
-		}).fail(function( jqXHR, textStatus, errorThrown ){
-			console.log('error');
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
+		}).fail(function(jqXHR, textStatus, errorThrown){
+
 		});
 	}
-
-	// set args
-	/*
-	var args = {
-		host : $('#dbHost').val(),
-		table : $('#dbTable').val(),
-		user : $('#dbUser').val(),
-		pass : $('#dbPass').val(),
-		username : $('#username').val(),
-		password : $('#password').val(),
-		email : $('#email').val(),
-		responseType : 'json'
-	};
-	*/
 
 });

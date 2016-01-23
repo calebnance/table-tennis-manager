@@ -28,7 +28,7 @@
 
 	// Title handled
 	if(!$title){
-		$title = 'Table Tennis';
+		$title = 'Table Tennis Manager';
 	}
 ?>
 <!DOCTYPE html>

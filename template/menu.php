@@ -14,7 +14,7 @@
 			<?php
 			}
 			?>
-			<a class="navbar-brand" href="<?php echo $base_url; ?>">Table Tennis</a>
+			<a class="navbar-brand" href="<?php echo $base_url; ?>">Table Tennis Manager</a>
 		</div><!-- /.navbar-header -->
 		<?php
 		if($current_page != 'wizard.php') {
@@ -22,8 +22,12 @@
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav">
-				<li <?php echo isCurrentPage($current_page, ''); ?>><a href="<?php echo $base_url; ?>">Home</a></li>
-				<li <?php echo isCurrentPage($current_page, 'about.php'); ?>><a href="<?php echo $base_url; ?>about.php">About</a></li>
+				<li <?php echo isCurrentPage($current_page, ''); ?>>
+					<a href="<?php echo $base_url; ?>">Home</a>
+				</li>
+				<li <?php echo isCurrentPage($current_page, 'about.php'); ?>>
+					<a href="<?php echo $base_url; ?>about.php">About</a>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle " data-toggle="dropdown">League <b class="caret"></b></a>
 					<ul class="dropdown-menu">

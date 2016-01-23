@@ -76,6 +76,7 @@
 									<div class="col-md-12">
 										<a href="#" class="btn btn-default pull-right display-none" id="gotoStep2">Step 2 <i class="fa fa-chevron-right"></i></a>
 										<a href="#" class="btn btn-default pull-left display-none" id="check-connection">Check Connection</a>
+										<a href="#" class="btn btn-success pull-left margin-l-10 display-none" id="create-database">Create Database</a>
 										<div class="clearfix"></div>
 										<div id="errorMsg"></div><!-- /#errorMsg -->
 										<div class="clearfix"></div>
