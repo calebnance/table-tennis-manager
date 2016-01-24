@@ -11,9 +11,9 @@ function getFullURL(){
 	}
 	$full_url .= "://";
 	if($_SERVER["SERVER_PORT"] != "80"){
-		$full_url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		$full_url .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
 	} else {
-		$full_url .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		$full_url .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 	}
 
 	return $full_url;
@@ -208,18 +208,22 @@ function install($host, $table, $user, $pass, $responseType) {
 
 	$contents  = '<?php' . "\n";
 	$contents .= '/**' . "\n";
-	$contents .= ' *	Table Tennis installer class' . "\n";
+	$contents .= ' *	File: tt.php' . "\n";
+	$contents .= ' *' . "\n";
+	$contents .= ' */' . "\n\n";
+	$contents .= '/**' . "\n";
+	$contents .= ' *	Table Tennis class' . "\n";
 	$contents .= ' *' . "\n";
 	$contents .= ' */' . "\n";
-	$contents .= '  class tt {' . "\n";
+	$contents .= 'class tt {' . "\n";
 	$contents .= "\n";
-	$contents .= '		// database stuff' . "\n";
-	$contents .= '    const DBHOST  = \'' . $host . '\';' . "\n";
-	$contents .= '    const DBTABLE = \'' . $table . '\';' . "\n";
-	$contents .= '    const DBUSER  = \'' . $user . '\';' . "\n";
-	$contents .= '    const DBPASS  = \'' . $pass . '\';' . "\n";
+	$contents .= '  // database connection' . "\n";
+	$contents .= '  const DBHOST  = \'' . $host . '\';' . "\n";
+	$contents .= '  const DBTABLE = \'' . $table . '\';' . "\n";
+	$contents .= '  const DBUSER  = \'' . $user . '\';' . "\n";
+	$contents .= '  const DBPASS  = \'' . $pass . '\';' . "\n";
 	$contents .= "\n";
-	$contents .= '  }' . "\n";
+	$contents .= '}' . "\n";
 	$contents .= '?>' . "\n";
 
 	fwrite($file, $contents);
@@ -389,7 +393,8 @@ function seedDatabaseTables($name, $username, $password, $email, $responseType) 
 	<body>
 	<p>Hey ' . $admin_record['name'] . ',</p>
 	<p>You have installed Table Tennis Manager on your server! :)</p>
-	<p>Thank you for trying this tool out! All errors or feature requests can be sent to me at calebnance@gmail.com</p>
+	<p>Thank you for trying this out! All errors or feature requests can be submitted on GitHub <a href="https://github.com/calebnance/table-tennis-manager/">(calebnance/table-tennis-manager)</a>.</p>
+	<br>
 	<p>Please validate this e-mail address by clicking the link below, if the link does not work, copy the full link underneath into your favorite internet browser.</p>
 	<p><a href="'.$link_validate.'">Validate E-mail</a></p>
 	<p>'.$link_validate.'</p>
@@ -404,7 +409,7 @@ function seedDatabaseTables($name, $username, $password, $email, $responseType) 
 	$headers .= 'From: Table Tennis Manager<no_reply@calebnance.com>' . "\r\n";
 
 	// send mail
-	mail($admin_record['email'], 'Table Tennis Validate E-mail', $email_msg, $headers);
+	mail($admin_record['email'], 'Table Tennis Manager Validate E-mail', $email_msg, $headers);
 
 	// sleep for a bit
 	sleep(5);

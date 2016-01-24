@@ -66,7 +66,7 @@
 											</label>
 										</span>
 										<span class="input input--jiro">
-											<input class="input__field input__field--jiro required" type="text" id="dbPass" />
+											<input class="input__field input__field--jiro required" type="password" id="dbPass" />
 											<label class="input__label input__label--jiro" for="dbPass">
 												<span class="input__label-content input__label-content--jiro">Database Password</span>
 											</label>
@@ -89,13 +89,15 @@
 						<div role="tabpanel" class="tab-pane fade step2" id="step2" data-complete="0">
 							<h3>Administrator Setup</h3>
 
+							<p class="help-block">This is the administrator login that will run this site.</p>
+
 							<div>
 								<div class="row">
 									<div class="col-md-6">
 										<span class="input input--jiro">
 											<input class="input__field input__field--jiro required" type="text" id="name" />
 											<label class="input__label input__label--jiro" for="name">
-												<span class="input__label-content input__label-content--jiro">Name</span>
+												<span class="input__label-content input__label-content--jiro">Full Name</span>
 											</label>
 										</span>
 										<span class="input input--jiro">

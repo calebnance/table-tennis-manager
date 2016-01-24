@@ -17,7 +17,7 @@
 				<h3>Rules</h3>
 				<ul>
 					<li>This is a singles play setup.</li>
-					<li>Points to win the match has been set to <span class="label label-primary"><?php echo $pts_to_win; ?> points</span>.</li>
+					<li>Points to win the match have been set to <span class="label label-primary"><?php echo $pts_to_win; ?> points</span>.</li>
 					<li>Service change is every <span class="label label-primary"><?php echo $pts_per_turn; ?> points</span>.</li>
 					<li>A player can win a match by skunk, the player must get to <span class="label label-primary"><?php echo $skunk; ?> points</span> before the opponent scores a single point.</li>
 					<li>You must win by 2 points.</li>
