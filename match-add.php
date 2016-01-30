@@ -1,5 +1,4 @@
 <?php
-
 	if($_POST){
 		// should be logged in.. but should check for it here.. ::TODO
 
@@ -172,9 +171,11 @@
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<h1 class="page-header">Add Match</h1>
 				<?php
 				if($show_form){
+				?>
+				<h1 class="page-header">Add Match</h1>
+					<?php
 					include_once('includes/database.php');
 
 					$db = new Database($db_host, $db_name, $db_user, $db_pass);
@@ -200,9 +201,9 @@
 											<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
 											Serves First
 										</label>
-									</div>
+									</div><!-- /.radio -->
 								</div>
-							</div>
+							</div><!-- /.form-group -->
 
 							<div class="verses pull-left">vs</div>
 
@@ -220,20 +221,23 @@
 											<input type="radio" name="playerserves" id="playerserves2" value="2">
 											Serves First
 										</label>
-									</div>
+									</div><!-- /.radio -->
 								</div>
-							</div>
+							</div><!-- /.form-group -->
 
 							<div class="clearfix"></div>
 
 							<div class="btm-form">
 								<a id="match-add" class="btn btn-lg btn-navy">Start Match</a>
-							</div>
+							</div><!-- /.btm-form -->
 
 							<input type="hidden" name="type" value="start" />
 
 						</form>
-
+						<?php
+						// TODO: Make this database driven!
+						// Extra TODO: have them add, edit attributes..
+						?>
 						<form id="match_created_form">
 							<div id="player1-area" class="form-group player-area pull-left" data-id="1">
 								<div id="player1-msg"></div><!-- /#player1-msg -->
@@ -243,12 +247,12 @@
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
 										<input type="text" id="score_1" name="score_1" class="form-control counters scoring" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -256,12 +260,12 @@
 									<div class="lead pull-left">Aces</div>
 									<div class="pull-left">
 										<input type="text" name="aces_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -269,12 +273,12 @@
 									<div class="lead pull-left">Bad Serve</div>
 									<div class="pull-left">
 										<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -282,12 +286,12 @@
 									<div class="lead pull-left">Digs</div>
 									<div class="pull-left">
 										<input type="text" name="digs_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -295,12 +299,12 @@
 									<div class="lead pull-left">Fabulous</div>
 									<div class="pull-left">
 										<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -308,12 +312,12 @@
 									<div class="lead pull-left">Feel Goods</div>
 									<div class="pull-left">
 										<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -326,7 +330,7 @@
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -334,7 +338,7 @@
 									<div class="lead pull-left">Frustration</div>
 									<div class="pull-left">
 										<input type="text" name="frustration_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
@@ -347,12 +351,12 @@
 									<div class="lead pull-left">Just The Tip</div>
 									<div class="pull-left">
 										<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -360,12 +364,12 @@
 									<div class="lead pull-left">Ones</div>
 									<div class="pull-left">
 										<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -373,12 +377,12 @@
 									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
 										<input type="text" name="slams_missed_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -386,12 +390,12 @@
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
 										<input type="text" name="slams_made_1" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -402,16 +406,17 @@
 							<div id="player2-area" class="form-group player-area pull-left" data-id="2">
 								<div id="player2-msg"></div><!-- /#player2-msg -->
 								<label id="player2-label" class="control-label">Player 2</label>
+
 								<div class="controls">
 									<div class="lead pull-left">Score</div>
 									<div class="pull-left">
 										<input type="text" id="score_2" name="score_2" class="form-control counters scoring" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -419,12 +424,12 @@
 									<div class="lead pull-left">Aces</div>
 									<div class="pull-left">
 										<input type="text" name="aces_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -432,12 +437,12 @@
 									<div class="lead pull-left">Bad Serve</div>
 									<div class="pull-left">
 										<input type="text" name="bad_serve_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -445,12 +450,12 @@
 									<div class="lead pull-left">Digs</div>
 									<div class="pull-left">
 										<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -458,12 +463,12 @@
 									<div class="lead pull-left">Fabulous</div>
 									<div class="pull-left">
 										<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -471,12 +476,12 @@
 									<div class="lead pull-left">Feel Goods</div>
 									<div class="pull-left">
 										<input type="text" name="feel_goods_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -484,12 +489,12 @@
 									<div class="lead pull-left">Foosball</div>
 									<div class="pull-left">
 										<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -497,12 +502,12 @@
 									<div class="lead pull-left">Frustration</div>
 									<div class="pull-left">
 										<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -510,12 +515,12 @@
 									<div class="lead pull-left">Just The Tip</div>
 									<div class="pull-left">
 										<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -523,12 +528,12 @@
 									<div class="lead pull-left">Ones</div>
 									<div class="pull-left">
 										<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -536,12 +541,12 @@
 									<div class="lead pull-left">Slams Missed</div>
 									<div class="pull-left">
 										<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 								<div class="clearfix"></div>
 
@@ -549,12 +554,12 @@
 									<div class="lead pull-left">Slams Made</div>
 									<div class="pull-left">
 										<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
-									</div>
+									</div><!-- /.pull-left -->
 									<div class="btn-group pull-left">
 										<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
 										<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
 									</div><!-- /.btn-group -->
-								</div>
+								</div><!-- /.controls -->
 
 							</div><!-- /#player2-area -->
 

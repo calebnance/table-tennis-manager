@@ -23,7 +23,7 @@ $(document).ready(function(){
 					// if we need this later or something maybe
 					var userGrav = data.entry[0];
 					var imgGrava = 'http://www.gravatar.com/avatar/' + emailGra + '?s=250';
-					var captionW = 'You Have A Gravatar Account';
+					var captionW = 'From Gravatar';
 					// gravatar show
 					showGravatarOrNah(imgGrava, captionW);
 			}
@@ -31,7 +31,7 @@ $(document).ready(function(){
 			// something went wrong wif this
 			console.log('error with gravatar user look-up');
 			var imgGrava = 'http://placekitten.com/g/250/250';
-			var captionW = 'You Need A Gravatar Account..';
+			var captionW = 'You Need A <a href="http://www.gravatar.com" target="_blank">Gravatar</a> Account..';
 			// gravatar nah
 			showGravatarOrNah(imgGrava, captionW);
 		});
@@ -79,7 +79,7 @@ $(document).ready(function(){
 		// set image
 		var proImage = $('<img>').attr({ src: imgGrava, class: 'img-thumbnail' });
 		// boom
-		$('.gravatar').html(proImage).append('<div class="img-caption">' + captionW + '</div>').css('visibility', 'visible').hide().fadeIn(400);
+		$('.gravatar').html(proImage).append('<div class="img-caption need-hover">' + captionW + '</div>').css('visibility', 'visible').hide().fadeIn(400);
 	}
 
 });

@@ -152,25 +152,23 @@
 					<div class="clearfix"></div>
 				<?php
 				} else {
+					// no users set?
 					if(empty($users_check)){
-					?>
-						<p class="lead"><span class="label label-danger"><i class="glyphicon glyphicon-warning-sign"></i></span> There are no users set up yet!</p>
-					<?php
+						include('template/msgs/noUsersSet.php');
 					}
+					// no seasons set up?
 					if(empty($current_season)){
-					?>
-						<p class="lead"><span class="label label-danger"><i class="glyphicon glyphicon-warning-sign"></i></span> The seasons have not been set up! Please contact the site administrator!</p>
-					<?php
+						include('template/msgs/noSeason.php');
 					}
 				}
 				?>
 
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
 			<?php include('template/sidebar.php'); ?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
+		</div><!-- /.row-->
+	</div><!-- /.container-->
 
 
 <?php

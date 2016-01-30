@@ -16,9 +16,8 @@
 		error_reporting(E_ALL ^ E_NOTICE);
 	}
 
-	$db		= new Database($db_host, $db_name, $db_user, $db_pass);
-
-	$players= setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
+	$db	= new Database($db_host, $db_name, $db_user, $db_pass);
+	$players = setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
 	foreach($players as $player_id => $player){
 		$players[$player_id]->win			= 0;
 		$players[$player_id]->lose			= 0;
@@ -29,11 +28,11 @@
 		$set_season = $_GET['season'];
 	}
 
-	$seasons				= getSeasons($db);
+	$seasons = getSeasons($db);
 	if($set_season){
-		$current_season		= getSeasonByNumYear($set_season, date('Y'), $db);
+		$current_season	= getSeasonByNumYear($set_season, date('Y'), $db);
 	} else {
-		$current_season		= getCurrentSeason($db);
+		$current_season	= getCurrentSeason($db);
 	}
 	$current_season_matches	= getSeasonMatches($current_season->start, $current_season->end, $db);
 ?>
@@ -45,6 +44,11 @@
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
 				<h1 class="page-header">Matches</h1>
+
+				<?php
+				// are there users in the database?
+				if($users_check && $current_season){
+				?>
 
 				<form class="filter-area form-inline">
 					<select name="season" class="form-control margin-b-10">
@@ -133,7 +137,6 @@
 									</td>
 									<td class="text-center border-left-right">vs</td>
 									<td class="text-left<?php echo $winner_2; ?>">
-
 										<span class="label label-default"><?php echo sprintf("%02s", $match_player2->final_score); ?></span> <?php echo $players[$season_match->player2]->username; ?>
 										<div class="more display-none">
 											<p class="margin-b-0"><?php echo $served_2; ?></p>
@@ -167,13 +170,25 @@
 					</table>
 				</div><!-- /.table-responsive -->
 
-			</div><!--/span-->
+				<?php
+				} else {
+					// no users set?
+					if(empty($players)){
+						include('template/msgs/noUsersSet.php');
+					}
+					// no seasons set up?
+					if(empty($current_season)){
+						include('template/msgs/noSeason.php');
+					}
+				}
+				?>
+
+			</div><!-- /.col-xs-12 -->
 
 			<?php include('template/sidebar.php'); ?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');
