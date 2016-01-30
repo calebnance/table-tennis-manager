@@ -95,6 +95,9 @@ h1.page-header { margin: 0 0 20px 0; }
 
 /* Images */
 .img-caption { background-color: rgba(0,0,0,0.5); bottom: 25px; color: #fff; left: 0; padding: 5px 0; position: absolute; text-align: center; width: 100%; }
+.img-caption a { color: #FFD074; }
+.img-caption.need-hover { transition: opacity 400ms ease-out; opacity: 0; }
+.gravatar:hover .img-caption.need-hover { transition: opacity 400ms ease-in; opacity: 1; }
 
 /* List Group */
 a.list-group-item.active { background-color: #3B3F4C; border-color: #3B3F4C; }
