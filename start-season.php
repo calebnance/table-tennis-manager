@@ -13,17 +13,14 @@
 
 	$db = new Database($db_host, $db_name, $db_user, $db_pass);
 
-	$msg = '';
-
 	// Start season for this year
-
 	$current_start = strtotime($week_start);
 	$addS	= $weeks == 1 ? '' : 's';
 	if($_POST){
 		// check post for start seasons
 		if(isset($_POST['start_seasons'])){
 			$start_seasons_arr = explode('-', $_POST['start_seasons']);
-			$date_formatted= $start_seasons_arr[2] . '-' . $start_seasons_arr[0] . '-' . $start_seasons_arr[1];
+			$date_formatted = $start_seasons_arr[2] . '-' . $start_seasons_arr[0] . '-' . $start_seasons_arr[1];
 			$current_start = strtotime($date_formatted);
 		}
 		// Display errors on localhost
@@ -42,50 +39,53 @@
 				$season_check	= $db->select('seasons', '*', 'year="' . date('Y') . '"', 'object');
 				// if no season set up for this year.. do it
 				if(empty($season_check)){
-					$season_last				= $db->custom_query('SELECT * FROM seasons ORDER BY id DESC LIMIT 1');
-					$current_year				= date('Y-12-31');
-					$end_of_year				= strtotime($current_year);
-					$day_span						= ($weeks * 7) - 3;
-					$current_end				= strtotime('+' . $day_span . ' days', $current_start);
-					$next_season_start	= strtotime('+' . $weeks . ' weeks', $current_start); // next start of season
+					$season_last = $db->custom_query('SELECT * FROM seasons ORDER BY id DESC LIMIT 1');
+					$current_year	= date('Y-12-31');
+					$end_of_year = strtotime($current_year);
+					$day_span = ($weeks * 7) - 3;
+					$current_end = strtotime('+' . $day_span . ' days', $current_start);
+					$next_season_start = strtotime('+' . $weeks . ' weeks', $current_start); // next start of season
 
-					$season_number				= 1;
-					$season_number_start 	= 1;
+					$season_number = 1;
+					$season_number_start = 1;
 
 					if(!empty($season_last)){
-						$season_number				= $season_last->season_number + 1;
-						$season_number_start 	= $season_last->season_number + 1;
+						$season_number = $season_last->season_number + 1;
+						$season_number_start = $season_last->season_number + 1;
 					}
 
 					for($i=1; $i < 53; $i++){
 						if($end_of_year > $next_season_start){
 							$end_of_season = date('Y-m-d', $current_end) . ' 23:59:59';
-							$season = array(
+							$season = [
 								'season_number' => $season_number,
-								'start'					=> date('Y-m-d', $current_start),
-								'end'						=> $end_of_season,
-								'year'					=> (int)date('Y'),
-							);
+								'start' => date('Y-m-d', $current_start),
+								'end' => $end_of_season,
+								'year' => (int)date('Y'),
+							];
 							$add_season = $db->insert('seasons', $season);
 
-							$current_start			= $next_season_start;
-							$current_end				= strtotime('+' . $day_span . ' days', $current_start);
-							$next_season_start	= strtotime('+' . $weeks . ' weeks', $current_start); // next start of season
+							$current_start = $next_season_start;
+							$current_end = strtotime('+' . $day_span . ' days', $current_start);
+							$next_season_start = strtotime('+' . $weeks . ' weeks', $current_start); // next start of season
 
 							$season_number++;
 						}
 					}
 					$season_number--;
-					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Seasons ' . $season_number_start . ' - ' . $season_number . ' have been created!</div>';
+					$_SESSION['msg'] = 'Seasons ' . $season_number_start . ' - ' . $season_number . ' have been created!';
+					$_SESSION['msg-type'] = 'info';
 				} else {
-					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Seasons are already set for this year.</div>';
+					$_SESSION['msg'] = 'Seasons are already set for this year.';
+					$_SESSION['msg-type'] = 'info';
 				}
-
 			} else {
-				$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Season needs to be at least 1 week. In the config.php file, set $weeks = "1"</div>';
+				$_SESSION['msg'] = 'Season needs to be at least 1 week. In the config.php file, set $weeks = "1"';
+				$_SESSION['msg-type'] = 'info';
 			}
 		} else {
-			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Season start is not a Monday.</div>';
+			$_SESSION['msg'] = 'Season start is not a Monday.';
+			$_SESSION['msg-type'] = 'info';
 		}
 	}
 

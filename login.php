@@ -1,35 +1,45 @@
 <?php
 	// login
 	$username	= '';
-	$pass		= '';
+	$pass = '';
 	if($_POST){
 		// Lets do some checking
 		if(empty($_POST['username']) || empty($_POST['password'])){
 			if(isset($_POST['username']) || isset($_POST['password'])){
-				$msg = 'Make sure you fill in your username and password.';
+				session_start();
+				$_SESSION['msg'] = 'Make sure you fill in your username and password.';
+				$_SESSION['msg-type'] = 'danger';
 			}
 		} else {
 			include_once('includes/config.php');
 			include_once('includes/database.php');
 
 			$username	= $_POST['username'];
-			$pass			= $_POST['password'];
+			$pass = $_POST['password'];
 
 			$db = new Database($db_host, $db_name, $db_user, $db_pass);
 			$user_info = $db->select('users', '*', 'username="'.$username.'"');
+			// is user
 			if($user_info){
 				$user_pass	= pass_decrypt($user_info[0]['password']);
+				// password is with user
 				if($user_pass === $pass){
 					startsession($user_info, $db);
-					header('location: index.php?msg=1');
+					header('location: index.php');
+					$_SESSION['msg'] = 'You are now logged in!';
+					$_SESSION['msg-type'] = 'success';
 					exit();
 				} else {
 					$pass = '';
-					$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Password did not match.</div>';
+					session_start();
+					$_SESSION['msg'] = 'Password did not match.';
+					$_SESSION['msg-type'] = 'danger';
 				}
 			} else {
 				$username = $pass = '';
-				$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Username was not found!</div>';
+				session_start();
+				$_SESSION['msg'] = 'Username was not found!';
+				$_SESSION['msg-type'] = 'danger';
 			}
 
 		}
@@ -54,12 +64,12 @@
 					<a href="<?php echo $base_url; ?>create-account.php" class="btn btn-lg btn-navy btn-block">Create Account</a>
 				</form>
 
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
 			<?php include('template/sidebar.php'); ?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 
 <?php

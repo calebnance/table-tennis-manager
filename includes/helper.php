@@ -472,7 +472,10 @@ function timeoutsession(){
 	session_start();
 	if($_SESSION['timeout'] + 120 * 60 < time()){ // 2 hours of inactive time
 		session_destroy();
-		header('Location: index.php?msg=2');
+		session_start();
+		$_SESSION['msg'] = 'You have been logged out due to inactivity.';
+		$_SESSION['msg-type'] = 'info';
+		header('Location: index.php');
 		exit();
 	} else {
 		$_SESSION['timeout']	= time();
@@ -482,14 +485,19 @@ function timeoutsession(){
 function endsession(){
 	session_start();
 	session_destroy();
-	header('Location: index.php?msg=3');
+	session_start();
+	$_SESSION['msg'] = 'You are now logged out!';
+	$_SESSION['msg-type'] = 'info';
+	header('Location: index.php');
 	exit();
 }
 
 function isAdmin(){
 	checksession();
 	if($_SESSION['is_admin'] == 0){
-		header('Location: index.php?msg=4');
+		$_SESSION['msg'] = 'You do not have access to this page.';
+		$_SESSION['msg-type'] = 'danger';
+		header('Location: index.php');
 		exit();
 	}
 }

@@ -1,22 +1,4 @@
 <?php
-	// message
-	if(isset($_GET) && $_GET['msg']){
-		if($_GET['msg'] == 1){
-			$msg = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You are now logged in!</div>';
-		}
-		if($_GET['msg'] == 2){
-			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You have been logged out due to inactivity.</div>';
-		}
-		if($_GET['msg'] == 3){
-			$msg = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You are now logged out!</div>';
-		}
-		if($_GET['msg'] == 4){
-			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You do not have access to this page.</div>';
-		}
-		if($_GET['msg'] == 5){
-			$msg = '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>I like your style, but naw homie, you can\'t go there.</div>';
-		}
-	}
 	include('template/header.php');
 ?>
 	<div class="container">
