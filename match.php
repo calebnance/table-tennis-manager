@@ -10,15 +10,14 @@
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
 				<h1 class="page-header">Match <small>(not yet working)</small></h1>
-
-
 			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
 		</div><!-- /.row -->
 	</div><!-- /.container -->
-
 
 <?php
 	include('template/footer.php');

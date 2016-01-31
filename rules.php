@@ -13,7 +13,6 @@
 				</p>
 				<h1 class="page-header">Rules &amp; Definitions</h1>
 
-
 				<h3>Rules</h3>
 				<ul>
 					<li>This is a singles play setup.</li>
@@ -79,13 +78,14 @@
 					</li>
 				</ul>
 
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');

@@ -52,10 +52,6 @@
 	<div class="container">
 		<div id="message-area">
 		<?php
-		if(isset($msg) && $msg){
-			echo $msg;
-		}
-
 		// hey that's a good idea, use session and stuff
 		if(!empty($_SESSION['msg'])) {
 			include('template/msgs/alert.php');

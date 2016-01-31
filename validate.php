@@ -43,13 +43,14 @@
 				</p>
 				<h1 class="page-header">E-mail Validation</h1>
 				<p class="lead"><?php echo $msg; ?></p>
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');

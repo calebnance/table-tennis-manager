@@ -127,14 +127,14 @@
 					</div>
 					<button id="submit-create-account" type="submit" class="btn btn-navy">Create Account</button>
 				</form>
+			</div><!-- /.col-xs-12 -->
 
-			</div><!--/span-->
+			<?php
+			include('template/sidebar.php');
+			?>
 
-			<?php include('template/sidebar.php'); ?>
-
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');

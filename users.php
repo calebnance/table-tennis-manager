@@ -12,14 +12,14 @@ include('template/header.php');
 			</p>
 			<h1 class="page-header">Users List</h1>
 
+		</div><!-- /.col-xs-12 -->
 
-		</div><!--/span-->
+		<?php
+		include('template/sidebar.php');
+		?>
 
-		<?php include('template/sidebar.php'); ?>
-
-	</div><!--/.row-->
-</div><!--/.container-->
-
+	</div><!-- /.row -->
+</div><!-- /.container -->
 
 <?php
 include('template/footer.php');

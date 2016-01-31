@@ -169,7 +169,7 @@
 						</tbody>
 					</table>
 				</div><!-- /.table-responsive -->
-
+				
 				<?php
 				} else {
 					// no users set?
@@ -182,10 +182,11 @@
 					}
 				}
 				?>
-
 			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
 		</div><!-- /.row -->
 	</div><!-- /.container -->
