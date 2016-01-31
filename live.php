@@ -26,8 +26,7 @@
 			<div class="clearfix"></div>
 		</div><!-- /#table-tennis -->
 
-	</div><!--/.container-->
-
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');

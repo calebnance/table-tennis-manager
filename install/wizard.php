@@ -168,12 +168,14 @@
 					</div><!-- /.jumbotron -->
 				</div><!-- /#complete -->
 
-			</div><!--/.col-xs-12 -->
+			</div><!-- /.col-xs-12 -->
 
-			<?php include($root_path . 'template/sidebar.php'); ?>
+			<?php
+			include($root_path . 'template/sidebar.php');
+			?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include($root_path . 'template/footer.php');

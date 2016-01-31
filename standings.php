@@ -162,14 +162,14 @@
 					}
 				}
 				?>
-
 			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
 		</div><!-- /.row-->
 	</div><!-- /.container-->
-
 
 <?php
 	include('template/footer.php');

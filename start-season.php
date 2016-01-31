@@ -103,24 +103,29 @@
 				<h1 class="page-header">Start Seasons for <?php echo date('Y'); ?></h1>
 
 				<form id="start_seasons_form" role="form" action="start-season.php" method="POST">
-					<div class="form-group">
-						<label class="control-label" for="start_seasons">Season Start Day</label>
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							<input type="text" class="form-control datepicker" id="start_seasons" name="start_seasons" value="<?php echo date('m-d-Y', strtotime($week_start)); ?>">
-						</div><!-- /.input-group -->
-					</div><!-- /.form-group -->
-					<p class="lead">Each season will be <span class="label label-primary"><?php echo $weeks;?> week<?php echo $addS; ?></span>. (You can edit the season length inside of the config file)</p>
-					<button id="submit_start_seasons" type="submit" class="btn btn-navy">Start Seasons</button>
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group">
+							<label class="control-label" for="start_seasons">Season Start Day</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								<input type="text" class="form-control datepicker" id="start_seasons" name="start_seasons" value="<?php echo date('m-d-Y', strtotime($week_start)); ?>">
+							</div><!-- /.input-group -->
+						</div><!-- /.form-group -->
+					</div><!-- /.col-xs-12 -->
+					<div class="col-xs-12">
+						<p class="lead">Each season will be <span class="label label-primary"><?php echo $weeks;?> week<?php echo $addS; ?></span><br>(You can edit the season length inside of the config file)</p>
+						<button id="submit_start_seasons" type="submit" class="btn btn-navy">Start Seasons</button>
+					</div><!-- /.col-xs-12 -->
 				</form>
 
 			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
 		</div><!-- /.row -->
 	</div><!-- /.container -->
-
 
 <?php
 	include('template/footer.php');

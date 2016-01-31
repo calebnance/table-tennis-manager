@@ -47,7 +47,7 @@
 
 				<?php
 				// are there users in the database?
-				if($users_check && $current_season){
+				if($players && $current_season){
 				?>
 
 				<form class="filter-area form-inline">
@@ -182,10 +182,11 @@
 					}
 				}
 				?>
-
 			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
 		</div><!-- /.row -->
 	</div><!-- /.container -->
