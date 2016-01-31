@@ -1,11 +1,11 @@
 <?php
+include_once('includes/config.php');
+include_once('includes/database.php');
+
+$db = new Database($db_host, $db_name, $db_user, $db_pass);
+
 	if($_POST){
-		// should be logged in.. but should check for it here.. ::TODO
-
-		include_once('includes/config.php');
-		include_once('includes/database.php');
-
-		$db = new Database($db_host, $db_name, $db_user, $db_pass);
+		// TODO: should be logged in.. but should check for it here..
 
 		// start a match, set up everything in database
 		if(isset($_POST['type']) && $_POST['type'] == 'start'){
@@ -13,7 +13,7 @@
 			// are the two players the same person?
 			if(isset($_POST['player1']) && isset($_POST['player2']) && ($_POST['player1'] == $_POST['player2'] ) ){
 				$res = array(
-					'msg'		=> 'You have selected the same person for both, this can\'t be done..',
+					'msg'		=> 'You have selected the same person for both, this can\'t be done.. <a href="https://www.youtube.com/watch?v=Lr7CKWxqhtw" target="_blank">don\'t play yourself</a>',
 					'error'	=> 1,
 				);
 				echo json_encode($res);
@@ -161,9 +161,6 @@
 	$title = 'Match - Add/Edit';
 	include('template/header.php');
 
-	include_once('includes/database.php');
-
-	$db = new Database($db_host, $db_name, $db_user, $db_pass);
 	$current_season = getCurrentSeason($db);
 
 	// Include page js

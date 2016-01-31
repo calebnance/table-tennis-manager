@@ -38,7 +38,7 @@ if($current_page != 'wizard.php') {
 
 		<div class="panel-heading">
 			<h3 class="panel-title">Hi <?php echo $_SESSION['name'];?>!</h3>
-		</div><!-- /.panle-heading -->
+		</div><!-- /.panel-heading -->
 
 		<div class="panel-body">
 			<ul class="nav nav-pills nav-stacked">
@@ -46,7 +46,9 @@ if($current_page != 'wizard.php') {
 					<a href="<?php echo $base_url; ?>profile.php"><i class="fa fa-user"></i> Profile</a>
 				</li>
 				<li>
-					<div class="text-right text-muted">Last Login: <?php echo date('m-d-Y g:ha', strtotime($_SESSION['last_login'])); ?></div>
+					<div class="text-right text-muted">
+						Last Login: <?php echo date('m-d-Y g:ha', strtotime($_SESSION['last_login'])); ?>
+					</div><!-- /.text-right -->
 				</li>
 			<?php
 			if($_SESSION['is_admin'] == 1){
@@ -57,13 +59,13 @@ if($current_page != 'wizard.php') {
 			</li>
 			<li <?php echo isCurrentPage($current_page, 'start-season.php'); ?>>
 					<a href="<?php echo $base_url; ?>start-season.php"><span class="fa fa-bolt"></span> Start Seasons</a>
-				</li>
-				<li <?php echo isCurrentPage($current_page, 'match-add.php'); ?>>
-					<a href="<?php echo $base_url; ?>match-add.php"><span class="fa fa-plus"></span> Start Match</a>
-				</li>
-				<li <?php echo isCurrentPage($current_page, 'users.php'); ?>>
-					<a href="<?php echo $base_url; ?>users.php"><span class="fa fa-users"></span> Users List</a>
-				</li>
+			</li>
+			<li <?php echo isCurrentPage($current_page, 'match-add.php'); ?>>
+				<a href="<?php echo $base_url; ?>match-add.php"><span class="fa fa-plus"></span> Start Match</a>
+			</li>
+			<li <?php echo isCurrentPage($current_page, 'users.php'); ?>>
+				<a href="<?php echo $base_url; ?>users.php"><span class="fa fa-users"></span> Users List</a>
+			</li>
 			<?php
 			}
 			?>

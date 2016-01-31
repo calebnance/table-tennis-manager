@@ -47,7 +47,7 @@
 
 				<?php
 				// are there users in the database?
-				if($users_check && $current_season){
+				if($players && $current_season){
 				?>
 
 				<form class="filter-area form-inline">
@@ -169,7 +169,7 @@
 						</tbody>
 					</table>
 				</div><!-- /.table-responsive -->
-				
+
 				<?php
 				} else {
 					// no users set?

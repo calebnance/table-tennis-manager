@@ -114,11 +114,11 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 /* Add Match */
 #match_wrapper form { border: 1px solid #EEEEEE; margin: 0 auto; padding: 20px 6px; width: 850px; }
 #match_wrapper .player-area { text-align: center; width: 380px; }
-#match_add_form .player-area .control-label { padding: 8px 0; }
+#match_add_form .player-area .control-label { padding: 8px 0; width: 100%; }
 #match_wrapper .verses { font-size: 36px; line-height: 117px; padding: 0 20px; }
 #match_wrapper .radio { padding-left: 0; }
 #match_wrapper .radio label { padding: 10px 65px 10px 42px; }
-#match_wrapper .radio input { margin: 0 0 0 10px; }
+/*#match_wrapper .radio input { margin: 0 0 0 10px; }*/
 #match_wrapper .btm-form { margin-top: 5px; text-align: center; width: 100%; }
 
 #match_created_form { display: none; position: relative; }
