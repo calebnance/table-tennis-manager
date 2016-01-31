@@ -10,7 +10,7 @@
 		include_once('includes/config.php');
 		include_once('includes/database.php');
 
-		$db 		= new Database($db_host, $db_name, $db_user, $db_pass);
+		$db = new Database($db_host, $db_name, $db_user, $db_pass);
 		$nocode	= $db->select('users', 'DISTINCT id', 'email_code="'.$email_code.'"', 'object');
 
 		// is there a validate code in the database

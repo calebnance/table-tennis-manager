@@ -21,19 +21,19 @@
 		error_reporting(E_ALL ^ E_NOTICE);
 	}
 
-	$db		= new Database($db_host, $db_name, $db_user, $db_pass);
+	$db	= new Database($db_host, $db_name, $db_user, $db_pass);
 
-	$players= setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
+	$players = setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
 	foreach($players as $player_id => $player){
 		$players[$player_id]->win					= 0;
 		$players[$player_id]->lose				= 0;
 		$players[$player_id]->percentage	= 0;
 	}
 
-	$current_season					= getCurrentSeason($db);
+	$current_season = getCurrentSeason($db);
 	$current_season_matches	= getSeasonMatches($current_season->start, $current_season->end, $db);
 
-	$standings = array();
+	$standings = [];
 	foreach($current_season_matches as $match){
 		$match_scores	= $db->select('match_player', '*', 'match_id="' . $match->id . '"', 'object');
 		if($match_scores){

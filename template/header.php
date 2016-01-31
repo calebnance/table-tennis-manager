@@ -22,7 +22,8 @@
 	// Show message
 	$show_form = 1;
 	if((isset($registered) && $registered = 1) && $loggedin == 0){
-		$msg = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.</div>';
+		$_SESSION['msg'] = 'You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.';
+		$_SESSION['msg-type'] = 'warning';
 		$show_form = 0;
 	}
 
@@ -53,6 +54,13 @@
 		<?php
 		if(isset($msg) && $msg){
 			echo $msg;
+		}
+
+		// hey that's a good idea, use session and stuff
+		if(!empty($_SESSION['msg'])) {
+			include('template/msgs/alert.php');
+			unset($_SESSION['msg']);
+			unset($_SESSION['msg-type']);
 		}
 		?>
 		</div><!-- /#message-area -->
