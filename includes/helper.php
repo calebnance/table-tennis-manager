@@ -577,8 +577,10 @@ function checkForLiveMatch($responseType) {
 
 	// match found?
 	if(!empty($currentMatch)) {
-		$response['player1'] = getPlayerById($currentMatch->player1, $db);
-		$response['player2'] = getPlayerById($currentMatch->player2, $db);
+		$player1 = getPlayerById($currentMatch->player1, $db);
+		$player2 = getPlayerById($currentMatch->player2, $db);
+		$response['player1'] = $player1->username;
+		$response['player2'] = $player2->username;
 	}
 
 	// is response json?
