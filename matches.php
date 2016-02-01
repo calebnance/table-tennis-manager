@@ -67,6 +67,12 @@
 					<button type="submit" class="btn btn-primary margin-b-10">Submit</button>
 				</form><!-- /.filter-area -->
 
+				<div class="margin-b-10">
+					<i class="fa fa-plus-square fa-lg open-all" data-toggle="tooltip" data-placement="top" data-original-title="Open All Stats"></i>
+					<i class="fa fa-minus-square fa-lg close-all" data-toggle="tooltip" data-placement="top" data-original-title="Close All Stats"></i>
+					Open / Close
+				</div><!-- /.margin-b-10 -->
+
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
@@ -87,6 +93,10 @@
 								$match_player2	= $match_scores[1];
 								$winner_1		= $match_player1->final_score > $match_player2->final_score ? ' success' : '';
 								$winner_2		= $match_player2->final_score > $match_player1->final_score ? ' success' : '';
+
+								$winner_1_b	= $match_player1->final_score > $match_player2->final_score ? 'success' : 'default';
+								$winner_2_b	= $match_player2->final_score > $match_player1->final_score ? 'success' : 'default';
+
 								$served_1		= $season_match->serve_first == $season_match->player1 ? '<strong>Served First</strong>' : '&nbsp;';
 								$served_2		= $season_match->serve_first == $season_match->player2 ? '<strong>Served First</strong>' : '&nbsp;';
 								$date				= date('m-d-Y H:i:sa', strtotime($season_match->date_time_started));
@@ -118,10 +128,10 @@
 										<i class="fa fa-plus-square more-stats" data-toggle="tooltip" data-placement="right" data-original-title="View More Stats"></i>
 									</td>
 									<td class="text-right<?php echo $winner_1; ?>">
-										<?php echo $players[$season_match->player1]->username; ?> <span class="label label-default"><?php echo sprintf("%02s", $match_player1->final_score); ?></span>
+										<?php echo $players[$season_match->player1]->username; ?> <span class="label label-<?php echo $winner_1_b;?>"><?php echo sprintf("%02s", $match_player1->final_score); ?></span>
 										<div class="more display-none">
-											<p class="margin-b-0"><?php echo $served_1; ?></p>
-											<p class="margin-b-0">Started At - <strong><?php echo $date; ?></strong></p>
+											<p class="margin-b-0 margin-t-5"><?php echo $served_1; ?></p>
+											<p>Started At - <strong><?php echo $date; ?></strong></p>
 											<p class="margin-b-0">Aces - <?php echo $match_player1->aces; ?></p>
 											<p class="margin-b-0">Bad Serves - <?php echo $match_player1->bad_serves; ?></p>
 											<p class="margin-b-0">Frustration - <?php echo $match_player1->frustration; ?></p>
@@ -137,10 +147,10 @@
 									</td>
 									<td class="text-center border-left-right">vs</td>
 									<td class="text-left<?php echo $winner_2; ?>">
-										<span class="label label-default"><?php echo sprintf("%02s", $match_player2->final_score); ?></span> <?php echo $players[$season_match->player2]->username; ?>
+										<span class="label label-<?php echo $winner_2_b;?>"><?php echo sprintf("%02s", $match_player2->final_score); ?></span> <?php echo $players[$season_match->player2]->username; ?>
 										<div class="more display-none">
-											<p class="margin-b-0"><?php echo $served_2; ?></p>
-											<p class="margin-b-0">Total Time - <strong><?php echo $dis_time; ?></strong></p>
+											<p class="margin-b-0 margin-t-5"><?php echo $served_2; ?></p>
+											<p>Total Time - <strong><?php echo $dis_time; ?></strong></p>
 											<p class="margin-b-0"><?php echo $match_player2->aces; ?> - Aces</p>
 											<p class="margin-b-0"><?php echo $match_player2->bad_serves; ?> - Bad Serves</p>
 											<p class="margin-b-0"><?php echo $match_player2->frustration; ?> - Frustration</p>

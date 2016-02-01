@@ -1,4 +1,6 @@
 <?php
+	include_once('includes/config.php');
+	include_once('includes/database.php');
 	// include helper
 	include_once('includes/helper.php');
 

@@ -3,34 +3,6 @@ if($current_page != 'wizard.php') {
 ?>
 <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
 
-	<div class="panel panel-navy">
-
-		<div class="panel-heading">
-			<h3 class="panel-title">Matches</h3>
-		</div><!-- /.panle-heading -->
-
-		<div class="panel-body">
-			<ul class="nav nav-pills nav-stacked">
-				<li <?php echo isCurrentPage($current_page, 'standings.php'); ?>>
-					<a href="<?php echo $base_url; ?>standings.php"><span class="fa fa-signal"></span> Current Standings</a>
-				</li>
-				<li>
-					<a href="<?php echo $base_url; ?>live.php"><span class="fa fa-play"></span> Watch Live</a>
-				</li>
-				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
-					<a href="<?php echo $base_url; ?>matches.php"><span class="fa fa-list"></span> View Matches</a>
-				</li>
-				<li <?php echo isCurrentPage($current_page, 'graphs.php'); ?>>
-					<a href="<?php echo $base_url; ?>graphs.php"><span class="fa fa-bar-chart"></span> View Graphs</a>
-				</li>
-		</div><!-- /.panel-body -->
-		<?php
-		/*
-		<div class="panel-footer">footer area</div>
-		*/
-		?>
-	</div><!-- /.panel -->
-
 	<?php
 	if($_SESSION && $_SESSION['loggedin'] == 1){
 	?>
@@ -82,6 +54,34 @@ if($current_page != 'wizard.php') {
 	</div><!-- /.list-group -->
 	*/
 	?>
+
+	<div class="panel panel-navy">
+		<div class="panel-heading">
+			<h3 class="panel-title">Matches</h3>
+		</div><!-- /.panle-heading -->
+
+		<div class="panel-body">
+			<ul class="nav nav-pills nav-stacked">
+				<li <?php echo isCurrentPage($current_page, 'standings.php'); ?>>
+					<a href="<?php echo $base_url; ?>standings.php"><span class="fa fa-signal"></span> Current Standings</a>
+				</li>
+				<li>
+					<a href="<?php echo $base_url; ?>live.php"><span class="fa fa-play"></span> Watch Live</a>
+				</li>
+				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
+					<a href="<?php echo $base_url; ?>matches.php"><span class="fa fa-list"></span> View Matches</a>
+				</li>
+				<li <?php echo isCurrentPage($current_page, 'graphs.php'); ?>>
+					<a href="<?php echo $base_url; ?>graphs.php"><span class="fa fa-bar-chart"></span> View Graphs</a>
+				</li>
+		</div><!-- /.panel-body -->
+		<?php
+		/*
+		<div class="panel-footer">footer area</div>
+		*/
+		?>
+	</div><!-- /.panel -->
+
 </div><!-- /#sidebar -->
 <?php
 }

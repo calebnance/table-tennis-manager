@@ -51,6 +51,7 @@ $(document).ready(function(){
 
 	$('#match-complete').on('click', function(e){
 		var update_data = $('#match_created_form').serialize();
+		update_data += '&completed=1';
 
 		$.ajax({
 			url: 'match-add.php',

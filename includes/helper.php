@@ -270,44 +270,45 @@ function setUpDatabaseTables($responseType) {
 
 	// set sql2 - match_ref table
 	$sql2 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`match_ref` (' .
-	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
-	'`player1` INT( 11 ) NOT NULL,' .
-	'`player2` INT( 11 ) NOT NULL,' .
-	'`serve_first` INT( 11 ) NOT NULL,' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`player1` INT(11) NOT NULL,' .
+	'`player2` INT(11) NOT NULL,' .
+	'`serve_first` INT(11) NOT NULL,' .
 	'`date_time_started` DATETIME NOT NULL,' .
-	'`total_time` TIME NOT NULL' .
+	'`total_time` TIME NOT NULL,' .
+	'`completed` INT(2) NOT NULL' .
 	') ENGINE = INNODB;';
 
 	// set sql3 - match_player table
 	$sql3 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`match_player` (' .
-	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
-	'`match_id` INT( 11 ) NOT NULL,' .
-	'`player_id` INT( 11 ) NOT NULL,' .
-	'`final_score` INT( 11 ) NOT NULL,' .
-	'`aces` INT( 2 ) NOT NULL,' .
-	'`bad_serves` INT( 2 ) NOT NULL,' .
-	'`frustration` INT( 2 ) NOT NULL,' .
-	'`ones` INT( 2 ) NOT NULL,' .
-	'`feel_goods` INT( 2 ) NOT NULL,' .
-	'`slams_missed` INT( 2 ) NOT NULL,' .
-	'`slams_made` INT( 2 ) NOT NULL,' .
-	'`digs` INT( 2 ) NOT NULL,' .
-	'`foosball` INT( 2 ) NOT NULL,' .
-	'`just_the_tip` INT( 2 ) NOT NULL,' .
-	'`fabulous` INT( 2 ) NOT NULL,' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`match_id` INT(11) NOT NULL,' .
+	'`player_id` INT(11) NOT NULL,' .
+	'`final_score` INT(11) NOT NULL,' .
+	'`aces` INT(2) NOT NULL,' .
+	'`bad_serves` INT(2) NOT NULL,' .
+	'`frustration` INT(2) NOT NULL,' .
+	'`ones` INT(2) NOT NULL,' .
+	'`feel_goods` INT(2) NOT NULL,' .
+	'`slams_missed` INT(2) NOT NULL,' .
+	'`slams_made` INT(2) NOT NULL,' .
+	'`digs` INT(2) NOT NULL,' .
+	'`foosball` INT(2) NOT NULL,' .
+	'`just_the_tip` INT(2) NOT NULL,' .
+	'`fabulous` INT(2) NOT NULL,' .
 	'`date_created` DATETIME NOT NULL,' .
 	'`date_modified` DATETIME NOT NULL,' .
-	'`user_created` INT( 11 ) NOT NULL,' .
-	'`user_modified` INT( 11 ) NOT NULL' .
+	'`user_created` INT(11) NOT NULL,' .
+	'`user_modified` INT(11) NOT NULL' .
 	') ENGINE = INNODB;';
 
 	// set sql4 - seasons table
 	$sql4 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`seasons` (' .
-	'`id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
-	'`season_number` INT( 11 ) NOT NULL,' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`season_number` INT(11) NOT NULL,' .
 	'`start` DATETIME NOT NULL,' .
 	'`end` DATETIME NOT NULL,' .
-	'`year` INT( 11 ) NOT NULL' .
+	'`year` INT(11) NOT NULL' .
 	') ENGINE = INNODB;';
 
 	// create connection to database
@@ -545,6 +546,47 @@ function getSeasonByNumYear($number, $year, $db){
 function getSeasonMatches($season_start, $season_end, $db){
 
 	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . '" AND date_time_started <="' . $season_end . '"');
+}
+
+function getPlayerById($playerId, $db) {
+
+	return $db->custom_query('SELECT username FROM users WHERE id = "' . $playerId . '"', true);
+}
+
+/**
+ *	Live Match Helpers
+ */
+function checkForLiveMatch($responseType) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+	// first let's check for matches going on right now.. today.
+	$sql  = 'SELECT * FROM match_ref ';
+	$sql .= 'WHERE date_time_started >="' . date('Y-m-d') . ' 00:00:00" ';
+	$sql .= 'AND date_time_started <="' . date('Y-m-d') . ' 23:59:59" ';
+	$sql .= 'AND completed = 0 ';
+	$sql .= 'ORDER BY date_time_started DESC ';
+	$sql .= 'LIMIT 1';
+	$currentMatch = $db->custom_query($sql, true);
+
+	// set response
+	$response = [
+		'currentMatch' => empty($currentMatch) ? (int) 0 : (int) 1,
+		'match' => $currentMatch,
+		'query' => $sql,
+	];
+
+	// match found?
+	if(!empty($currentMatch)) {
+		$response['player1'] = getPlayerById($currentMatch->player1, $db);
+		$response['player2'] = getPlayerById($currentMatch->player2, $db);
+	}
+
+	// is response json?
+	if($responseType == 'json') {
+		jsonIt($response);
+	} else {
+		return $response;
+	}
 }
 
 ?>

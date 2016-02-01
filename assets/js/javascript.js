@@ -20,12 +20,12 @@ $(document).ready(function(){
 		}).done(function(data){
 			// only if returned good data
 			if(data) {
-					// if we need this later or something maybe
-					var userGrav = data.entry[0];
-					var imgGrava = 'http://www.gravatar.com/avatar/' + emailGra + '?s=250';
-					var captionW = 'From Gravatar';
-					// gravatar show
-					showGravatarOrNah(imgGrava, captionW);
+				// if we need this later or something maybe
+				var userGrav = data.entry[0];
+				var imgGrava = 'http://www.gravatar.com/avatar/' + emailGra + '?s=250';
+				var captionW = 'From <a href="http://www.gravatar.com" target="_blank">Gravatar</a>';
+				// gravatar show
+				showGravatarOrNah(imgGrava, captionW);
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown){
 			// something went wrong wif this
@@ -40,36 +40,8 @@ $(document).ready(function(){
 	// Bootstrap 3 tooltip
 	$('[data-toggle="tooltip"]').tooltip();
 
-
-	/**
-	 * on
-	 */
-
-	/**
-	 * ajax
-	 */
-
-	// get e-mail hash for gravatar
-	// $.ajax({
-	// 	type : 'POST',
-	// 	url : 'ajax.php',
-	// 	dataType : 'json',
-	// 	data : {
-	// 		ajax : true,
-	// 		function : 'md5It',
-	// 		args : {
-	// 			'email' : 'calebnance@gmail.com',
-	// 			'responseType' : 'json'
-	// 		}
-	// 	}
-	// }).done(function(data){
-	// 	console.log(data);
-	// }).fail(function( jqXHR, textStatus, errorThrown ){
-	// 	console.log(jqXHR);
-	// 	console.log(textStatus);
-	// 	console.log(errorThrown);
-	// });
-
+	// start dot loader
+	dotLoader();
 
 	/**
 	 * functions
@@ -80,6 +52,21 @@ $(document).ready(function(){
 		var proImage = $('<img>').attr({ src: imgGrava, class: 'img-thumbnail' });
 		// boom
 		$('.gravatar').html(proImage).append('<div class="img-caption need-hover">' + captionW + '</div>').css('visibility', 'visible').hide().fadeIn(400);
+	}
+
+	// do dot loader
+	function dotLoader() {
+	  $lDots = $('.loading-dots');
+	  setInterval(function(){
+	    $dots = $lDots.text();
+	    if($dots === '...') {
+	      $lDots.text('.');
+	    } else if($dots === '.') {
+	      $lDots.text('..');
+	    } else if($dots === '..') {
+	      $lDots.text('...');
+	    }
+	  }, 400);
 	}
 
 });

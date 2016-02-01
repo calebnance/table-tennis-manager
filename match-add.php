@@ -138,9 +138,10 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 			$time_stamp				= ($current_time - $match_start_time);
 			$time_played			= date('i:s', $time_stamp);
 
-			$match_update = array(
-				'total_time' => '00:' . $time_played
-			);
+			$match_update = [
+				'total_time' => '00:' . $time_played,
+				'completed' => !empty($_POST['completed']) ? (int) 1 : (int) 0,
+			];
 			$update_3 = $db->update('match_ref', $match_update, 'id="' . (int)$_POST['match_id'] .'"');
 
 			$response = array(
@@ -149,7 +150,7 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 				'player_2'		=> $player2_update,
 				'current'			=> date('Y-m-d H:i:s'),
 				'stamp'				=> ($current_time - $match_start_time),
-				'time_format'	=> $time_format
+				'time_format'	=> $time_format,
 			);
 			echo json_encode($response);
 			exit();
