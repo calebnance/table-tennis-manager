@@ -69,7 +69,8 @@
 	});
 
 	$users_check = $db->select('users', '*', '1=1', 'object', '', '', '', '1');
-?>
+	?>
+
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
 
@@ -84,19 +85,20 @@
 				if($users_check && $current_season){
 				?>
 					<div class="btn-group pull-right" data-toggle="buttons">
-						<label class="btn btn-primary show-list-graph active">
+						<label class="btn btn-default show-list-graph active">
 							<input type="radio" name="options" id="listings"> <i class="fa fa-th-list"></i>
 						</label>
-						<label class="btn btn-primary show-list-graph">
+						<label class="btn btn-default show-list-graph">
 							<input type="radio" name="options" id="graphs"> <i class="fa fa-th-large"></i>
 						</label>
 					</div><!-- /.btn-group -->
 
-					<h3>
+					<h3 class="margin-b-20">
 						Season #<?php echo $current_season->season_number; ?>
-						<br />
-						<small><?php echo date('m-d-Y', strtotime($current_season->start)); ?> to <?php echo date('m-d-Y', strtotime($current_season->end)); ?></small>
+						<small><?php echo date('M d, Y', strtotime($current_season->start)); ?> to <?php echo date('M d, Y', strtotime($current_season->end)); ?></small>
 					</h3>
+
+					<div class="clearfix"></div>
 
 					<div id="standings-listings" class="list-graph">
 						<table class="table table-striped">
@@ -110,14 +112,14 @@
 								</tr>
 							</thead>
 							<tbody>
-						<?php
-						$place = 1;
-						foreach($players as $player){
-							$tr_class = '';
-							if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
-								$tr_class = 'success';
-							}
-						?>
+							<?php
+							$place = 1;
+							foreach($players as $player){
+								$tr_class = '';
+								if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
+									$tr_class = 'success';
+								}
+							?>
 							<tr class="<?php echo $tr_class; ?>">
 								<td class="text-center"><?php echo $place; ?></td>
 								<td><?php echo $player->username; ?></td>

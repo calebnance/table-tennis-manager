@@ -14,6 +14,9 @@
 				<div class="gravatar invisible pull-left margin-b-5 margin-r-10" data-email="<?php echo md5($_SESSION['email']); ?>" data-username="<?php echo $_SESSION['name']; ?>"></div><!-- /.gravatar -->
 
 				<div class="profile-text">
+					<?php
+					/* have easter eggs and notify user when they get them! have badges for it or points or something.. idk. */
+					?>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id augue sit amet neque suscipit venenatis sed et orci.
 					Curabitur condimentum scelerisque enim, non dignissim elit ultricies eu. Integer sit amet convallis enim. Vivamus ornare
 					libero et tellus egestas blandit. Suspendisse sem orci, faucibus non justo eget, finibus accumsan dui. Aenean rhoncus augue
