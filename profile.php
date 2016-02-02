@@ -1,6 +1,16 @@
 <?php
+	include_once('includes/database.php');
+
 	$title = 'My Profile';
 	include('template/header.php');
+
+	// are we looking at someone else's profile?
+	// and if actual username
+	if(!empty($_GET['username']) && checkUsername($_GET['username'])) {
+		//print_r($_GET['username']);
+	} else {
+		//echo 'get the current logged in users profile stuff';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

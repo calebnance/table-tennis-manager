@@ -520,6 +520,19 @@ function setKeyDBData($data, $field){
 }
 
 /**
+ *	Profile Helpers
+ */
+function checkUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return !empty($response) ? 1 : 0;
+}
+
+/**
  *	Match Helpers
  */
 
