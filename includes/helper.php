@@ -553,10 +553,16 @@ function getPlayerById($playerId, $db) {
 	return $db->custom_query('SELECT username FROM users WHERE id = "' . $playerId . '"', true);
 }
 
+function getScoreByPlayerAndMatchId($playerId, $matchId, $db) {
+
+	return $db->custom_query('SELECT * FROM match_player WHERE match_id = "' . $matchId . '" AND player_id = "' . $playerId . '"', true);
+}
+
 /**
  *	Live Match Helpers
  */
 function checkForLiveMatch($responseType) {
+	sleep(1);
 	// connect to datbase
 	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
 	// first let's check for matches going on right now.. today.
@@ -571,14 +577,25 @@ function checkForLiveMatch($responseType) {
 	// set response
 	$response = [
 		'currentMatch' => empty($currentMatch) ? (int) 0 : (int) 1,
-		'match' => $currentMatch,
-		'query' => $sql,
 	];
 
 	// match found?
 	if(!empty($currentMatch)) {
-		$response['player1'] = getPlayerById($currentMatch->player1, $db);
-		$response['player2'] = getPlayerById($currentMatch->player2, $db);
+		// set time
+		$response['totalTime'] = $currentMatch->total_time;
+		// get players
+		$player1 = getPlayerById($currentMatch->player1, $db);
+		$player2 = getPlayerById($currentMatch->player2, $db);
+		$response['player1'] = $player1->username;
+		$response['player2'] = $player2->username;
+		// get player attributes
+		$player1Match = getScoreByPlayerAndMatchId($currentMatch->player1, $currentMatch->id, $db);
+		$player2Match = getScoreByPlayerAndMatchId($currentMatch->player2, $currentMatch->id, $db);
+		$response['player1Score'] = (int) $player1Match->final_score;
+		$response['player2Score'] = (int) $player2Match->final_score;
+		// TODO: database driven
+		$response['ptsToWin'] = (int) 11;
+		$response['skunk'] = (int) 5;
 	}
 
 	// is response json?

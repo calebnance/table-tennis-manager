@@ -89,6 +89,7 @@ $(document).ready(function(){
 		$skunk				= parseInt($('#skunk').val());
 		$pts_to_win		= parseInt($('#pts_to_win').val());
 
+		// TODO
 		// short game arrays
 		var first_points = [0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20];
 		var secon_points = [2, 3, 6, 7, 10, 11, 14, 15, 18, 19];
