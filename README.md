@@ -31,10 +31,11 @@ Table Tennis Manager
 		</ul>
 	</li>
 	<li>
-		Live Game View! (coming soon)
+		Live Game View!
 		<ul>
 			<li>Others can go to this page while the game is being played and it's updated real-time</li>
 			<li>Display it on a big screen so the players can see the scoreboard, who's serve it is.. etc.</li>
+			<li>Animated ping-pong ball to show who is serving!</li>
 		</ul>
 	</li>
 </ul>
