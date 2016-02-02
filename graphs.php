@@ -5,7 +5,7 @@
 	include('template/header.php');
 	// Include page js
 	$scripts[] = $js . 'jquery.circliful.min.js';
-	$scripts[] = $js . 'matches.js';
+	$scripts[] = $js . 'graphs.js';
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

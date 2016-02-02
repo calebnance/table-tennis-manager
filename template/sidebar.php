@@ -18,7 +18,7 @@ if($current_page != 'wizard.php') {
 					<a href="<?php echo $base_url; ?>profile.php"><i class="fa fa-user"></i> Profile</a>
 				</li>
 				<li>
-					<div class="text-right text-muted">
+					<div class="text-center text-muted">
 						Last Login: <?php echo date('m-d-Y g:ha', strtotime($_SESSION['last_login'])); ?>
 					</div><!-- /.text-right -->
 				</li>
