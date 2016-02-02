@@ -149,14 +149,16 @@ form .counters { height: 30px; margin-right: 10px; width: 60px; }
 .more-stats { cursor: pointer; }
 
 /* Live Match */
-#live-loader { font-size: 36px; text-align: center; }
+#live-loader { font-size: 36px; position: relative; text-align: center; }
+#live-loader #live-checker { background-color: #fff; border-bottom-left-radius: 4px; border-top-right-radius: 4px; cursor: pointer; display: none; font-size: 18px; padding: 8px 15px; position: absolute; right: 0; top: 0; }
+#live-loader #live-checker:hover { background-color: #e6e6e6; }
 #live-loader .loading-dots { display: inline-block; height: 51px; text-align: left; width: 20px; }
 #table-tennis { background-color: #306048; border: 1px solid #000000; height: 420px; margin: 0 auto; position: relative; width: 756px; }
 #center-stripe { background-color: #FFFFFF; height: 4px; position: absolute; top: 209px; width: 754px; z-index: 10; }
 #net { background-color: #000000; left: 373px; height: 418px; width: 8px; position: absolute; z-index: 20; }
 .side { border: 4px solid #FFF; color: #FFFFFF; height: 418px; width: 373px; }
-.side .player { font-size: 26px; padding: 30px 0; text-align: center; }
-.side .score { font-size: 36px; padding: 0 0 30px 0; text-align: center; }
+.side .player { display: none; font-size: 26px; height: 97px; padding: 30px 0; text-align: center; }
+.side .score { display: none; font-size: 36px; padding: 0 0 30px 0; text-align: center; }
 
 /* Service Ball */
 #pong-ball {
