@@ -10,7 +10,7 @@
 		include_once('includes/config.php');
 		include_once('includes/database.php');
 
-		$db 		= new Database($db_host, $db_name, $db_user, $db_pass);
+		$db = new Database($db_host, $db_name, $db_user, $db_pass);
 		$nocode	= $db->select('users', 'DISTINCT id', 'email_code="'.$email_code.'"', 'object');
 
 		// is there a validate code in the database
@@ -43,13 +43,14 @@
 				</p>
 				<h1 class="page-header">E-mail Validation</h1>
 				<p class="lead"><?php echo $msg; ?></p>
-			</div><!--/span-->
+			</div><!-- /.col-xs-12 -->
 
-			<?php include('template/sidebar.php'); ?>
+			<?php
+			include('template/sidebar.php');
+			?>
 
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');

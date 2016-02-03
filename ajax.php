@@ -1,16 +1,21 @@
 <?php
+	include_once('includes/config.php');
+	include_once('includes/database.php');
 	// include helper
 	include_once('includes/helper.php');
 
 	// default response for now
-	$response = array(
-		'msg' 	=> '',
+	$response = [
+		'msg' => '',
 		'error' => (bool) false,
-	);
+	];
 
 	// only posts
 	if(!isset($_POST['ajax'])) {
-		header('Location: index.php?msg=5');
+		session_start();
+		$_SESSION['msg'] = 'I like your style, but naw homie, you can\'t go there.';
+		$_SESSION['msg-type'] = 'info';
+		header('Location: index.php');
 		exit();
 	} else {
 		// we also need a function..
@@ -23,7 +28,7 @@
 				$function();
 			}
 		} else {
-			$response['msg']   = 'We at least need something to do..';
+			$response['msg'] = 'We at least need something to do..';
 			$response['error'] = (bool) true;
 		}
 

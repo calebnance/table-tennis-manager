@@ -21,19 +21,19 @@
 		error_reporting(E_ALL ^ E_NOTICE);
 	}
 
-	$db		= new Database($db_host, $db_name, $db_user, $db_pass);
+	$db	= new Database($db_host, $db_name, $db_user, $db_pass);
 
-	$players= setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
+	$players = setKeyDBData($db->select('users', 'id, username', '1="1"', 'object', '', '', 'username'), 'id');
 	foreach($players as $player_id => $player){
 		$players[$player_id]->win					= 0;
 		$players[$player_id]->lose				= 0;
 		$players[$player_id]->percentage	= 0;
 	}
 
-	$current_season					= getCurrentSeason($db);
+	$current_season = getCurrentSeason($db);
 	$current_season_matches	= getSeasonMatches($current_season->start, $current_season->end, $db);
 
-	$standings = array();
+	$standings = [];
 	foreach($current_season_matches as $match){
 		$match_scores	= $db->select('match_player', '*', 'match_id="' . $match->id . '"', 'object');
 		if($match_scores){
@@ -69,7 +69,8 @@
 	});
 
 	$users_check = $db->select('users', '*', '1=1', 'object', '', '', '', '1');
-?>
+	?>
+
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
 
@@ -84,19 +85,20 @@
 				if($users_check && $current_season){
 				?>
 					<div class="btn-group pull-right" data-toggle="buttons">
-						<label class="btn btn-primary show-list-graph active">
+						<label class="btn btn-default show-list-graph active">
 							<input type="radio" name="options" id="listings"> <i class="fa fa-th-list"></i>
 						</label>
-						<label class="btn btn-primary show-list-graph">
+						<label class="btn btn-default show-list-graph">
 							<input type="radio" name="options" id="graphs"> <i class="fa fa-th-large"></i>
 						</label>
 					</div><!-- /.btn-group -->
 
-					<h3>
+					<h3 class="margin-b-20">
 						Season #<?php echo $current_season->season_number; ?>
-						<br />
-						<small><?php echo date('m-d-Y', strtotime($current_season->start)); ?> to <?php echo date('m-d-Y', strtotime($current_season->end)); ?></small>
+						<small><?php echo date('M d, Y', strtotime($current_season->start)); ?> to <?php echo date('M d, Y', strtotime($current_season->end)); ?></small>
 					</h3>
+
+					<div class="clearfix"></div>
 
 					<div id="standings-listings" class="list-graph">
 						<table class="table table-striped">
@@ -110,14 +112,14 @@
 								</tr>
 							</thead>
 							<tbody>
-						<?php
-						$place = 1;
-						foreach($players as $player){
-							$tr_class = '';
-							if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
-								$tr_class = 'success';
-							}
-						?>
+							<?php
+							$place = 1;
+							foreach($players as $player){
+								$tr_class = '';
+								if($_SESSION && isset($_SESSION['uid']) && $player->id == $_SESSION['uid']){
+									$tr_class = 'success';
+								}
+							?>
 							<tr class="<?php echo $tr_class; ?>">
 								<td class="text-center"><?php echo $place; ?></td>
 								<td><?php echo $player->username; ?></td>
@@ -152,26 +154,24 @@
 					<div class="clearfix"></div>
 				<?php
 				} else {
+					// no users set?
 					if(empty($users_check)){
-					?>
-						<p class="lead"><span class="label label-danger"><i class="glyphicon glyphicon-warning-sign"></i></span> There are no users set up yet!</p>
-					<?php
+						include('template/msgs/noUsersSet.php');
 					}
+					// no seasons set up?
 					if(empty($current_season)){
-					?>
-						<p class="lead"><span class="label label-danger"><i class="glyphicon glyphicon-warning-sign"></i></span> The seasons have not been set up! Please contact the site administrator!</p>
-					<?php
+						include('template/msgs/noSeason.php');
 					}
 				}
 				?>
+			</div><!-- /.col-xs-12 -->
 
-			</div><!--/span-->
+			<?php
+			include('template/sidebar.php');
+			?>
 
-			<?php include('template/sidebar.php'); ?>
-
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row-->
+	</div><!-- /.container-->
 
 <?php
 	include('template/footer.php');

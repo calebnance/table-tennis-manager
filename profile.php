@@ -1,6 +1,16 @@
 <?php
+	include_once('includes/database.php');
+
 	$title = 'My Profile';
 	include('template/header.php');
+
+	// are we looking at someone else's profile?
+	// and if actual username
+	if(!empty($_GET['username']) && checkUsername($_GET['username'])) {
+		//print_r($_GET['username']);
+	} else {
+		//echo 'get the current logged in users profile stuff';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -14,6 +24,9 @@
 				<div class="gravatar invisible pull-left margin-b-5 margin-r-10" data-email="<?php echo md5($_SESSION['email']); ?>" data-username="<?php echo $_SESSION['name']; ?>"></div><!-- /.gravatar -->
 
 				<div class="profile-text">
+					<?php
+					/* have easter eggs and notify user when they get them! have badges for it or points or something.. idk. */
+					?>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id augue sit amet neque suscipit venenatis sed et orci.
 					Curabitur condimentum scelerisque enim, non dignissim elit ultricies eu. Integer sit amet convallis enim. Vivamus ornare
 					libero et tellus egestas blandit. Suspendisse sem orci, faucibus non justo eget, finibus accumsan dui. Aenean rhoncus augue
@@ -33,14 +46,14 @@
 				</div><!-- /.profile-text -->
 
 				<div class="clearfix"></div>
+			</div><!-- /.col-xs-12 -->
 
-			</div><!--/span-->
+			<?php
+			include('template/sidebar.php');
+			?>
 
-			<?php include('template/sidebar.php'); ?>
-
-		</div><!--/.row-->
-	</div><!--/.container-->
-
+		</div><!-- /.row -->
+	</div><!-- /.container -->
 
 <?php
 	include('template/footer.php');
