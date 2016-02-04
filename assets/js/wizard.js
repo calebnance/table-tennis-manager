@@ -9,11 +9,11 @@ $(document).ready(function(){
 	*/
 
 	// on wizard field keyup/blur
-	$wizard.on('keyup blur', '.required', function(e) {
+	$wizard.on('input', '.required', function(e) {
 		// steps to pass
-		var pass1 = pass2 = true;
+		var pass1 = pass2 = pass3 = true;
 
-		// are we in step1?
+		// are we on step1?
 		if($(this).closest('[role="tabpanel"]').hasClass('step1')) {
 			// step1 check
 			$step1 		  = $('#step1 .required');
@@ -40,13 +40,13 @@ $(document).ready(function(){
 
 			// is pass1 good?
 			if(pass1 == true) {
-				$('#check-connection').slideDown(400);
+				$('#check-connection').slideDown();
 			} else {
-				$('#check-connection').slideUp(400);
+				$('#check-connection').slideUp();
 			}
 		}
 
-		// are we in step2?
+		// are we on step2?
 		if($(this).closest('[role="tabpanel"]').hasClass('step2')) {
 			// step2 check
 			$step2 		  = $('#step2 .required');
@@ -64,9 +64,33 @@ $(document).ready(function(){
 
 			// is pass1 good?
 			if(pass2 == true) {
-				$('#complete-install').fadeIn(400);
+				$('#gotoStep3').fadeIn();
 			} else {
-				$('#complete-install').fadeOut(400);
+				$('#gotoStep3').fadeOut();
+			}
+		}
+
+		// are we on step3?
+		if($(this).closest('[role="tabpanel"]').hasClass('step3')) {
+			// step3 check
+			$step3 		  = $('#step3 .required');
+			$step3Count = $step3.length;
+			// are there required fields in step 3?
+			if($step3Count > 1) {
+				// parse through the required fields for step 3
+				$.each($step3, function(i, input) {
+					// is it empty?
+					if($(input).val() == '' || $(input).val() === null) {
+						pass3 = false;
+					}
+				});
+			}
+
+			// is pass1 good?
+			if(pass3 == true) {
+				$('#complete-install').fadeIn();
+			} else {
+				$('#complete-install').fadeOut();
 			}
 		}
 	});
@@ -122,7 +146,7 @@ $(document).ready(function(){
 			} else {
 				$('#check-connection').removeClass('btn-default').addClass('btn-success').html('Connection Success!');
 				$('#step1').attr('data-complete', 1);
-				$('#gotoStep2').fadeIn(400);
+				$('#gotoStep2').fadeIn();
 			}
 		}).fail(function(jqXHR, textStatus, errorThrown){
 			// remove class of working
@@ -185,7 +209,20 @@ $(document).ready(function(){
 	$wizard.on('click', '#gotoStep2', function(e){
 		e.preventDefault();
 		$('#tab-wizard li:eq(1) a').tab('show');
-		$('[href="#step1"]').addClass('completed').html('<span class="label label-success">Step 1</span>');
+		$('[href="#step1"]').addClass('completed').html('<span class="label label-success">Connect Database</span>');
+	});
+
+	// go back to step2
+	$wizard.on('click', '#gobackStep3', function(e){
+		e.preventDefault();
+		$('#tab-wizard li:eq(1) a').tab('show');
+	});
+
+	// go to step3
+	$wizard.on('click', '#gotoStep3', function(e){
+		e.preventDefault();
+		$('#tab-wizard li:eq(2) a').tab('show');
+		$('[href="#step2"]').addClass('completed').html('<span class="label label-success">Administrator Setup</span>');
 	});
 
 	// complete installation
@@ -193,7 +230,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		// fadeout wizard
 		$wizard.fadeOut(400, function(e){
-			$('#installing').fadeIn(400);
+			$('#installing').fadeIn();
 		});
 
 		// setInterval
@@ -297,7 +334,7 @@ $(document).ready(function(){
 			// show complete
 			setTimeout(function(){
 				$('#installing').fadeOut(400, function(e){
-					$('#complete').fadeIn(400);
+					$('#complete').fadeIn();
 				});
 			}, 3000);
 		}).fail(function(jqXHR, textStatus, errorThrown){
