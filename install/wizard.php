@@ -2,11 +2,20 @@
 	$title 			= 'Installation';
 	$root_path  = '../';
 	$dir_deep   = 'install';
+
 	include('../template/header.php');
+
 	// Include page js
-	$scripts[] = $js . 'classie.js';
-	$scripts[] = $js . 'text-input-effects.js';
-	$scripts[] = $js . 'wizard.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/classie.js';
+		$scripts[] = $js . 'dev/text-input-effects.js';
+		$scripts[] = $js . 'dev/wizard.js';
+	} else {
+		$scripts[] = $js . 'classie.min.js';
+		$scripts[] = $js . 'text-input-effects.min.js';
+		$scripts[] = $js . 'wizard.min.js';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
@@ -20,16 +29,16 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist" id="tab-wizard">
 						<li role="presentation" class="active">
-							<a href="#step1" aria-controls="step1" role="tab" data-toggle="tab">Step 1</a>
+							<a href="#step1" aria-controls="step1" role="tab" data-toggle="tab">Connect Database</a>
 						</li>
 						<li role="presentation">
-							<a href="#step2" aria-controls="step2" role="tab" data-toggle="tab">Step 2</a>
+							<a href="#step2" aria-controls="step2" role="tab" data-toggle="tab">Administrator Setup</a>
+						</li>
+						<li role="presentation">
+							<a href="#step3" aria-controls="step3" role="tab" data-toggle="tab">Settings</a>
 						</li>
 						<?php
 						/*
-						<li role="presentation">
-							<a href="#step3" aria-controls="step3" role="tab" data-toggle="tab">Step 3</a>
-						</li>
 						<li role="presentation">
 							<a href="#step4" aria-controls="step4" role="tab" data-toggle="tab">Step 4</a>
 						</li>
@@ -123,7 +132,7 @@
 									</div><!-- /.col-md-6 -->
 
 									<div class="col-md-12">
-										<a href="#" class="btn btn-default pull-right display-none" id="complete-install">Complete Install</a>
+										<a href="#" class="btn btn-default pull-right display-none" id="gotoStep3">Step 3 <i class="fa fa-chevron-right"></i></a>
 										<a href="#" class="btn btn-default pull-left" id="gobackStep2"><i class="fa fa-chevron-left"></i> Step 2</a>
 										<div class="clearfix"></div>
 									</div><!-- /.col-md-12 -->
@@ -131,13 +140,61 @@
 								</div><!-- /.row -->
 							</div>
 						</div><!-- /#step2 -->
+						<div role="tabpanel" class="tab-pane fade step3" id="step3" data-complete="0">
+
+							<h3>Settings</h3>
+
+							<div>
+								<div class="row">
+									<div class="col-md-12">
+										<div id="quickStandGame" class="btn-group margin-b-10" role="group">
+											<button id="quickGame" type="button" class="btn btn-default active">Quick Game</button>
+											<button id="standGame" type="button" class="btn btn-default">Standard Game</button>
+										</div><!-- /.btn-group -->
+									</div><!-- /.col-md-12 -->
+
+									<div class="col-md-6">
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="number" id="ptsToWin" value="11" />
+											<label class="input__label input__label--jiro" for="ptsToWin">
+												<span class="input__label-content input__label-content--jiro">Points To Win</span>
+											</label>
+										</span>
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="number" id="ptsPerTurn" value="2" />
+											<label class="input__label input__label--jiro" for="ptsPerTurn">
+												<span class="input__label-content input__label-content--jiro">Points Per Turn</span>
+											</label>
+										</span>
+									</div><!-- /.col-md-6 -->
+									<div class="col-md-6">
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="number" id="skunk" value="5" />
+											<label class="input__label input__label--jiro" for="skunk">
+												<span class="input__label-content input__label-content--jiro">Skunk</span>
+											</label>
+										</span>
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="number" id="weeksPerSeason" value="2" />
+											<label class="input__label input__label--jiro" for="weeksPerSeason">
+												<span class="input__label-content input__label-content--jiro">Weeks Per Season</span>
+											</label>
+										</span>
+									</div><!-- /.col-md-6 -->
+
+									<div class="col-md-12">
+										<a href="#" class="btn btn-default pull-right display-none" id="complete-install">Complete Install</a>
+										<a href="#" class="btn btn-default pull-left" id="gobackStep3"><i class="fa fa-chevron-left"></i> Step 3</a>
+										<div class="clearfix"></div>
+									</div><!-- /.col-md-12 -->
+
+								</div><!-- /.row -->
+							</div>
+						</div><!-- /#step3 -->
 						<?php
 						/*
-						<div role="tabpanel" class="tab-pane fade step3" id="step3" data-complete="0">
-							messages
-						</div><!-- /#step3 -->
 						<div role="tabpanel" class="tab-pane fade step4" id="step4" data-complete="0">
-							settings
+							messages
 						</div><!-- /#step4 -->
 						*/
 						?>

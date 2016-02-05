@@ -3,7 +3,12 @@
 	include('template/header.php');
 
 	// Include page js
-	$scripts[] = $js . 'matches.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/matches.js';
+	} else {
+		$scripts[] = $js . 'matches.min.js';
+	}
 
 	include_once('includes/database.php');
 
