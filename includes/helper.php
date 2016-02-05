@@ -94,8 +94,10 @@ function isInstalled(){
 			if(class_exists('tt')) {
 				return false;
 			}
+
+			$checkCurrentPage = getCurrentPage();
 			// are we at the wizard?
-			if(getCurrentPage() != 'wizard.php') {
+			if($checkCurrentPage != 'wizard.php' && $checkCurrentPage != 'ajax.php') {
 				// go to wizard!
 				goToWizard();
 				exit();
