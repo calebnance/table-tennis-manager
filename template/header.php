@@ -1,21 +1,35 @@
 <?php
-	include_once('includes/config.php');
-	
+	// Are we directory(ies) deep?
+	if(!isset($root_path)) {
+		$root_path = '';
+	}
+	// Remove direcory from paths?
+	if(!isset($dir_deep)) {
+		$dir_deep = '';
+	}
+	// Config
+	include_once($root_path . 'includes/config.php');
+
+	// Check session
 	checksession();
-	
+
+	// Are they logged in?
 	$loggedin = 0;
 	if(isset($_SESSION['loggedin'])){
 		$loggedin = 1;
 	}
-	
+
+	// Show message
 	$show_form = 1;
 	if((isset($registered) && $registered = 1) && $loggedin == 0){
-		$msg = '<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.</div>';
+		$_SESSION['msg'] = 'You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.';
+		$_SESSION['msg-type'] = 'warning';
 		$show_form = 0;
 	}
-	
+
+	// Title handled
 	if(!$title){
-		$title = 'Table Tennis';
+		$title = 'Table Tennis Manager';
 	}
 ?>
 <!DOCTYPE html>
@@ -31,15 +45,18 @@
 		}
 		?>
 	</head>
-	
+
 	<body>
-	<?php include('template/menu.php'); ?>
-	
+	<?php include($root_path . 'template/menu.php'); ?>
+
 	<div class="container">
 		<div id="message-area">
 		<?php
-		if(isset($msg) && $msg){
-			echo $msg;
+		// hey that's a good idea, use session and stuff
+		if(!empty($_SESSION['msg'])) {
+			include('template/msgs/alert.php');
+			unset($_SESSION['msg']);
+			unset($_SESSION['msg-type']);
 		}
 		?>
 		</div><!-- /#message-area -->
