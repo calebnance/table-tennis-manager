@@ -7,12 +7,11 @@ $(document).ready(function(){
 	
 	$('#submit-create-account').on('click', function(e){
 		e.preventDefault();
-		console.log('Submit form clicked');
 		$.validateForm(true);
 	});
 	
 	$.validateForm = function(check_empty){
-		$fields = $('form .required');
+		$fields = $('#create_account_form .required');
 		var email_val = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
 		var submit = true;
 		$.each($fields, function(f, field){
@@ -61,7 +60,6 @@ $(document).ready(function(){
 		});
 		
 		if(check_empty && submit){
-			console.log('Submit form');
 			$.ajax({
 				url: 'create-account.php',
 				type: 'POST',
@@ -69,10 +67,8 @@ $(document).ready(function(){
 				data: $('#create_account_form').serialize()
 			}).done(function(data){
 				$('#message-area').hide().html('<div class="alert alert-' + data.type + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.msg + '</div>').slideDown(400);
-				console.log('success');
-				console.log(data);
 			}).fail(function(){
-				console.log('Ajax fail');
+				$('#message-area').hide().html('<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Something went wrong, please reload the page and try again.</div>').slideDown(400);
 			});
 		}
 	}
