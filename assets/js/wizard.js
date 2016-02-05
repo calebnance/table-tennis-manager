@@ -8,102 +8,6 @@ $(document).ready(function(){
 	* on
 	*/
 
-	// on wizard field keyup/blur
-	$wizard.on('input', '.required', function(e) {
-		// steps to pass
-		var pass1 = pass2 = pass3 = true;
-
-		// are we on step1?
-		if($(this).closest('[role="tabpanel"]').hasClass('step1')) {
-			// step1 check
-			$step1 		  = $('#step1 .required');
-			$step1Count = $step1.length;
-			// are there required fields in step 1?
-			if($step1Count > 1) {
-				// if connection button had success already?
-				if($('#check-connection').hasClass('btn-success')) {
-					$('#check-connection').removeClass('btn-success').addClass('btn-default').html('Check Connection');
-					$('#gotoStep2').fadeOut(400);
-					$('[href="#step1"]').removeClass('completed').html('Step 1');
-					$('#step1').attr('data-complete', 0);
-				}
-				// clear errorMsg
-				$('#errorMsg').html('');
-				// parse through the required fields for step 1
-				$.each($step1, function(i, input) {
-					// is it empty?
-					if($(input).val() == '' || $(input).val() === null) {
-						pass1 = false;
-					}
-				});
-			}
-
-			// is pass1 good?
-			if(pass1 == true) {
-				$('#check-connection').slideDown();
-			} else {
-				$('#check-connection').slideUp();
-			}
-		}
-
-		// are we on step2?
-		if($(this).closest('[role="tabpanel"]').hasClass('step2')) {
-			// step2 check
-			$step2 		  = $('#step2 .required');
-			$step2Count = $step2.length;
-			// are there required fields in step 2?
-			if($step2Count > 1) {
-				// parse through the required fields for step 2
-				$.each($step2, function(i, input) {
-					// is it empty?
-					if($(input).val() == '' || $(input).val() === null) {
-						pass2 = false;
-					}
-				});
-			}
-
-			// is pass1 good?
-			if(pass2 == true) {
-				$('#gotoStep3').fadeIn();
-			} else {
-				$('#gotoStep3').fadeOut();
-			}
-		}
-
-		// are we on step3?
-		if($(this).closest('[role="tabpanel"]').hasClass('step3')) {
-			// step3 check
-			$step3 		  = $('#step3 .required');
-			$step3Count = $step3.length;
-			// are there required fields in step 3?
-			if($step3Count > 1) {
-				// parse through the required fields for step 3
-				$.each($step3, function(i, input) {
-					// is it empty?
-					if($(input).val() == '' || $(input).val() === null) {
-						pass3 = false;
-					}
-				});
-			}
-
-			// is pass1 good?
-			if(pass3 == true) {
-				$('#complete-install').fadeIn();
-			} else {
-				$('#complete-install').fadeOut();
-			}
-		}
-	});
-
-	// on steppers for wizard clicked
-	$wizard.on('click', '[href="#step1"], [href="#step2"], [href="#step3"], [href="#step4"]', function(e) {
-		// not completed, no go
-		if(!$(this).hasClass('completed')) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
-	});
-
 	// on check connection click
 	$wizard.on('click', '#check-connection', function(e){
 		e.preventDefault();
@@ -199,6 +103,102 @@ $(document).ready(function(){
 		});
 	});
 
+	// on wizard field input/keyup/blur
+	$wizard.on('input keyup blur', '.required', function(e) {
+		// steps to pass
+		var pass1 = pass2 = pass3 = true;
+		
+		// are we on step1?
+		if($(this).closest('[role="tabpanel"]').hasClass('step1')) {
+			// step1 check
+			$step1 = $('#step1 .required');
+			$step1Count = $step1.length;
+			// are there required fields in step 1?
+			if($step1Count > 1) {
+				// if connection button had success already?
+				if($('#check-connection').hasClass('btn-success')) {
+					$('#check-connection').removeClass('btn-success').addClass('btn-default').html('Check Connection');
+					$('#gotoStep2').fadeOut(400);
+					$('[href="#step1"]').removeClass('completed').html('Step 1');
+					$('#step1').attr('data-complete', 0);
+				}
+				// clear errorMsg
+				$('#errorMsg').html('');
+				// parse through the required fields for step 1
+				$.each($step1, function(i, input) {
+					// is it empty?
+					if($(input).val() == '' || $(input).val() === null) {
+						pass1 = false;
+					}
+				});
+			}
+
+			// is pass1 good?
+			if(pass1 == true) {
+				$('#check-connection').slideDown();
+			} else {
+				$('#check-connection').slideUp();
+			}
+		}
+
+		// are we on step2?
+		if($(this).closest('[role="tabpanel"]').hasClass('step2')) {
+			// step2 check
+			$step2 = $('#step2 .required');
+			$step2Count = $step2.length;
+			// are there required fields in step 2?
+			if($step2Count > 1) {
+				// parse through the required fields for step 2
+				$.each($step2, function(i, input) {
+					// is it empty?
+					if($(input).val() == '' || $(input).val() === null) {
+						pass2 = false;
+					}
+				});
+			}
+
+			// is pass1 good?
+			if(pass2 == true) {
+				$('#gotoStep3').fadeIn();
+			} else {
+				$('#gotoStep3').fadeOut();
+			}
+		}
+
+		// are we on step3?
+		if($(this).closest('[role="tabpanel"]').hasClass('step3')) {
+			// step3 check
+			$step3 = $('#step3 .required');
+			$step3Count = $step3.length;
+			// are there required fields in step 3?
+			if($step3Count > 1) {
+				// parse through the required fields for step 3
+				$.each($step3, function(i, input) {
+					// is it empty?
+					if($(input).val() == '' || $(input).val() === null) {
+						pass3 = false;
+					}
+				});
+			}
+
+			// is pass1 good?
+			if(pass3 == true) {
+				$('#complete-install').fadeIn();
+			} else {
+				$('#complete-install').fadeOut();
+			}
+		}
+	});
+
+	// on steppers for wizard clicked
+	$wizard.on('click', '[href="#step1"], [href="#step2"], [href="#step3"], [href="#step4"]', function(e) {
+		// not completed, no go
+		if(!$(this).hasClass('completed')) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	});
+
 	// go back to step1
 	$wizard.on('click', '#gobackStep2', function(e){
 		e.preventDefault();
@@ -223,6 +223,30 @@ $(document).ready(function(){
 		e.preventDefault();
 		$('#tab-wizard li:eq(2) a').tab('show');
 		$('[href="#step2"]').addClass('completed').html('<span class="label label-success">Administrator Setup</span>');
+		$('#ptsToWin').blur();
+	});
+
+	// quck/standard game buttons
+	// quick game clicked
+	$('#quickGame').on('click', function(e){
+		$('#quickStandGame').find('button').removeClass('active');
+		$(this).addClass('active');
+		// set values
+		$('#ptsToWin').val(11);
+		$('#ptsPerTurn').val(2);
+		$('#skunk').val(5);
+		$('#weeksPerSeason').val(2);
+	});
+
+	// standard game clicked
+	$('#standGame').on('click', function(e){
+		$('#quickStandGame').find('button').removeClass('active');
+		$(this).addClass('active');
+		// set values
+		$('#ptsToWin').val(21);
+		$('#ptsPerTurn').val(5);
+		$('#skunk').val(7);
+		$('#weeksPerSeason').val(2);
 	});
 
 	// complete installation

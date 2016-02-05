@@ -135,20 +135,12 @@
 
 							<h3>Settings</h3>
 
-							<?php
-							/*
-							$pts_to_win		= 11;
-							$pts_per_turn	= 2;
-							$skunk				= 5;
-							*/
-							?>
-
 							<div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="btn-group margin-b-10" role="group">
-											<button type="button" class="btn btn-default active">Quick Game</button>
-											<button type="button" class="btn btn-default">Standard Game</button>
+										<div id="quickStandGame" class="btn-group margin-b-10" role="group">
+											<button id="quickGame" type="button" class="btn btn-default active">Quick Game</button>
+											<button id="standGame" type="button" class="btn btn-default">Standard Game</button>
 										</div><!-- /.btn-group -->
 									</div><!-- /.col-md-12 -->
 
@@ -171,6 +163,12 @@
 											<input class="input__field input__field--jiro required" type="number" id="skunk" value="5" />
 											<label class="input__label input__label--jiro" for="skunk">
 												<span class="input__label-content input__label-content--jiro">Skunk</span>
+											</label>
+										</span>
+										<span class="input input--jiro">
+											<input class="input__field input__field--jiro required" type="number" id="weeksPerSeason" value="2" />
+											<label class="input__label input__label--jiro" for="weeksPerSeason">
+												<span class="input__label-content input__label-content--jiro">Weeks Per Season</span>
 											</label>
 										</span>
 									</div><!-- /.col-md-6 -->
