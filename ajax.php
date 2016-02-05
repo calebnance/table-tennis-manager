@@ -1,7 +1,9 @@
 <?php
+	// Config
+	include_once('includes/config.php');
+
 	// Does this class exist? we are in the wizard then
 	if(class_exists('tt')) {
-		include_once('includes/config.php');
 		include_once('includes/database.php');
 	}
 

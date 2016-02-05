@@ -1,11 +1,24 @@
 <?php
 	$title = 'Graphs';
+
 	// Include page css
-	$page_styles[] = $css . 'jquery.circliful.css';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$page_styles[] = $css . 'dev/jquery.circliful.css';
+	} else {
+		$page_styles[] = $css . 'jquery.circliful.min.css';
+	}
+
 	include('template/header.php');
+
 	// Include page js
 	$scripts[] = $js . 'jquery.circliful.min.js';
-	$scripts[] = $js . 'graphs.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/graphs.js';
+	} else {
+		$scripts[] = $js . 'graphs.min.js';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

@@ -8,7 +8,12 @@
 
 	// Include page js
 	$scripts[] = $js . 'jquery.circliful.min.js';
-	$scripts[] = $js . 'standings.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/standings.js';
+	} else {
+		$scripts[] = $js . 'standings.min.js';
+	}
 
 	include_once('includes/database.php');
 

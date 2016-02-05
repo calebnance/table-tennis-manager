@@ -90,7 +90,12 @@
 	include('template/header.php');
 
 	// Include page js
-	$scripts[] = $js . 'create-account.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/create-account.js';
+	} else {
+		$scripts[] = $js . 'create-account.min.js';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

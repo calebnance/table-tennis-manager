@@ -2,11 +2,20 @@
 	$title 			= 'Installation';
 	$root_path  = '../';
 	$dir_deep   = 'install';
+
 	include('../template/header.php');
+
 	// Include page js
-	$scripts[] = $js . 'classie.js';
-	$scripts[] = $js . 'text-input-effects.js';
-	$scripts[] = $js . 'wizard.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/classie.js';
+		$scripts[] = $js . 'dev/text-input-effects.js';
+		$scripts[] = $js . 'dev/wizard.js';
+	} else {
+		$scripts[] = $js . 'classie.min.js';
+		$scripts[] = $js . 'text-input-effects.min.js';
+		$scripts[] = $js . 'wizard.min.js';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
