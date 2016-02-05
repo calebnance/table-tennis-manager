@@ -3,7 +3,12 @@
 	include('template/header-live.php');
 
 	// Include page js
-	$scripts[] = $js . 'live.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/live.js';
+	} else {
+		$scripts[] = $js . 'live.min.js';
+	}
 
 ?>
 	<div class="container">

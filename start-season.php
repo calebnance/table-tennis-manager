@@ -1,9 +1,9 @@
 <?php
 
-
 	include_once('includes/config.php');
 	include_once('includes/database.php');
 
+	// TODO: dev this out, with DEBUG
 	$post_styles[] = $dp_css . 'datepicker.css';
 	$scripts[] = $dp_js . 'bootstrap-datepicker.js';
 	$scripts[] = $js . 'datepicker.js';
