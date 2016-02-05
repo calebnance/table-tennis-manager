@@ -30,7 +30,7 @@
 			}
 			// email has already been used!
 			if(!empty($email_check)){
-				$response['msg'] = 'E-mail has already been registered, have you forgotten you\'ve already signed up?';
+				$response['msg'] = 'E-mail has already been registered, have you forgotten you\'ve already signed up? (make sure to check your spam folder)';
 				echo json_encode($response);
 				exit();
 			}
@@ -105,32 +105,43 @@
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
 				<h1 class="page-header">Create Account</h1>
-
+				<?php
+				if(empty($first_signup)){
+				?>
+				<div class="alert alert-info">First account created! You will be the administrator of this site!</div>
+				<?php
+				}
+				?>
 				<form id="create_account_form" role="form" action="create-account.php" method="POST">
-					<?php if(empty($first_signup)){ ?>
-						<div class="alert alert-info">First account created! You will be the administrator of this site!</div>
-					<?php } ?>
-					<div class="form-group">
-						<label class="control-label" for="acco_name">Name <span></span></label>
-						<input type="text" class="form-control required" id="acco_name" name="acco_name" placeholder="Enter Name">
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="acco_username">Username <span></span></label>
-						<input type="text" class="form-control required" id="acco_username" name="acco_username" placeholder="Enter Username">
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="acco_email">E-mail <span></span></label>
-						<input type="email" class="form-control required" id="acco_email" name="acco_email" placeholder="example@gmail.com">
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="acco_password">Password <span></span></label>
-						<input type="password" class="form-control required" id="acco_password" name="acco_password" placeholder="Password">
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="acco_password2">Re-Type Password <span></span></label>
-						<input type="password" class="form-control required" id="acco_password2" name="acco_password2" placeholder="Password">
-					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<label class="control-label" for="acco_name">Name <span></span></label>
+								<input type="text" class="form-control required" id="acco_name" name="acco_name" placeholder="Enter Name">
+							</div><!-- /.form-group -->
+							<div class="form-group">
+								<label class="control-label" for="acco_username">Username <span></span></label>
+								<input type="text" class="form-control required" id="acco_username" name="acco_username" placeholder="Enter Username">
+							</div><!-- /.form-group -->
+							<div class="form-group">
+								<label class="control-label" for="acco_email">E-mail <span></span></label>
+								<input type="email" class="form-control required" id="acco_email" name="acco_email" placeholder="example@gmail.com">
+							</div><!-- /.form-group -->
+						</div><!-- /.col-xs-12 -->
+						<div class="col-xs-12 col-md-6">
+							<div class="form-group">
+								<label class="control-label" for="acco_password">Password <span></span></label>
+								<input type="password" class="form-control required" id="acco_password" name="acco_password" placeholder="Password">
+							</div><!-- /.form-group -->
+							<div class="form-group">
+								<label class="control-label" for="acco_password2">Re-Type Password <span></span></label>
+								<input type="password" class="form-control required" id="acco_password2" name="acco_password2" placeholder="Password">
+							</div><!-- /.form-group -->
+						</div><!-- /.col-xs-12 -->
+					</div><!-- /.row -->
+
 					<button id="submit-create-account" type="submit" class="btn btn-navy">Create Account</button>
+
 				</form>
 			</div><!-- /.col-xs-12 -->
 
