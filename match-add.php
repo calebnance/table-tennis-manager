@@ -165,7 +165,12 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 	$current_season = getCurrentSeason($db);
 
 	// Include page js
-	$scripts[] = $js . 'match-add.js';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$scripts[] = $js . 'dev/match-add.js';
+	} else {
+		$scripts[] = $js . 'match-add.min.js';
+	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
