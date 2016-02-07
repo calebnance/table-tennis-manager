@@ -221,7 +221,7 @@
 					<div class="jumbotron text-align-center margin-b-0">
 						<h1><i class="fa fa-check"></i> Installation is Complete</h1>
 						<p class="lead">You may now start your league!</p>
-						<a href="../index.php" class="btn btn-primary btn-lg margin-b-0">Home</a>
+						<a href="../index.php" class="btn btn-default btn-lg margin-b-0"><i class="fa fa-home"></i> Go To Home</a>
 					</div><!-- /.jumbotron -->
 				</div><!-- /#complete -->
 

@@ -97,7 +97,7 @@ function isInstalled(){
 
 			$checkCurrentPage = getCurrentPage();
 			// are we at the wizard?
-			if($checkCurrentPage != 'wizard.php' && $checkCurrentPage != 'ajax.php') {
+			if($checkCurrentPage != 'wizard.php' && $checkCurrentPage != 'wizard-ajax.php' && $checkCurrentPage != 'ajax.php') {
 				// go to wizard!
 				goToWizard();
 				exit();
