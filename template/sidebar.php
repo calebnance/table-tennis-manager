@@ -71,9 +71,13 @@ if($current_page != 'wizard.php') {
 				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
 					<a href="<?php echo $base_url; ?>matches.php"><span class="fa fa-list"></span> View Matches</a>
 				</li>
+				<?php
+				/*
 				<li <?php echo isCurrentPage($current_page, 'graphs.php'); ?>>
 					<a href="<?php echo $base_url; ?>graphs.php"><span class="fa fa-bar-chart"></span> View Graphs</a>
 				</li>
+				*/
+				?>
 		</div><!-- /.panel-body -->
 		<?php
 		/*
