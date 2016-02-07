@@ -107,7 +107,7 @@
 				<?php
 				if(empty($first_signup)){
 				?>
-				<div class="alert alert-info">First account created! You will be the administrator of this site!</div>
+				<div class="alert alert-info">This is the first account for this site! You will be the administrator!</div>
 				<?php
 				}
 				?>
