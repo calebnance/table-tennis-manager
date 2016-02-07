@@ -1,23 +1,24 @@
 <?php
-	$title = 'Graphs';
+	include_once('includes/config.php');
 
 	// Include page css
 	// are we in dev or prod?
 	if(DEBUG) {
-		$page_styles[] = $css . 'dev/jquery.circliful.css';
+		$page_styles[] = $css . 'dev/jquery.circliful.css?v=' . $version;
 	} else {
-		$page_styles[] = $css . 'jquery.circliful.min.css';
+		$page_styles[] = $css . 'jquery.circliful.min.css?v=' . $version;
 	}
 
+	$title = 'Graphs';
 	include('template/header.php');
 
 	// Include page js
-	$scripts[] = $js . 'jquery.circliful.min.js';
+	$scripts[] = $js . 'jquery.circliful.min.js?v=' . $version;
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/graphs.js';
+		$scripts[] = $js . 'dev/graphs.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'graphs.min.js';
+		$scripts[] = $js . 'graphs.min.js?v=' . $version;
 	}
 ?>
 	<div class="container">

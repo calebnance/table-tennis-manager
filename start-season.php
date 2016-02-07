@@ -4,9 +4,9 @@
 	include_once('includes/database.php');
 
 	// TODO: dev this out, with DEBUG
-	$post_styles[] = $dp_css . 'datepicker.css';
-	$scripts[] = $dp_js . 'bootstrap-datepicker.js';
-	$scripts[] = $js . 'datepicker.js';
+	$post_styles[] = $dp_css . 'datepicker.css?v=' . $version;
+	$scripts[] = $dp_js . 'bootstrap-datepicker.js?v=' . $version;
+	$scripts[] = $js . 'datepicker.js?v=' . $version;
 
 	// do they have access to ths page?
 	isAdmin();

@@ -1,8 +1,8 @@
 <?php
-include_once('includes/config.php');
-include_once('includes/database.php');
+	include_once('includes/config.php');
+	include_once('includes/database.php');
 
-$db = new Database($db_host, $db_name, $db_user, $db_pass);
+	$db = new Database($db_host, $db_name, $db_user, $db_pass);
 
 	if($_POST){
 		// TODO: should be logged in.. but should check for it here..
@@ -155,6 +155,7 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 			echo json_encode($response);
 			exit();
 		}
+
 		exit();
 	}
 
@@ -167,9 +168,9 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/match-add.js';
+		$scripts[] = $js . 'dev/match-add.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'match-add.min.js';
+		$scripts[] = $js . 'match-add.min.js?v=' . $version;
 	}
 ?>
 	<div class="container">

@@ -5,9 +5,9 @@
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/matches.js';
+		$scripts[] = $js . 'dev/matches.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'matches.min.js';
+		$scripts[] = $js . 'matches.min.js?v=' . $version;
 	}
 
 	include_once('includes/database.php');
@@ -72,14 +72,23 @@
 					<button type="submit" class="btn btn-primary margin-b-10">Submit</button>
 				</form><!-- /.filter-area -->
 
+				<?php
+				if(!empty($current_season_matches)) {
+				?>
 				<div class="margin-b-10">
 					<i class="fa fa-plus-square fa-lg open-all" data-toggle="tooltip" data-placement="top" data-original-title="Open All Stats"></i>
 					<i class="fa fa-minus-square fa-lg close-all" data-toggle="tooltip" data-placement="top" data-original-title="Close All Stats"></i>
 					Open / Close
 				</div><!-- /.margin-b-10 -->
+				<?php
+				}
+				?>
 
 				<div class="table-responsive">
 					<table class="table table-striped">
+						<?php
+						if(!empty($current_season_matches)) {
+						?>
 						<thead>
 							<tr>
 								<th class="width-20"></th>
@@ -88,9 +97,11 @@
 								<th class="text-left width-200">Player 2</th>
 							</tr>
 						</thead>
+						<?php
+						}
+						?>
 						<tbody>
 						<?php
-						//print_r($current_season_matches);
 						if($current_season_matches){
 							foreach($current_season_matches as $season_match){
 								$match_scores	= $db->select('match_player', '*', 'match_id="' . $season_match->id . '"', 'object');
@@ -106,6 +117,7 @@
 								$served_2		= $season_match->serve_first == $season_match->player2 ? '<strong>Served First</strong>' : '&nbsp;';
 								$date				= date('m-d-Y H:i:sa', strtotime($season_match->date_time_started));
 								$total_time = explode(':', $season_match->total_time);
+
 								// add ssss
 								$addSh = $addSm = $addSs = '';
 								if(ltrim($total_time[0], '0') != 1){
@@ -117,6 +129,7 @@
 								if(ltrim($total_time[2], '0') != 1){
 									$addSs = 's';
 								}
+
 								// if hours and minutes are empty.
 								if ($total_time[0] == 0 && $total_time[1] == 0) {
 									$dis_time = ltrim($total_time[2], '0') . ' second' . $addSs;
@@ -125,6 +138,7 @@
 								} else {
 									$dis_time = ltrim($total_time[0], '0') . 'hour' . $addSh . ', ' . ltrim($total_time[1], '0') . ' minute' . $addSm . ', ' . ltrim($total_time[2], '0') . ' second' . $addSs;
 								}
+
 								// wat? why even is this here?
 								if(($match_player1->final_score != $match_player2->final_score) && ($match_player1->final_score > 0 || $match_player2->final_score > 0)){
 								?>
