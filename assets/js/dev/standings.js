@@ -6,7 +6,7 @@ $(document).ready(function(){
 		$id = $(this).find('input').attr('id');
 		if(!$('#standings-' + $id).is(':visible')){
 			$('.list-graph').hide();
-			$('#standings-' + $id).fadeIn(400);
+			$('#standings-' + $id).fadeIn();
 		}
 		if(circliful_shown == false){
 			$('.circliful').circliful();
