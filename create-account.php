@@ -86,15 +86,14 @@
 	}
 
 	$title = 'Create Account';
-
 	include('template/header.php');
 
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/create-account.js';
+		$scripts[] = $js . 'dev/create-account.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'create-account.min.js';
+		$scripts[] = $js . 'create-account.min.js?v=' . $version;
 	}
 ?>
 	<div class="container">

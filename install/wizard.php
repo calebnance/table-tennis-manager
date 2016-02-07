@@ -1,20 +1,20 @@
 <?php
-	$title 			= 'Installation';
-	$root_path  = '../';
-	$dir_deep   = 'install';
+	$root_path = '../';
+	$dir_deep = 'install';
 
+	$title = 'Installation';
 	include('../template/header.php');
 
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/classie.js';
-		$scripts[] = $js . 'dev/text-input-effects.js';
-		$scripts[] = $js . 'dev/wizard.js';
+		$scripts[] = $js . 'dev/classie.js?v=' . $version;
+		$scripts[] = $js . 'dev/text-input-effects.js?v=' . $version;
+		$scripts[] = $js . 'dev/wizard.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'classie.min.js';
-		$scripts[] = $js . 'text-input-effects.min.js';
-		$scripts[] = $js . 'wizard.min.js';
+		$scripts[] = $js . 'classie.min.js?v=' . $version;
+		$scripts[] = $js . 'text-input-effects.min.js?v=' . $version;
+		$scripts[] = $js . 'wizard.min.js?v=' . $version;
 	}
 ?>
 	<div class="container">

@@ -1,18 +1,24 @@
 <?php
-	$title = 'Standings';
+	include_once('includes/config.php');
 
 	// Include page css
-	$page_styles[] = $css . 'jquery.circliful.css';
+	// are we in dev or prod?
+	if(DEBUG) {
+		$page_styles[] = $css . 'dev/jquery.circliful.css?v=' . $version;
+	} else {
+		$page_styles[] = $css . 'jquery.circliful.min.css?v=' . $version;
+	}
 
+	$title = 'Standings';
 	include('template/header.php');
 
 	// Include page js
-	$scripts[] = $js . 'jquery.circliful.min.js';
+	$scripts[] = $js . 'jquery.circliful.min.js?v=' . $version;
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/standings.js';
+		$scripts[] = $js . 'dev/standings.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'standings.min.js';
+		$scripts[] = $js . 'standings.min.js?v=' . $version;
 	}
 
 	include_once('includes/database.php');

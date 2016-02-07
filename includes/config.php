@@ -52,14 +52,14 @@
 	$styles = [];
 	$scripts = [];
 
-	$styles[]	= $bs_css . 'bootstrap.min.css';
-	$styles[]	= $fa_css . 'font-awesome.min.css';
+	$styles[]	= $bs_css . 'bootstrap.min.css?v=' . $version;
+	$styles[]	= $fa_css . 'font-awesome.min.css?v=' . $version;
 
 	// are we in dev or prod?
 	if(DEBUG) {
-		$styles[]	= $css . 'dev/offcanvas.css';
-		$styles[]	= $css . 'dev/plugins.css';
-		$styles[]	= $css . 'dev/style.css';
+		$styles[]	= $css . 'dev/offcanvas.css?v=' . $version;
+		$styles[]	= $css . 'dev/plugins.css?v=' . $version;
+		$styles[]	= $css . 'dev/style.css?v=' . $version;
 	} else {
 		$styles[]	= $css . 'offcanvas.min.css?v=' . $version;
 		$styles[]	= $css . 'plugins.min.css?v=' . $version;
@@ -79,20 +79,20 @@
 		}
 	}
 
-	$scripts[] = $js . 'jquery-2.1.3.min.js';
-	$scripts[] = $bs_js . 'bootstrap.min.js';
+	$scripts[] = $js . 'jquery-2.1.3.min.js?v=' . $version;
+	$scripts[] = $bs_js . 'bootstrap.min.js?v=' . $version;
 
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/offcanvas.js';
-		$scripts[] = $js . 'dev/javascript.js';
+		$scripts[] = $js . 'dev/offcanvas.js?v=' . $version;
+		$scripts[] = $js . 'dev/javascript.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'offcanvas.min.js';
-		$scripts[] = $js . 'javascript.min.js';
+		$scripts[] = $js . 'offcanvas.min.js?v=' . $version;
+		$scripts[] = $js . 'javascript.min.js?v=' . $version;
 	}
 
 	// Table tennis defaults
-	$pts_to_win		= 11;
+	$pts_to_win = 11;
 	$pts_per_turn	= 2;
-	$skunk				= 5;
+	$skunk = 5;
 ?>
