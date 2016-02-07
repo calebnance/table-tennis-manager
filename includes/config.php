@@ -41,11 +41,14 @@
 	}
 
 	// Season Setup
-	$weeks = 2; // for each season
+	// for each season
+	$weeks = 2;
 	if(date('N') == 1) {
-		$week_start	= date('Y-m-d'); // grab today
+		// grab today
+		$week_start	= date('Y-m-d');
 	} else {
-		$week_start	= date('Y-m-d', strtotime('next monday')); // grab last weeks monday
+		// grab last weeks monday
+		$week_start	= date('Y-m-d', strtotime('next monday'));
 	}
 
 	// Includes
