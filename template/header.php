@@ -3,10 +3,12 @@
 	if(!isset($root_path)) {
 		$root_path = '';
 	}
+
 	// Remove direcory from paths?
 	if(!isset($dir_deep)) {
 		$dir_deep = '';
 	}
+
 	// Config
 	include_once($root_path . 'includes/config.php');
 
