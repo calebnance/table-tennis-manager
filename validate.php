@@ -4,18 +4,17 @@
 
 	// make sure to check for sql injection! in all of these areas being added!
 	$email_code = $_SERVER['QUERY_STRING'];
-
 	if($email_code){
 		// include files
 		include_once('includes/config.php');
 		include_once('includes/database.php');
 
 		$db = new Database($db_host, $db_name, $db_user, $db_pass);
-		$nocode	= $db->select('users', 'DISTINCT id', 'email_code="'.$email_code.'"', 'object');
+		$nocode	= $db->select('users', 'DISTINCT id', 'email_code="' . $email_code . '"', 'object');
 
 		// is there a validate code in the database
 		if($nocode){
-			$valid = $db->select('users', 'DISTINCT id', 'email_code="'.$email_code.'" AND email_validated="1"', 'object');
+			$valid = $db->select('users', 'DISTINCT id', 'email_code="' . $email_code . '" AND email_validated="1"', 'object');
 
 			// has the code already been validated?
 			if(!$valid[0]){
