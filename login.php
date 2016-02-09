@@ -19,6 +19,7 @@
 
 			$db = new Database($db_host, $db_name, $db_user, $db_pass);
 			$user_info = $db->select('users', '*', 'username="'.$username.'"');
+
 			// is user
 			if($user_info){
 				$user_pass	= pass_decrypt($user_info[0]['password']);

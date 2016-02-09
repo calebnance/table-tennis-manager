@@ -116,9 +116,11 @@ function goToWizard() {
 	exit();
 }
 
-function checkConnection($host, $table, $user, $pass, $responseType) {
-	// sleep just for the ajax call
-	sleep(3);
+function checkConnection($host, $table, $user, $pass, $responseType = 'return') {
+	if($responseType == 'json') {
+		// sleep just for the ajax call
+		sleep(3);
+	}
 	// turn off error reporting
 	error_reporting(0);
 	// response
@@ -313,6 +315,19 @@ function setUpDatabaseTables($responseType) {
 	'`year` INT(11) NOT NULL' .
 	') ENGINE = INNODB;';
 
+	// set sql5 - pages table
+	$sql5 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`pages` (' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`page` VARCHAR(256) NOT NULL,' .
+	'`title` VARCHAR(256) NOT NULL,' .
+	'`content` TEXT NOT NULL,' .
+	'`date_created` DATETIME NOT NULL,' .
+	'`date_modified` DATETIME NOT NULL,' .
+	'`user_created` INT(11) NOT NULL,' .
+	'`user_modified` INT(11) NOT NULL,' .
+	'`published` INT(2) NOT NULL DEFAULT "1"' .
+	') ENGINE = INNODB;';
+
 	// create connection to database
 	$conn = mysqli_connect(tt::DBHOST, tt::DBUSER, tt::DBPASS, tt::DBTABLE);
 
@@ -321,6 +336,7 @@ function setUpDatabaseTables($responseType) {
 	mysqli_query($conn, $sql2);
 	mysqli_query($conn, $sql3);
 	mysqli_query($conn, $sql4);
+	mysqli_query($conn, $sql5);
 
 	// close connection
 	mysqli_close($conn);

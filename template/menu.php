@@ -25,9 +25,13 @@
 				<li <?php echo isCurrentPage($current_page, ''); ?>>
 					<a href="<?php echo $base_url; ?>">Home</a>
 				</li>
+				<?php
+				/*
 				<li <?php echo isCurrentPage($current_page, 'about.php'); ?>>
 					<a href="<?php echo $base_url; ?>about.php">About</a>
 				</li>
+				*/
+				?>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle " data-toggle="dropdown">League <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -40,9 +44,13 @@
 						<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
 							<a href="<?php echo $base_url; ?>matches.php">Matches</a>
 						</li>
+						<?php
+						/*
 						<li <?php echo isCurrentPage($current_page, 'compare.php'); ?>>
 							<a href="<?php echo $base_url; ?>compare.php">Compare</a>
 						</li>
+						*/
+						?>
 					</ul>
 				</li>
 			</ul>
