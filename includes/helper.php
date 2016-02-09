@@ -468,6 +468,7 @@ function startsession($user_info, $db){
 	$_SESSION['name']				= $user_info[0]['name'];
 	$_SESSION['username']		= $user_info[0]['username'];
 	$_SESSION['email']			= $user_info[0]['email'];
+	$_SESSION['email_v']		= $user_info[0]['email_validated'];
 	$_SESSION['last_login']	= $user_info[0]['last_login'] == '0000-00-00 00:00:00' ? date('Y-m-d H:i:s') : $user_info[0]['last_login']; // first time then just say last login was 2 seconds ago and so on..
 	$_SESSION['timeout']		= time();
 
@@ -509,6 +510,11 @@ function endsession(){
 	$_SESSION['msg-type'] = 'info';
 	header('Location: index.php');
 	exit();
+}
+
+function hasValidatedEmail() {
+	
+	return $_SESSION['email_v'] ? true : false;
 }
 
 function isAdmin(){
