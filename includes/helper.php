@@ -1,5 +1,7 @@
 <?php
 
+include('includes/debug.php');
+
 /**
  *	Helpers
  */
@@ -513,7 +515,7 @@ function endsession(){
 }
 
 function hasValidatedEmail() {
-	
+
 	return $_SESSION['email_v'] ? true : false;
 }
 
@@ -525,6 +527,29 @@ function isAdmin(){
 		header('Location: index.php');
 		exit();
 	}
+}
+
+/**
+ *	Profile Helpers
+ */
+function checkUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return !empty($response) ? 1 : 0;
+}
+
+function getUserByUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT * FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return $response;
 }
 
 /**
@@ -541,19 +566,6 @@ function setKeyDBData($data, $field){
 	}
 
 	return $formatted;
-}
-
-/**
- *	Profile Helpers
- */
-function checkUsername($username) {
-	// connect to datbase
-	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
-
-	$username = $db->sanitize($username);
-	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
-
-	return !empty($response) ? 1 : 0;
 }
 
 /**
