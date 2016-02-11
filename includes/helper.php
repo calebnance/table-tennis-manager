@@ -597,6 +597,14 @@ function getSeasonMatches($season_start, $season_end, $db){
 	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . '" AND date_time_started <="' . $season_end . '"');
 }
 
+function getUsers() {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+	$response = $db->custom_query('SELECT * FROM users', true);
+
+	return $response;
+}
+
 function getPlayerById($playerId, $db) {
 
 	return $db->custom_query('SELECT username FROM users WHERE id = "' . $playerId . '"', true);

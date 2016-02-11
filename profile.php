@@ -26,7 +26,12 @@
 		$name = $_SESSION['name'];
 		$email = $_SESSION['email'];
 		$last_login = $_SESSION['last_login'];
-		$title = 'My Profile | ' . $_SESSION['name'];
+		if(!empty($name)) {
+			$title = 'My Profile | ' . $name;
+		} else {
+			$title = 'My Profile | No Access';
+		}
+
 		$pageHeading = 'My Profile';
 	}
 
