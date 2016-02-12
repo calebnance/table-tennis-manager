@@ -1,5 +1,6 @@
 <?php
 $registered = 1;
+$adminOnly = true;
 $title = 'Users List';
 include('template/header.php');
 
