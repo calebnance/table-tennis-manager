@@ -66,16 +66,18 @@
 							Last Login: <?php echo date('m-d-Y g:ha', strtotime($last_login)); ?>
 						</p>
 						<?php
-						/* have easter eggs and notify user when they get them! have badges for it or points or something.. idk. */
+						/* have easter eggs and notify user when they get them! have badges for it or points or something.. idk.
 						?>
 						<p>TODO::About</p>
 						<p>TODO::Badges Earned</p>
+						<?php
+						*/
+						?>
 					</div><!-- /.profile-text -->
 
 					<div class="clearfix"></div>
-
-					<strong>NOT REAL DATA</strong>
-
+					<?php
+					/*
 					<h3>This Season Stats</h3>
 					<table class="table">
 						<tbody>
@@ -109,6 +111,8 @@
 								<td>10</td>
 						</tbody>
 					</table>
+					*/
+					?>
 
 				</div><!-- /.col-xs-12 -->
 
