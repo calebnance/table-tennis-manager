@@ -5,6 +5,9 @@
 
 	$isProfile = false;
 
+	// Check session
+	checksession();
+
 	// are we looking at someone else's profile?
 	// and if actual username
 	if(!empty($_GET['username']) && checkUsername($_GET['username'])) {
@@ -16,9 +19,11 @@
 		$last_login = $user->last_login;
 		$title = 'Profile | ' . $name;
 		$pageHeading = $name . '\'s Profile';
+		// session user and user page the same?
+		if($username == $_SESSION['username']) {
+			$isProfile = true;
+		}
 	} else {
-		// Check session
-		checksession();
 		$isProfile = true;
 		$registered = 1;
 		// set all the things
@@ -31,7 +36,6 @@
 		} else {
 			$title = 'My Profile | No Access';
 		}
-
 		$pageHeading = 'My Profile';
 	}
 
