@@ -29,8 +29,10 @@ if($show_form) {
 				<table class="table">
 					<thead>
 						<tr>
+							<th></th>
 							<th>Name</th>
 							<th>Username</th>
+							<th class="text-center">Site Admin</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -39,18 +41,35 @@ if($show_form) {
 						foreach($users as $user) {
 							?>
 							<tr>
-								<td>
-									<?php
-									/* TODO
-									<div class="gravatar invisible pull-left margin-b-5 margin-r-10" data-email="<?= md5($user->email); ?>" data-username="<?= $user->username; ?>"></div><!-- /.gravatar -->
-									*/
-									?>
+								<td class="text-center v-align-middle width-75">
+									<a href="<?= $base_url . 'profile.php?username=' . $user->username; ?>">
+										<div class="gravatar noHW invisible pull-left" data-email="<?= md5($user->email); ?>" data-username="<?= $user->username; ?>"></div><!-- /.gravatar -->
+									</a>
+								</td>
+								<td class="v-align-middle">
 									<?= $user->name; ?>
 								</td>
-								<td>
+								<td class="v-align-middle">
 									<?= $user->username; ?>
 								</td>
-								<td class="text-right">
+								<td class="v-align-middle text-center">
+									<?php
+									if($user->is_admin) {
+									?>
+									<div class="btn btn-success">
+										<i class="fa fa-check"></i> Yes
+									</div><!-- /.btn -->
+									<?php
+									} else {
+									?>
+									<div class="btn btn-danger">
+										<i class="fa fa-times"></i> No
+									</div><!-- /.btn -->
+									<?php
+									}
+									?>
+								</td>
+								<td class="v-align-middle text-right">
 									<a class="btn btn-default" href="<?= $base_url . 'profile.php?username=' . $user->username; ?>">View Profile</a>
 								</td>
 							</tr>
