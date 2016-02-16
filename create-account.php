@@ -46,16 +46,16 @@
 			// Set up for user e-mail
 			$email_code = md5(uniqid(rand(), true));
 			// Insert new user
-			$user_record = array (
-				'name' 						=> $_POST['acco_name'],
-				'username'				=> $_POST['acco_username'],
-				'email'						=> $_POST['acco_email'],
-				'password'				=> pass_encrypt($_POST['acco_password']),
-				'email_code'			=> $email_code,
-				'email_validated'	=> 0,
-				'created'					=> date('Y-m-d H:i:s'),
-				'last_login'			=> '0000-00-00 00:00:00',
-			);
+			$user_record = [
+				'name' => $_POST['acco_name'],
+				'username' => $_POST['acco_username'],
+				'email' => $_POST['acco_email'],
+				'password' => pass_encrypt($_POST['acco_password']),
+				'email_code' => $email_code,
+				'email_validated' => 0,
+				'created' => date('Y-m-d H:i:s'),
+				'last_login' => '0000-00-00 00:00:00',
+			];
 			// first user? make them administrator
 			if(empty($first_signup)){
 				$user_record['is_admin'] = 1;

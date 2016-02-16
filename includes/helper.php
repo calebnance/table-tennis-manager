@@ -110,9 +110,9 @@ function startsession($user_info, $db){
 	$_SESSION['timeout']		= time();
 
 	// update user table
-	$user = array(
+	$user = [
 		'last_login' => date('Y-m-d H:i:s'),
-	);
+	];
 	$db->update('users', $user, 'id='.$user_info[0]['id']);
 
 	timeoutsession();
@@ -191,7 +191,7 @@ function getUserByUsername($username) {
  *	Data Helpers
  */
 function setKeyDBData($data, $field){
-	$formatted = array();
+	$formatted = [];
 	if($data && $field && is_array($data)){
 		foreach($data as $key => $value){
 			if(isset($value->$field)){
