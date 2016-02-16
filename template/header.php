@@ -3,10 +3,12 @@
 	if(!isset($root_path)) {
 		$root_path = '';
 	}
+
 	// Remove direcory from paths?
 	if(!isset($dir_deep)) {
 		$dir_deep = '';
 	}
+
 	// Config
 	include_once($root_path . 'includes/config.php');
 
@@ -25,6 +27,14 @@
 		$_SESSION['msg'] = 'You need to be <a href="' . $base_url . 'login.php">logged-in</a> to view the full page.';
 		$_SESSION['msg-type'] = 'warning';
 		$show_form = 0;
+	}
+
+	// admin only?
+	if(!empty($adminOnly) && $_SESSION['is_admin'] == 0){
+		$_SESSION['msg'] = 'That page is <strong>admin only!</strong>';
+		$_SESSION['msg-type'] = 'danger';
+		header('location: index.php');
+		exit();
 	}
 
 	// Title handled

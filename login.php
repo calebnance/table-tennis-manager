@@ -19,13 +19,23 @@
 
 			$db = new Database($db_host, $db_name, $db_user, $db_pass);
 			$user_info = $db->select('users', '*', 'username="'.$username.'"');
+
 			// is user
 			if($user_info){
 				$user_pass	= pass_decrypt($user_info[0]['password']);
 				// password is with user
 				if($user_pass === $pass){
 					startsession($user_info, $db);
-					header('location: index.php');
+					$referer = explode('/', $_SERVER['HTTP_REFERER']);
+					$refererPage = end($referer);
+					// if $referer is set
+					// AND if $refererPage's last 4 characters are .php
+					// AND if $refererPage doesn't equal login.php page
+					if(!empty($refererPage) && (substr($refererPage, -4) == '.php') && $refererPage !== 'login.php') {
+						header('location: ' . $refererPage);
+					} else {
+						header('location: index.php');
+					}
 					$_SESSION['msg'] = 'You are now logged in!';
 					$_SESSION['msg-type'] = 'success';
 					exit();
