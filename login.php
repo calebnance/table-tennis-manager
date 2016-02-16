@@ -2,6 +2,7 @@
 	// login
 	$username	= '';
 	$pass = '';
+
 	if($_POST){
 		// Lets do some checking
 		if(empty($_POST['username']) || empty($_POST['password'])){
@@ -53,6 +54,15 @@
 			}
 
 		}
+	}
+
+	session_start();
+	// are we already logged in?!
+	if(!empty($_SESSION['loggedin'])){
+		header('location: /');
+		$_SESSION['msg'] = 'You are already logged in!';
+		$_SESSION['msg-type'] = 'success';
+		exit();
 	}
 
 	$title = 'Login';
