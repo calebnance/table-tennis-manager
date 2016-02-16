@@ -14,6 +14,7 @@ table { background-color: #EFEFEF; }
 .display-none { display: none; }
 
 .text-align-center { text-align: center; }
+.v-align-middle { vertical-align: middle!important; }
 
 .margin-0 { margin: 0; }
 .margin-b-0 { margin-bottom: 0; }
@@ -35,6 +36,7 @@ table { background-color: #EFEFEF; }
 .margin-l-20 { margin-left: 20px; }
 .margin-r-20 { margin-right: 20px; }
 .margin-t-20 { margin-top: 20px; }
+.margin-t-25 { margin-top: 25px; }
 .padding-0 { padding: 0; }
 .padding-b-0 { padding-bottom: 0; }
 .padding-l-0 { padding-left: 0; }
@@ -42,6 +44,8 @@ table { background-color: #EFEFEF; }
 .padding-t-0 { padding-top: 0; }
 
 .width-20 { width: 20px; }
+.width-50 { width: 50px; }
+.width-75 { width: 75px; }
 .width-200 { width: 45%; }
 
 .bs3-btn-padding { padding: 6px 12px; }
@@ -106,6 +110,7 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 
 /* Gravatar */
 .gravatar { background-color: #fff; border-radius: 4px; height: 250px; width: 250px; }
+.gravatar.noHW { height: auto; width: auto; }
 .gravatar, .gravatar img { position: relative; }
 
 /* Standings */
