@@ -235,7 +235,7 @@ function getSeasonMatches($season_start, $season_end, $db){
 function getUsers() {
 	// connect to datbase
 	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
-	$response = $db->custom_query('SELECT * FROM users', true);
+	$response = $db->custom_query('SELECT * FROM users');
 
 	return $response;
 }

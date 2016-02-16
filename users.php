@@ -9,6 +9,11 @@ if($show_form) {
 	$users = getUsers();
 }
 
+// check database table
+$response = checkConnection($db_host, $db_name, $db_user, $db_pass);
+
+// database table be there!
+if($response['extra'] !== 'showCreateDB') {
 ?>
 <div class="container">
 	<div class="row row-offcanvas row-offcanvas-right">
@@ -27,13 +32,14 @@ if($show_form) {
 				include('template/msgs/noUsersSet.php');
 			} else {
 				?>
-				<table class="table">
+				<table class="table table-hover table-striped">
 					<thead>
 						<tr>
 							<th></th>
 							<th>Name</th>
 							<th>Username</th>
 							<th class="text-center">Site Admin</th>
+							<th class="text-center">Get System E-mails</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -57,13 +63,30 @@ if($show_form) {
 									<?php
 									if($user->is_admin) {
 									?>
-									<div class="btn btn-success">
+									<div class="label label-success">
 										<i class="fa fa-check"></i> Yes
 									</div><!-- /.btn -->
 									<?php
 									} else {
 									?>
-									<div class="btn btn-danger">
+									<div class="label label-danger">
+										<i class="fa fa-times"></i> No
+									</div><!-- /.btn -->
+									<?php
+									}
+									?>
+								</td>
+								<td class="v-align-middle text-center">
+									<?php
+									if($user->is_admin && $user->receive_email) {
+									?>
+									<div class="label label-success">
+										<i class="fa fa-check"></i> Yes
+									</div><!-- /.btn -->
+									<?php
+									} else {
+									?>
+									<div class="label label-danger">
 										<i class="fa fa-times"></i> No
 									</div><!-- /.btn -->
 									<?php
@@ -94,5 +117,22 @@ if($show_form) {
 </div><!-- /.container -->
 
 <?php
+} else {
+?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<?php
+			// no database table
+			include('template/msgs/noDatabase.php');
+			?>
+		</div><!-- /.col-xs-12 -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
+
+<?php
+}
+
 include('template/footer.php');
 ?>

@@ -293,7 +293,7 @@ $(document).ready(function(){
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
-			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
+			$('#installing .progress-bar').addClass('progress-bar-warning progress-bar-striped active').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
 			// next step
 			setUpDB();
 		}).fail(function(jqXHR, textStatus, errorThrown){
@@ -323,7 +323,7 @@ $(document).ready(function(){
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
-			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
+			$('#installing .progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-info').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
 			// next step
 			seedContent();
 		}).fail(function(jqXHR, textStatus, errorThrown){
@@ -354,7 +354,7 @@ $(document).ready(function(){
 			// update text
 			$('#installation-text').html(data.msg);
 			// update progress
-			$('#installing .progress-bar').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
+			$('#installing .progress-bar').removeClass('progress-bar-info').addClass('progress-bar-success').attr('aria-valuenow', data.progress).attr('style', 'width:' + data.progress + '%;').html(data.progress + '%');
 			// show complete
 			setTimeout(function(){
 				$('#installing').fadeOut(400, function(e){
