@@ -29,6 +29,14 @@
 		$show_form = 0;
 	}
 
+	// admin only?
+	if(!empty($adminOnly) && $_SESSION['is_admin'] == 0){
+		$_SESSION['msg'] = 'That page is <strong>admin only!</strong>';
+		$_SESSION['msg-type'] = 'danger';
+		header('location: index.php');
+		exit();
+	}
+
 	// Title handled
 	if(!$title){
 		$title = 'Table Tennis Manager';
