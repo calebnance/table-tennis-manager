@@ -18,11 +18,12 @@
 
 			// has the code already been validated?
 			if(!$valid[0]){
-				$user = array(
+				$user = [
 					'email_validated' => 1,
-				);
+				];
 				$db->update('users', $user, 'id=' . $nocode[0]->id);
 				$msg = 'E-mail address has been validated!';
+				$_SESSION['email_v'] = 1;
 			} else {
 				$msg = 'E-mail address has already been validated!';
 			}

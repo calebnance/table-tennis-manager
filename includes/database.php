@@ -34,13 +34,13 @@
 			mysqli_query($this->_connection, 'SET CHARACTER SET \'utf8\'');
 
 			$result = mysqli_query($this->_connection, $query);
-			$tmpId  = mysqli_insert_id($this->_connection);
+			$tmpId = mysqli_insert_id($this->_connection);
 
 			mysqli_close($this->_connection);
 
-			if ($getId):
+			if($getId) {
 				return $tmpId;
-			endif;
+			}
 
 			return $result;
 		}
@@ -51,13 +51,13 @@
 		 */
 		public function custom_query($query, $single = false) {
 			$result = $this->_sendQuery($query);
-			$resultArray = array();
+			$resultArray = [];
 
-			while ($row = mysqli_fetch_object($result)){
+			while ($row = mysqli_fetch_object($result)) {
 				$resultArray[] = $row;
 			}
 
-			if(count($resultArray) == 1 && $single == true){
+			if(count($resultArray) == 1 && $single == true) {
 				$resultArray = $resultArray[0];
 			}
 
@@ -79,49 +79,50 @@
 		 * @return	resource	Result
 		 */
 		public function select($table, $fields = '*', $where = '1=1', $returntype = 'array', $leftjoin = '', $on = '',  $order = 'id', $limit = '', $desc = false, $limitBegin = 0, $groupby = null, $monitoring = false) {
+			$types = [
+				'array' => 'mysqli_fetch_assoc',
+				'object' => 'mysqli_fetch_object'
+			];
 
-			$types = array('array'=>'mysqli_fetch_assoc', 'object'=>'mysqli_fetch_object');
 			$type = $types[$returntype];
-
 			$query = 'SELECT ' . $fields;
-
 			$query .= ' FROM ' . $table;
 
-			if (!empty($leftjoin) && !empty($on)):
+			if(!empty($leftjoin) && !empty($on)) {
 				$query .= ' LEFT JOIN ' . $leftjoin;
 				$query .= ' ON ' . $on;
-			endif;
+			}
 
 			$query .= ' WHERE ' . $where;
 
-			if (!empty($groupby)):
+			if(!empty($groupby)) {
 				$query .= ' GROUP BY ' . $groupby;
-			endif;
+			}
 
-			if (!empty($order)):
+			if(!empty($order)) {
 				$query .= ' ORDER BY ' . $order;
-				if ($desc):
+				if($desc) {
 					$query .= ' DESC';
-				endif;
-			endif;
+				}
+			}
 
-			if (!empty($limit)):
+			if(!empty($limit)) {
 				$query .= ' LIMIT ' . $limitBegin . ', ' . $limit;
-			endif;
+			}
 
 			$result = $this->_sendQuery($query);
-			$resultArray = array();
+			$resultArray = [];
 
-			while ($row = $type($result)){
+			while($row = $type($result)) {
 				$resultArray[] = $row;
 			}
 
 			/**
 			 * If monitoring is activated, echo the query
 			 */
-			if ($monitoring):
+			if($monitoring) {
 				echo $query;
-			endif;
+			}
 
 			return $resultArray;
 		}
@@ -151,17 +152,17 @@
 		 * @return	void
 		 */
 		public function update($table, $data, $where) {
-			if (is_array($data)):
-				$update = array();
+			if(is_array($data)) {
+				$update = [];
 
-				foreach ($data as $key => $val):
+				foreach($data as $key => $val) {
 					$update[] .= $key . '=\'' . $val . '\'';
-				endforeach;
+				}
 
 				$query = 'UPDATE ' . $table . ' SET ' . implode(',', $update) . ' WHERE ' . $where;
 
 				$this->_sendQuery($query);
-			endif;
+			}
 		}
 
 		/**
@@ -172,11 +173,11 @@
 		 * @return	void
 		 */
 		public function delete($table, $id, $where = null) {
-			if($where === null):
+			if($where === null) {
 				$query = 'DELETE FROM ' . $table . ' WHERE id=\'' . $id . '\'';
-			else:
+			} else {
 				$query = 'DELETE FROM ' . $table . ' WHERE ' . $where;
-			endif;
+			}
 
 			$this->_sendQuery($query);
 		}

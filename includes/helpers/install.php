@@ -48,13 +48,16 @@ function checkConnection($host, $table, $user, $pass, $responseType = 'return') 
 	}
 	// turn off error reporting
 	error_reporting(0);
+
 	// response
-	$response = array(
+	$response = [
 		'error' => false,
-		'msg'   => '',
+		'msg' => '',
 		'extra' => '',
-	);
+	];
+
 	$mysqli = mysqli_init();
+
 	if (!$mysqli) {
 		$response['msg'] = 'mysqli_init failed';
 		$response['error'] = true;
@@ -98,11 +101,11 @@ function createDatabase($host, $table, $user, $pass, $responseType) {
 	// turn off error reporting
 	error_reporting(0);
 	// response
-	$response = array(
+	$response = [
 		'error' => false,
-		'msg'   => '',
+		'msg' => '',
 		'extra' => '',
-	);
+	];
 
 	// create connection
 	$connection = new mysqli($host, $user, $pass);
@@ -164,11 +167,11 @@ function install($host, $table, $user, $pass, $responseType) {
 	sleep(5);
 
 	// response
-	$response = array(
-		'error' 	 => false,
-		'msg'   	 => 'Installing Database Tables',
+	$response = [
+		'error' => false,
+		'msg' => 'Installing Database Tables',
 		'progress' => '25',
-	);
+	];
 
 	// is response json?
 	if($responseType == 'json') {
@@ -276,11 +279,11 @@ function setUpDatabaseTables($responseType) {
 	sleep(5);
 
 	// response
-	$response = array(
-		'error' 	 => false,
-		'msg'   	 => 'Seeding Database Tables',
+	$response = [
+		'error' => false,
+		'msg' => 'Seeding Database Tables',
 		'progress' => '50',
-	);
+	];
 
 	// is response json?
 	if($responseType == 'json') {
@@ -308,19 +311,19 @@ function seedDatabaseTables($name, $username, $password, $email, $responseType) 
 	$email_code = md5(uniqid(rand(), true));
 
 	// Insert new user
-	$admin_record = array (
-		'name' 						=> $name,
-		'username'				=> $username,
-		'email'						=> $email,
-		'password'				=> pass_encrypt($password),
-		'about'						=> '',
-		'email_code'			=> $email_code,
-		'email_validated'	=> 0,
-		'is_admin' 				=> 1,
-		'receive_email'   => 1,
-		'created'					=> date('Y-m-d H:i:s'),
-		'last_login'			=> '0000-00-00 00:00:00',
-	);
+	$admin_record = [
+		'name' => $name,
+		'username' => $username,
+		'email' => $email,
+		'password' => pass_encrypt($password),
+		'about' => '',
+		'email_code' => $email_code,
+		'email_validated' => 0,
+		'is_admin' => 1,
+		'receive_email' => 1,
+		'created' => date('Y-m-d H:i:s'),
+		'last_login' => '0000-00-00 00:00:00',
+	];
 
 	// insert query
 	$query = 'INSERT INTO users ( ' . implode(',', array_keys($admin_record)) . ' )';
@@ -370,11 +373,11 @@ function seedDatabaseTables($name, $username, $password, $email, $responseType) 
 	sleep(5);
 
 	// response
-	$response = array(
-		'error' 	 => false,
-		'msg'   	 => 'Validation E-mail has been sent!',
+	$response = [
+		'error' => false,
+		'msg' => 'Validation E-mail has been sent!',
 		'progress' => '100',
-	);
+	];
 
 	// is response json?
 	if($responseType == 'json') {
