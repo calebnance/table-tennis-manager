@@ -22,7 +22,18 @@ if($current_page != 'wizard.php') {
 						Last Login: <?php echo date('m-d-Y g:ha', strtotime($_SESSION['last_login'])); ?>
 					</div><!-- /.text-right -->
 				</li>
-			<?php
+				<?php
+				// has e-mail not been validated?
+				if(!hasValidatedEmail()) {
+				?>
+				<li>
+					<?php
+					include('template/msgs/emailNotValidated.php');
+					?>
+				</li>
+				<?php
+				}
+
 			if($_SESSION['is_admin'] == 1){
 			?>
 			<li>

@@ -1,5 +1,7 @@
 <?php
 
+include('includes/debug.php');
+
 /**
  *	Helpers
  */
@@ -468,6 +470,7 @@ function startsession($user_info, $db){
 	$_SESSION['name']				= $user_info[0]['name'];
 	$_SESSION['username']		= $user_info[0]['username'];
 	$_SESSION['email']			= $user_info[0]['email'];
+	$_SESSION['email_v']		= $user_info[0]['email_validated'];
 	$_SESSION['last_login']	= $user_info[0]['last_login'] == '0000-00-00 00:00:00' ? date('Y-m-d H:i:s') : $user_info[0]['last_login']; // first time then just say last login was 2 seconds ago and so on..
 	$_SESSION['timeout']		= time();
 
@@ -511,6 +514,11 @@ function endsession(){
 	exit();
 }
 
+function hasValidatedEmail() {
+
+	return $_SESSION['email_v'] ? true : false;
+}
+
 function isAdmin(){
 	checksession();
 	if($_SESSION['is_admin'] == 0){
@@ -519,6 +527,29 @@ function isAdmin(){
 		header('Location: index.php');
 		exit();
 	}
+}
+
+/**
+ *	Profile Helpers
+ */
+function checkUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return !empty($response) ? 1 : 0;
+}
+
+function getUserByUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT * FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return $response;
 }
 
 /**
@@ -535,19 +566,6 @@ function setKeyDBData($data, $field){
 	}
 
 	return $formatted;
-}
-
-/**
- *	Profile Helpers
- */
-function checkUsername($username) {
-	// connect to datbase
-	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
-
-	$username = $db->sanitize($username);
-	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
-
-	return !empty($response) ? 1 : 0;
 }
 
 /**
@@ -577,6 +595,14 @@ function getSeasonByNumYear($number, $year, $db){
 function getSeasonMatches($season_start, $season_end, $db){
 
 	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . '" AND date_time_started <="' . $season_end . '"');
+}
+
+function getUsers() {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+	$response = $db->custom_query('SELECT * FROM users', true);
+
+	return $response;
 }
 
 function getPlayerById($playerId, $db) {
