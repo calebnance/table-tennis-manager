@@ -1,17 +1,17 @@
 <?php
-	// debug
+	// Set debug
 	const DEBUG = false;
 
-	// Helper
-	include($root_path . 'includes/helper.php');
+	// Include Helpers
+	include_once($root_path . 'includes/helper.php');
 
 	// Is it installed?
 	isInstalled();
 
-	// set timezone
+	// Set timezone
 	date_default_timezone_set('America/New_York');
 
-	// Version
+	// Set version
 	$version  = '0.9.9';
 
 	// Paths
@@ -28,7 +28,7 @@
 	$dp_js 		= $dp . 'js/';
 	$dp_css 	= $dp . 'css/';
 
-	// Variables
+	// Set helper variables
 	$current_page	= getCurrentPage();
 
 	// Does this class exist? Errors out when wizard is present, so fixed it.
@@ -78,7 +78,7 @@
 	 */
 	if(isset($page_styles)){
 		foreach($page_styles as $page_style){
-			$styles[] = $css . $page_style;
+			$styles[] = $css . $page_style . '?v=' . $version;
 		}
 	}
 

@@ -1,8 +1,12 @@
 <?php
+	// wat
 	$root_path = '../';
 	$dir_deep = 'install';
 
+	// set page title
 	$title = 'Installation';
+
+	// include header
 	include('../template/header.php');
 
 	// Include page js
