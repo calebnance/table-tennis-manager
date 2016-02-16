@@ -12,38 +12,40 @@
 
 			// are the two players the same person?
 			if(isset($_POST['player1']) && isset($_POST['player2']) && ($_POST['player1'] == $_POST['player2'] ) ){
-				$res = array(
-					'msg'		=> 'You have selected the same person for both, this can\'t be done.. <a href="https://www.youtube.com/watch?v=Lr7CKWxqhtw" target="_blank">don\'t play yourself</a>',
+				$res = [
+					'msg' => 'You have selected the same person for both, this can\'t be done.. <a href="https://www.youtube.com/watch?v=Lr7CKWxqhtw" target="_blank">don\'t play yourself</a>',
 					'error'	=> 1,
-				);
+				];
 				echo json_encode($res);
 				exit();
 			}
 
 			// match ref insert data
 			$playerserves = 'player' . $_POST['playerserves'];
-			$match_start = array(
-				'player1'						=> $_POST['player1'],
-				'player2'						=> $_POST['player2'],
-				'serve_first'				=> $_POST[$playerserves],
+			$match_start = [
+				'player1'	=> $_POST['player1'],
+				'player2'	=> $_POST['player2'],
+				'serve_first' => $_POST[$playerserves],
 				'date_time_started' => date('Y-m-d H:i:s'),
-			);
+			];
+
 			// insert data into match_ref
 			$match_id = $db->insert('match_ref', $match_start);
 
 			// ajax response
-			$match_response = array(
-				'match_id'			=> (int)$match_id,
-				'player1'				=> (int)$_POST['player1'],
-				'player2' 			=> (int)$_POST['player2'],
-				'serve_first'		=> (int)$_POST[$playerserves],
-				'skunk'					=> (int)$skunk,
-				'pts_per_turn'	=> (int)$pts_per_turn,
-				'pts_to_win'		=> (int)$pts_to_win,
-				'type'					=> 'match',
-				'error'					=> 0,
-				'msg'						=> 'Match has been created!',
-			);
+			$match_response = [
+				'match_id' => (int)$match_id,
+				'player1' => (int)$_POST['player1'],
+				'player2' => (int)$_POST['player2'],
+				'serve_first' => (int)$_POST[$playerserves],
+				'skunk' => (int)$skunk,
+				'pts_per_turn' => (int)$pts_per_turn,
+				'pts_to_win' => (int)$pts_to_win,
+				'type' => 'match',
+				'error' => 0,
+				'msg' => 'Match has been created!',
+			];
+
 			// sleep a little
 			sleep(2);
 			echo json_encode($match_response);
@@ -54,42 +56,42 @@
 		if(isset($_POST['type']) && $_POST['type'] == 'match'){
 			session_start();
 
-			$player1	= $db->select('users', 'username', 'id="' . (int)$_POST['player1'] . '"', 'object');
-			$player2	= $db->select('users', 'username', 'id="' . (int)$_POST['player2'] . '"', 'object');
+			$player1 = $db->select('users', 'username', 'id="' . (int)$_POST['player1'] . '"', 'object');
+			$player2 = $db->select('users', 'username', 'id="' . (int)$_POST['player2'] . '"', 'object');
 
-			$player1_create = array(
-				'match_id'			=> (int)$_POST['match_id'],
-				'player_id'			=> (int)$_POST['player1'],
-				'date_created'	=> date('Y-m-d H:i:s'),
-				'date_modified'	=> date('Y-m-d H:i:s'),
-				'user_created'	=> (int)$_SESSION['uid'],
-				'user_modified'	=> (int)$_SESSION['uid'],
-			);
-			$player2_create = array(
-				'match_id'			=> (int)$_POST['match_id'],
-				'player_id'			=> (int)$_POST['player2'],
-				'date_created'	=> date('Y-m-d H:i:s'),
-				'date_modified'	=> date('Y-m-d H:i:s'),
-				'user_created'	=> (int)$_SESSION['uid'],
-				'user_modified'	=> (int)$_SESSION['uid'],
-			);
+			$player1_create = [
+				'match_id' => (int)$_POST['match_id'],
+				'player_id' => (int)$_POST['player1'],
+				'date_created' => date('Y-m-d H:i:s'),
+				'date_modified' => date('Y-m-d H:i:s'),
+				'user_created' => (int)$_SESSION['uid'],
+				'user_modified' => (int)$_SESSION['uid'],
+			];
+			$player2_create = [
+				'match_id' => (int)$_POST['match_id'],
+				'player_id' => (int)$_POST['player2'],
+				'date_created' => date('Y-m-d H:i:s'),
+				'date_modified' => date('Y-m-d H:i:s'),
+				'user_created' => (int)$_SESSION['uid'],
+				'user_modified' => (int)$_SESSION['uid'],
+			];
 
 			$player1_match = $db->insert('match_player', $player1_create);
 			$player2_match = $db->insert('match_player', $player2_create);
 
-			$response = array(
-				'match_options'	=> $_POST,
-				'player1'				=> array(
-					'match_player_id'	=> $player1_match,
-					'info'						=> $player1_create,
-					'username'				=> $player1[0]->username,
-				),
-				'player2'				=> array(
-					'match_player_id'	=> $player2_match,
-					'info'						=> $player2_create,
-					'username'				=> $player2[0]->username,
-				),
-			);
+			$response = [
+				'match_options' => $_POST,
+				'player1' => [
+					'match_player_id' => $player1_match,
+					'info' => $player1_create,
+					'username' => $player1[0]->username,
+				],
+				'player2' => [
+					'match_player_id' => $player2_match,
+					'info' => $player2_create,
+					'username' => $player2[0]->username,
+				],
+			];
 
 			echo json_encode($response);
 			exit();
@@ -98,45 +100,45 @@
 		// now we want to update the match_player table each autosave and final save goes here
 		if(isset($_POST['type']) && $_POST['type'] == 'update'){
 			//echo json_encode($_POST);
-			$player1_update = array(
-				'final_score'		=> (int)$_POST['score_1'],
-				'aces'					=> (int)$_POST['aces_1'],
-				'bad_serves'		=> (int)$_POST['bad_serve_1'],
-				'frustration'		=> (int)$_POST['frustration_1'],
-				'ones'					=> (int)$_POST['ones_1'],
-				'feel_goods'		=> (int)$_POST['feel_goods_1'],
-				'slams_missed'	=> (int)$_POST['slams_missed_1'],
-				'slams_made'		=> (int)$_POST['slams_made_1'],
-				'digs'					=> (int)$_POST['digs_1'],
-				'foosball'			=> (int)$_POST['foosball_1'],
-				'just_the_tip'	=> (int)$_POST['just_the_tip_1'],
-				'fabulous'			=> (int)$_POST['fabulous_1'],
-				'date_modified'	=> date('Y-m-d H:i:s')
-			);
-			$player2_update = array(
-				'final_score'		=> (int)$_POST['score_2'],
-				'aces'					=> (int)$_POST['aces_2'],
-				'bad_serves'		=> (int)$_POST['bad_serve_2'],
-				'frustration'		=> (int)$_POST['frustration_2'],
-				'ones'					=> (int)$_POST['ones_2'],
-				'feel_goods'		=> (int)$_POST['feel_goods_2'],
-				'slams_missed'	=> (int)$_POST['slams_missed_2'],
-				'slams_made'		=> (int)$_POST['slams_made_2'],
-				'digs'					=> (int)$_POST['digs_2'],
-				'foosball'			=> (int)$_POST['foosball_2'],
-				'just_the_tip'	=> (int)$_POST['just_the_tip_2'],
-				'fabulous'			=> (int)$_POST['fabulous_2'],
-				'date_modified'	=> date('Y-m-d H:i:s')
-			);
+			$player1_update = [
+				'final_score' => (int)$_POST['score_1'],
+				'aces' => (int)$_POST['aces_1'],
+				'bad_serves' => (int)$_POST['bad_serve_1'],
+				'frustration' => (int)$_POST['frustration_1'],
+				'ones' => (int)$_POST['ones_1'],
+				'feel_goods' => (int)$_POST['feel_goods_1'],
+				'slams_missed' => (int)$_POST['slams_missed_1'],
+				'slams_made' => (int)$_POST['slams_made_1'],
+				'digs' => (int)$_POST['digs_1'],
+				'foosball' => (int)$_POST['foosball_1'],
+				'just_the_tip' => (int)$_POST['just_the_tip_1'],
+				'fabulous' => (int)$_POST['fabulous_1'],
+				'date_modified' => date('Y-m-d H:i:s'),
+			];
+			$player2_update = [
+				'final_score' => (int)$_POST['score_2'],
+				'aces' => (int)$_POST['aces_2'],
+				'bad_serves' => (int)$_POST['bad_serve_2'],
+				'frustration' => (int)$_POST['frustration_2'],
+				'ones' => (int)$_POST['ones_2'],
+				'feel_goods' => (int)$_POST['feel_goods_2'],
+				'slams_missed' => (int)$_POST['slams_missed_2'],
+				'slams_made' => (int)$_POST['slams_made_2'],
+				'digs' => (int)$_POST['digs_2'],
+				'foosball' => (int)$_POST['foosball_2'],
+				'just_the_tip' => (int)$_POST['just_the_tip_2'],
+				'fabulous' => (int)$_POST['fabulous_2'],
+				'date_modified' => date('Y-m-d H:i:s'),
+			];
 
 			$update_1 = $db->update('match_player', $player1_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player1_id'] . '"');
 			$update_2 = $db->update('match_player', $player2_update, 'match_id="' . (int)$_POST['match_id'] .'" AND player_id="' . (int)$_POST['player2_id'] . '"');
 
-			$match_info				= $db->select('match_ref', 'date_time_started', 'id="' . (int)$_POST['match_id'] . '"', 'object');
-			$match_start_time	= strtotime($match_info[0]->date_time_started);
-			$current_time			= strtotime(date('Y-m-d H:i:s'));
-			$time_stamp				= ($current_time - $match_start_time);
-			$time_played			= date('i:s', $time_stamp);
+			$match_info = $db->select('match_ref', 'date_time_started', 'id="' . (int)$_POST['match_id'] . '"', 'object');
+			$match_start_time = strtotime($match_info[0]->date_time_started);
+			$current_time = strtotime(date('Y-m-d H:i:s'));
+			$time_stamp = ($current_time - $match_start_time);
+			$time_played = date('i:s', $time_stamp);
 
 			$match_update = [
 				'total_time' => '00:' . $time_played,
@@ -144,14 +146,15 @@
 			];
 			$update_3 = $db->update('match_ref', $match_update, 'id="' . (int)$_POST['match_id'] .'"');
 
-			$response = array(
-				'post'				=> $_POST,
-				'player_1'		=> $player1_update,
-				'player_2'		=> $player2_update,
-				'current'			=> date('Y-m-d H:i:s'),
-				'stamp'				=> ($current_time - $match_start_time),
-				'time_format'	=> $time_format,
-			);
+			$response = [
+				'post' => $_POST,
+				'player_1' => $player1_update,
+				'player_2' => $player2_update,
+				'current' => date('Y-m-d H:i:s'),
+				'stamp' => ($current_time - $match_start_time),
+				'time_format' => $time_format,
+			];
+			
 			echo json_encode($response);
 			exit();
 		}
