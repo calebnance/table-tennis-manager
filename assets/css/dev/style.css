@@ -113,6 +113,9 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 .gravatar.noHW { height: auto; width: auto; }
 .gravatar, .gravatar img { position: relative; }
 
+/* Start Season */
+.container .datepicker { margin-top: 0; }
+
 /* Standings */
 .circliful-standings-block { border: 1px solid #CCCCCC; border-radius: 4px; margin: 0 20px 20px 0; }
 
