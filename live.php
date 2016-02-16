@@ -5,16 +5,16 @@
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/live.js';
+		$scripts[] = $js . 'dev/live.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'live.min.js';
+		$scripts[] = $js . 'live.min.js?v=' . $version;
 	}
 
 ?>
 	<div class="container">
 
 		<div class="pull-right">
-			<a href="<?php echo $base_url; ?>" class="btn btn-default">Return Home</a>
+			<a href="<?php echo $base_url; ?>" class="btn btn-default"><i class="fa fa-home"></i> Return Home</a>
 		</div><!-- /.pull-right -->
 
 		<h1 class="page-header">

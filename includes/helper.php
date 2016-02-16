@@ -1,5 +1,7 @@
 <?php
 
+include('includes/debug.php');
+
 /**
  *	Helpers
  */
@@ -97,7 +99,7 @@ function isInstalled(){
 
 			$checkCurrentPage = getCurrentPage();
 			// are we at the wizard?
-			if($checkCurrentPage != 'wizard.php' && $checkCurrentPage != 'ajax.php') {
+			if($checkCurrentPage != 'wizard.php' && $checkCurrentPage != 'wizard-ajax.php' && $checkCurrentPage != 'ajax.php') {
 				// go to wizard!
 				goToWizard();
 				exit();
@@ -116,9 +118,11 @@ function goToWizard() {
 	exit();
 }
 
-function checkConnection($host, $table, $user, $pass, $responseType) {
-	// sleep just for the ajax call
-	sleep(3);
+function checkConnection($host, $table, $user, $pass, $responseType = 'return') {
+	if($responseType == 'json') {
+		// sleep just for the ajax call
+		sleep(3);
+	}
 	// turn off error reporting
 	error_reporting(0);
 	// response
@@ -313,6 +317,19 @@ function setUpDatabaseTables($responseType) {
 	'`year` INT(11) NOT NULL' .
 	') ENGINE = INNODB;';
 
+	// set sql5 - pages table
+	$sql5 = 'CREATE TABLE IF NOT EXISTS  `' . tt::DBTABLE . '`.`pages` (' .
+	'`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,' .
+	'`page` VARCHAR(256) NOT NULL,' .
+	'`title` VARCHAR(256) NOT NULL,' .
+	'`content` TEXT NOT NULL,' .
+	'`date_created` DATETIME NOT NULL,' .
+	'`date_modified` DATETIME NOT NULL,' .
+	'`user_created` INT(11) NOT NULL,' .
+	'`user_modified` INT(11) NOT NULL,' .
+	'`published` INT(2) NOT NULL DEFAULT "1"' .
+	') ENGINE = INNODB;';
+
 	// create connection to database
 	$conn = mysqli_connect(tt::DBHOST, tt::DBUSER, tt::DBPASS, tt::DBTABLE);
 
@@ -321,6 +338,7 @@ function setUpDatabaseTables($responseType) {
 	mysqli_query($conn, $sql2);
 	mysqli_query($conn, $sql3);
 	mysqli_query($conn, $sql4);
+	mysqli_query($conn, $sql5);
 
 	// close connection
 	mysqli_close($conn);
@@ -452,6 +470,7 @@ function startsession($user_info, $db){
 	$_SESSION['name']				= $user_info[0]['name'];
 	$_SESSION['username']		= $user_info[0]['username'];
 	$_SESSION['email']			= $user_info[0]['email'];
+	$_SESSION['email_v']		= $user_info[0]['email_validated'];
 	$_SESSION['last_login']	= $user_info[0]['last_login'] == '0000-00-00 00:00:00' ? date('Y-m-d H:i:s') : $user_info[0]['last_login']; // first time then just say last login was 2 seconds ago and so on..
 	$_SESSION['timeout']		= time();
 
@@ -495,6 +514,11 @@ function endsession(){
 	exit();
 }
 
+function hasValidatedEmail() {
+
+	return $_SESSION['email_v'] ? true : false;
+}
+
 function isAdmin(){
 	checksession();
 	if($_SESSION['is_admin'] == 0){
@@ -503,6 +527,29 @@ function isAdmin(){
 		header('Location: index.php');
 		exit();
 	}
+}
+
+/**
+ *	Profile Helpers
+ */
+function checkUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return !empty($response) ? 1 : 0;
+}
+
+function getUserByUsername($username) {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+
+	$username = $db->sanitize($username);
+	$response = $db->custom_query('SELECT * FROM users WHERE username ="' . $username . '" LIMIT 1', true);
+
+	return $response;
 }
 
 /**
@@ -519,19 +566,6 @@ function setKeyDBData($data, $field){
 	}
 
 	return $formatted;
-}
-
-/**
- *	Profile Helpers
- */
-function checkUsername($username) {
-	// connect to datbase
-	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
-
-	$username = $db->sanitize($username);
-	$response = $db->custom_query('SELECT id FROM users WHERE username ="' . $username . '" LIMIT 1', true);
-
-	return !empty($response) ? 1 : 0;
 }
 
 /**
@@ -561,6 +595,14 @@ function getSeasonByNumYear($number, $year, $db){
 function getSeasonMatches($season_start, $season_end, $db){
 
 	return $db->custom_query('SELECT * FROM match_ref WHERE date_time_started >="' . $season_start . '" AND date_time_started <="' . $season_end . '"');
+}
+
+function getUsers() {
+	// connect to datbase
+	$db = new Database(tt::DBHOST, tt::DBTABLE, tt::DBUSER, tt::DBPASS);
+	$response = $db->custom_query('SELECT * FROM users', true);
+
+	return $response;
 }
 
 function getPlayerById($playerId, $db) {

@@ -6,10 +6,8 @@ $(document).ready(function(){
 	$('#match-add').on('click', function(e){
 		e.preventDefault();
 		if($(this).hasClass('disabled')){
-
 			return false;
 		}
-
 		$.validateForm(true);
 	});
 
@@ -60,7 +58,7 @@ $(document).ready(function(){
 			data: update_data
 		}).done(function(data){
 			$('#match-complete').addClass('btn-success').removeClass('btn-navy').html('<i class="fa fa-check"></i> Match Saved!');
-			$('#player1-area, #player2-area, .verses, #match-updating').fadeOut(400);
+			$('#player1-area, #player2-area, .verses, #match-updating').fadeOut();
 
 			setTimeout(function(){
 				location.reload();
@@ -193,16 +191,10 @@ $(document).ready(function(){
 				dataType: 'json',
 				data: update_data
 			}).done(function(data){
-
-					//console.log('Updated');
-					//console.log(data);
-
+				//console.log(data);
 			}).fail(function(){
-
-				console.log('FAILED UPDATE: $.autoUpdate');
-
+				console.log('FAILED');
 			});
-
 		}, 3000);
 	}
 
@@ -245,20 +237,16 @@ $(document).ready(function(){
 					$('#skunk').val(match_start.skunk);
 					$('#serve_first').val(match_start.serve_first);
 
-					//console.log(match_start);
-
 					$.ajax({
 						url: 'match-add.php',
 						type: 'POST',
 						dataType: 'json',
 						data: match_start
 					}).done(function(data){
-
-						$match_add		= $('#match_add_form');
-						$match_created	= $('#match_created_form');
-
-						$match_add.fadeOut(400);
-						$match_created.delay(400).fadeIn(400);
+						$match_add = $('#match_add_form');
+						$match_created = $('#match_created_form');
+						$match_add.fadeOut();
+						$match_created.delay(400).fadeIn();
 
 						// Update data
 						$match_created.find('#player1-label').html(data.player1.username).attr('data-player-id', match_start.player1);

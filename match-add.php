@@ -1,8 +1,8 @@
 <?php
-include_once('includes/config.php');
-include_once('includes/database.php');
+	include_once('includes/config.php');
+	include_once('includes/database.php');
 
-$db = new Database($db_host, $db_name, $db_user, $db_pass);
+	$db = new Database($db_host, $db_name, $db_user, $db_pass);
 
 	if($_POST){
 		// TODO: should be logged in.. but should check for it here..
@@ -155,6 +155,7 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 			echo json_encode($response);
 			exit();
 		}
+
 		exit();
 	}
 
@@ -167,445 +168,445 @@ $db = new Database($db_host, $db_name, $db_user, $db_pass);
 	// Include page js
 	// are we in dev or prod?
 	if(DEBUG) {
-		$scripts[] = $js . 'dev/match-add.js';
+		$scripts[] = $js . 'dev/match-add.js?v=' . $version;
 	} else {
-		$scripts[] = $js . 'match-add.min.js';
+		$scripts[] = $js . 'match-add.min.js?v=' . $version;
 	}
 ?>
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
 
+			<?php
+			if($show_form){
+			?>
 			<div class="col-xs-12 col-sm-9">
 				<p class="pull-right visible-xs">
 					<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle</button>
 				</p>
-				<?php
-				if($show_form){
-				?>
 				<h1 class="page-header">Add Match</h1>
+				<?php
+				// no seasons set up?
+				if(empty($current_season)){
+					include('template/msgs/noSeason.php');
+				} else {
+					$players = $db->select('users', 'id, username', '1="1"', 'object', '', '', 'username');
+					if($players){
+					?>
+						<div id="match_wrapper">
+							<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
+
+								<div class="form-group player-area pull-left">
+									<label class="control-label">Player 1</label>
+									<div>
+										<select id="player1" name="player1" class="form-control required">
+											<option value="">-select-</option>
+											<?php foreach($players as $player){ ?>
+											<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
+											<?php } ?>
+										</select>
+										<div class="radio">
+											<label>
+												<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
+												Serves First
+											</label>
+										</div><!-- /.radio -->
+									</div>
+								</div><!-- /.form-group -->
+
+								<div class="verses pull-left">vs</div>
+
+								<div class="form-group player-area pull-left">
+									<label class="control-label">Player 2</label>
+									<div>
+										<select id="player2" name="player2" class="form-control required">
+											<option value="">-select-</option>
+											<?php foreach($players as $player){ ?>
+											<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
+											<?php } ?>
+										</select>
+										<div class="radio">
+											<label>
+												<input type="radio" name="playerserves" id="playerserves2" value="2">
+												Serves First
+											</label>
+										</div><!-- /.radio -->
+									</div>
+								</div><!-- /.form-group -->
+
+								<div class="clearfix"></div>
+
+								<div class="btm-form">
+									<a id="match-add" class="btn btn-lg btn-navy">Start Match</a>
+								</div><!-- /.btm-form -->
+
+								<input type="hidden" name="type" value="start" />
+
+							</form>
+							<?php
+							// TODO: Make this database driven!
+							// Extra TODO: have them add, edit attributes..
+							?>
+							<form id="match_created_form">
+								<div id="player1-area" class="form-group player-area pull-left" data-id="1">
+									<div id="player1-msg"></div><!-- /#player1-msg -->
+									<label id="player1-label" data-player-id="0" class="control-label">Player 1</label>
+
+									<div class="controls">
+										<div class="lead pull-left">Score</div>
+										<div class="pull-left">
+											<input type="text" id="score_1" name="score_1" class="form-control counters scoring" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Aces</div>
+										<div class="pull-left">
+											<input type="text" name="aces_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Bad Serve</div>
+										<div class="pull-left">
+											<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Digs</div>
+										<div class="pull-left">
+											<input type="text" name="digs_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Fabulous</div>
+										<div class="pull-left">
+											<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Feel Goods</div>
+										<div class="pull-left">
+											<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Foosball</div>
+										<div class="pull-left">
+											<input type="text" name="foosball_1" class="form-control counters" placeholder="" value="0">
+										</div>
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Frustration</div>
+										<div class="pull-left">
+											<input type="text" name="frustration_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Just The Tip</div>
+										<div class="pull-left">
+											<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Ones</div>
+										<div class="pull-left">
+											<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Slams Missed</div>
+										<div class="pull-left">
+											<input type="text" name="slams_missed_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Slams Made</div>
+										<div class="pull-left">
+											<input type="text" name="slams_made_1" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+								</div><!-- /#player1-area -->
+
+								<div class="verses pull-left">vs</div>
+
+								<div id="player2-area" class="form-group player-area pull-left" data-id="2">
+									<div id="player2-msg"></div><!-- /#player2-msg -->
+									<label id="player2-label" class="control-label">Player 2</label>
+
+									<div class="controls">
+										<div class="lead pull-left">Score</div>
+										<div class="pull-left">
+											<input type="text" id="score_2" name="score_2" class="form-control counters scoring" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Aces</div>
+										<div class="pull-left">
+											<input type="text" name="aces_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Bad Serve</div>
+										<div class="pull-left">
+											<input type="text" name="bad_serve_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Digs</div>
+										<div class="pull-left">
+											<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Fabulous</div>
+										<div class="pull-left">
+											<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Feel Goods</div>
+										<div class="pull-left">
+											<input type="text" name="feel_goods_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Foosball</div>
+										<div class="pull-left">
+											<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Frustration</div>
+										<div class="pull-left">
+											<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Just The Tip</div>
+										<div class="pull-left">
+											<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Ones</div>
+										<div class="pull-left">
+											<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Slams Missed</div>
+										<div class="pull-left">
+											<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+									<div class="clearfix"></div>
+
+									<div class="controls">
+										<div class="lead pull-left">Slams Made</div>
+										<div class="pull-left">
+											<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
+										</div><!-- /.pull-left -->
+										<div class="btn-group pull-left">
+											<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
+											<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
+										</div><!-- /.btn-group -->
+									</div><!-- /.controls -->
+
+								</div><!-- /#player2-area -->
+
+								<div class="clearfix"></div>
+
+								<!-- post needed -->
+								<input type="hidden" name="type" value="update" />
+								<input type="hidden" id="player1_id" name="player1_id" value="" />
+								<input type="hidden" id="player2_id" name="player2_id" value="" />
+								<input type="hidden" id="match_id" name="match_id" value="" />
+								<input type="hidden" id="serve_first" name="serve_first" value="" />
+
+								<!-- js needed -->
+								<input type="hidden" id="pts_per_turn" value="<?php echo $pts_per_turn; ?>" />
+								<input type="hidden" id="pts_to_win" value="<?php echo $pts_to_win; ?>" />
+								<input type="hidden" id="skunk" value="<?php echo $skunk; ?>" />
+
+								<div id="match-updating" class="alert alert-warning pull-right">waiting</div>
+
+								<div class="btm-form">
+									<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>
+								</div><!-- /.btm-form -->
+
+								<div class="clearfix"></div>
+							</form>
+						</div><!-- /#match_wrapper -->
 					<?php
-					// no seasons set up?
-					if(empty($current_season)){
-						include('template/msgs/noSeason.php');
 					} else {
-						$players = $db->select('users', 'id, username', '1="1"', 'object', '', '', 'username');
-						if($players){
-						?>
-							<div id="match_wrapper">
-								<form id="match_add_form" role="form" action="<?php echo $base_url; ?>match-add.php" method="POST">
-
-									<div class="form-group player-area pull-left">
-										<label class="control-label">Player 1</label>
-										<div>
-											<select id="player1" name="player1" class="form-control required">
-												<option value="">-select-</option>
-												<?php foreach($players as $player){ ?>
-												<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
-												<?php } ?>
-											</select>
-											<div class="radio">
-												<label>
-													<input type="radio" name="playerserves" id="playerserves1" value="1" checked>
-													Serves First
-												</label>
-											</div><!-- /.radio -->
-										</div>
-									</div><!-- /.form-group -->
-
-									<div class="verses pull-left">vs</div>
-
-									<div class="form-group player-area pull-left">
-										<label class="control-label">Player 2</label>
-										<div>
-											<select id="player2" name="player2" class="form-control required">
-												<option value="">-select-</option>
-												<?php foreach($players as $player){ ?>
-												<option value="<?php echo $player->id; ?>"><?php echo $player->username; ?></option>
-												<?php } ?>
-											</select>
-											<div class="radio">
-												<label>
-													<input type="radio" name="playerserves" id="playerserves2" value="2">
-													Serves First
-												</label>
-											</div><!-- /.radio -->
-										</div>
-									</div><!-- /.form-group -->
-
-									<div class="clearfix"></div>
-
-									<div class="btm-form">
-										<a id="match-add" class="btn btn-lg btn-navy">Start Match</a>
-									</div><!-- /.btm-form -->
-
-									<input type="hidden" name="type" value="start" />
-
-								</form>
-								<?php
-								// TODO: Make this database driven!
-								// Extra TODO: have them add, edit attributes..
-								?>
-								<form id="match_created_form">
-									<div id="player1-area" class="form-group player-area pull-left" data-id="1">
-										<div id="player1-msg"></div><!-- /#player1-msg -->
-										<label id="player1-label" data-player-id="0" class="control-label">Player 1</label>
-
-										<div class="controls">
-											<div class="lead pull-left">Score</div>
-											<div class="pull-left">
-												<input type="text" id="score_1" name="score_1" class="form-control counters scoring" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Aces</div>
-											<div class="pull-left">
-												<input type="text" name="aces_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Bad Serve</div>
-											<div class="pull-left">
-												<input type="text" name="bad_serve_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Digs</div>
-											<div class="pull-left">
-												<input type="text" name="digs_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Fabulous</div>
-											<div class="pull-left">
-												<input type="text" name="fabulous_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Feel Goods</div>
-											<div class="pull-left">
-												<input type="text" name="feel_goods_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Foosball</div>
-											<div class="pull-left">
-												<input type="text" name="foosball_1" class="form-control counters" placeholder="" value="0">
-											</div>
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Frustration</div>
-											<div class="pull-left">
-												<input type="text" name="frustration_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div>
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Just The Tip</div>
-											<div class="pull-left">
-												<input type="text" name="just_the_tip_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Ones</div>
-											<div class="pull-left">
-												<input type="text" name="ones_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Slams Missed</div>
-											<div class="pull-left">
-												<input type="text" name="slams_missed_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Slams Made</div>
-											<div class="pull-left">
-												<input type="text" name="slams_made_1" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-									</div><!-- /#player1-area -->
-
-									<div class="verses pull-left">vs</div>
-
-									<div id="player2-area" class="form-group player-area pull-left" data-id="2">
-										<div id="player2-msg"></div><!-- /#player2-msg -->
-										<label id="player2-label" class="control-label">Player 2</label>
-
-										<div class="controls">
-											<div class="lead pull-left">Score</div>
-											<div class="pull-left">
-												<input type="text" id="score_2" name="score_2" class="form-control counters scoring" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Aces</div>
-											<div class="pull-left">
-												<input type="text" name="aces_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Bad Serve</div>
-											<div class="pull-left">
-												<input type="text" name="bad_serve_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Digs</div>
-											<div class="pull-left">
-												<input type="text" name="digs_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Fabulous</div>
-											<div class="pull-left">
-												<input type="text" name="fabulous_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Feel Goods</div>
-											<div class="pull-left">
-												<input type="text" name="feel_goods_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Foosball</div>
-											<div class="pull-left">
-												<input type="text" name="foosball_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Frustration</div>
-											<div class="pull-left">
-												<input type="text" name="frustration_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Just The Tip</div>
-											<div class="pull-left">
-												<input type="text" name="just_the_tip_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Ones</div>
-											<div class="pull-left">
-												<input type="text" name="ones_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Slams Missed</div>
-											<div class="pull-left">
-												<input type="text" name="slams_missed_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-										<div class="clearfix"></div>
-
-										<div class="controls">
-											<div class="lead pull-left">Slams Made</div>
-											<div class="pull-left">
-												<input type="text" name="slams_made_2" class="form-control counters" placeholder="" value="0">
-											</div><!-- /.pull-left -->
-											<div class="btn-group pull-left">
-												<div class="btn btn-navy btn-sm plus"><i class="glyphicon glyphicon-plus"></i></div>
-												<div class="btn btn-default btn-sm minus"><i class="glyphicon glyphicon-minus"></i></div>
-											</div><!-- /.btn-group -->
-										</div><!-- /.controls -->
-
-									</div><!-- /#player2-area -->
-
-									<div class="clearfix"></div>
-
-									<!-- post needed -->
-									<input type="hidden" name="type" value="update" />
-									<input type="hidden" id="player1_id" name="player1_id" value="" />
-									<input type="hidden" id="player2_id" name="player2_id" value="" />
-									<input type="hidden" id="match_id" name="match_id" value="" />
-									<input type="hidden" id="serve_first" name="serve_first" value="" />
-
-									<!-- js needed -->
-									<input type="hidden" id="pts_per_turn" value="<?php echo $pts_per_turn; ?>" />
-									<input type="hidden" id="pts_to_win" value="<?php echo $pts_to_win; ?>" />
-									<input type="hidden" id="skunk" value="<?php echo $skunk; ?>" />
-
-									<div id="match-updating" class="alert alert-warning pull-right">waiting</div>
-
-									<div class="btm-form">
-										<a id="match-complete" class="btn btn-lg btn-navy">Match Complete</a>
-									</div><!-- /.btm-form -->
-
-									<div class="clearfix"></div>
-								</form>
-							</div><!-- /#match_wrapper -->
-						<?php
-						} else {
-						?>
-							<p class="lead">There are no players in the database.</p>
-						<?php
-						}
+					?>
+						<p class="lead">There are no players in the database.</p>
+					<?php
 					}
 				}
 				?>
 			</div><!-- /.col-xs-12 -->
 
 			<?php
-			include('template/sidebar.php');
+				include('template/sidebar.php');
+			}
 			?>
 
 		</div><!-- /.row -->

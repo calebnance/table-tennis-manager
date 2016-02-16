@@ -22,7 +22,18 @@ if($current_page != 'wizard.php') {
 						Last Login: <?php echo date('m-d-Y g:ha', strtotime($_SESSION['last_login'])); ?>
 					</div><!-- /.text-right -->
 				</li>
-			<?php
+				<?php
+				// has e-mail not been validated?
+				if(!hasValidatedEmail()) {
+				?>
+				<li>
+					<?php
+					include('template/msgs/emailNotValidated.php');
+					?>
+				</li>
+				<?php
+				}
+
 			if($_SESSION['is_admin'] == 1){
 			?>
 			<li>
@@ -71,9 +82,13 @@ if($current_page != 'wizard.php') {
 				<li <?php echo isCurrentPage($current_page, 'matches.php'); ?>>
 					<a href="<?php echo $base_url; ?>matches.php"><span class="fa fa-list"></span> View Matches</a>
 				</li>
+				<?php
+				/*
 				<li <?php echo isCurrentPage($current_page, 'graphs.php'); ?>>
 					<a href="<?php echo $base_url; ?>graphs.php"><span class="fa fa-bar-chart"></span> View Graphs</a>
 				</li>
+				*/
+				?>
 		</div><!-- /.panel-body -->
 		<?php
 		/*
