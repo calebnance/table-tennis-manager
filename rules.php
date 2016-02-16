@@ -16,10 +16,22 @@
 				<h3>Rules</h3>
 				<ul>
 					<li>This is a singles play setup.</li>
+					<li>Players volley to determine who the initial server will be, typically,
+						a minimum of 4 non-competitive shots must be hit back and forth and then
+						the first player to score a point is the initial server.</li>
+					<li><strong>When Serving:</strong> The ball must rest on an open palm. Then it
+						must be tossed at least 6 inches in the air and struck so that the ball first
+						bounces on the server's side, then over the net, without touching the net, onto
+						the opponent's side.</li>
+					<li><strong>When Serving:</strong> The ball must be behind the table, not from the
+						side of the table, the ball also must be visible by the opponent at all times
+						during the serve.</li>
+					<li>If the ball hits any foreign object (ceiling, floor, light, wall.. etc.),
+						it is an immediate point for the opposing player</li>
+					<li>You must win by 2 points.</li>
 					<li>Points to win the match have been set to <span class="label label-primary"><?php echo $pts_to_win; ?> points</span>.</li>
 					<li>Service change is every <span class="label label-primary"><?php echo $pts_per_turn; ?> points</span>.</li>
 					<li>A player can win a match by skunk, the player must get to <span class="label label-primary"><?php echo $skunk; ?> points</span> before the opponent scores a single point.</li>
-					<li>You must win by 2 points.</li>
 					<li>Seasons are <span class="label label-primary"><?php echo $weeks; ?> week<?php echo $addS; ?></span> long.</li>
 				</ul>
 

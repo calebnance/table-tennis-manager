@@ -7,7 +7,7 @@ $(document).ready(function(){
  	var liveLoaderText = 'Looking for a live match<div class="loading-dots">...</div>';
 	var totalSeconds = 0;
 	var totalScore = 0;
-	
+
 	// TODO
 	// short game arrays
 	var first_points = [0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20];
@@ -60,7 +60,6 @@ $(document).ready(function(){
 				args : args
 			}
 		}).done(function(data){
-			console.log(data);
 			// is there a current match?
 			if(!data.currentMatch) {
 				$('#live-checker').fadeIn();
@@ -117,7 +116,6 @@ $(document).ready(function(){
 				console.log('do winner display!');
 			} else {
 				console.log(data);
-				console.log('hit now');
 				// fill in the scores
 				$player1.find('.score').html(data.player1Score);
 				$player2.find('.score').html(data.player2Score);
@@ -132,14 +130,10 @@ $(document).ready(function(){
 	// who is serving?
 	function serving(player1Score, player2Score, data) {
 		totalScore = player1Score + player2Score;
-		console.log('serving');
-		console.log(totalScore);
 		// if short game (2 points a serve)
 		if($.inArray(totalScore, first_points) >= 0 || totalScore == 0) {
-			console.log('first player');
 			$pongBall.removeClass('service-right');
 		} else {
-			console.log('second player');
 			$pongBall.addClass('service-right');
 		}
 

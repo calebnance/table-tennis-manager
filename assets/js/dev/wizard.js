@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type : 'POST',
-			url : '../ajax.php',
+			url : 'wizard-ajax.php',
 			dataType : 'json',
 			data : {
 				ajax : true,
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type : 'POST',
-			url : '../ajax.php',
+			url : 'wizard-ajax.php',
 			dataType : 'json',
 			data : {
 				ajax : true,
@@ -107,7 +107,7 @@ $(document).ready(function(){
 	$wizard.on('input keyup blur', '.required', function(e) {
 		// steps to pass
 		var pass1 = pass2 = pass3 = true;
-		
+
 		// are we on step1?
 		if($(this).closest('[role="tabpanel"]').hasClass('step1')) {
 			// step1 check
@@ -282,7 +282,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type : 'POST',
-			url : '../ajax.php',
+			url : 'wizard-ajax.php',
 			dataType : 'json',
 			data : {
 				ajax : true,
@@ -312,7 +312,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type : 'POST',
-			url : '../ajax.php',
+			url : 'wizard-ajax.php',
 			dataType : 'json',
 			data : {
 				ajax : true,
@@ -343,7 +343,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type : 'POST',
-			url : '../ajax.php',
+			url : 'wizard-ajax.php',
 			dataType : 'json',
 			data : {
 				ajax : true,
