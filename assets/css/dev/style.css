@@ -13,6 +13,8 @@ table { background-color: #EFEFEF; }
 /* General */
 .display-none { display: none; }
 
+.no-resize { resize: none; }
+
 .text-align-center { text-align: center; }
 .v-align-middle { vertical-align: middle!important; }
 
@@ -112,6 +114,10 @@ a.list-group-item>.badge { background-color: #3B3F4C; }
 .gravatar { background-color: #fff; border-radius: 4px; height: 250px; width: 250px; }
 .gravatar.noHW { height: auto; width: auto; }
 .gravatar, .gravatar img { position: relative; }
+
+/* Edit Pages */
+.form-element-wrapper { position: relative; }
+.form-element-wrapper .form-type-count { background-color: #fff; border: 1px solid #ccc; border-bottom-right-radius: 4px; border-top-left-radius: 4px; bottom: 0; font-size: 14px; margin-top: -2px; padding: 4px 8px; position: absolute; right: 0; }
 
 /* Start Season */
 .container .datepicker { margin-top: 0; }
